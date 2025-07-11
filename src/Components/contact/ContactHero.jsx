@@ -10,7 +10,7 @@ const ContactHero = () => {
         muted
         playsInline
       >
-        <source src="/your-video.mp4" type="video/mp4" />
+        <source src="src/assets/videos/Hero-contact.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
