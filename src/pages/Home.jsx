@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "../Components/NavBar";
 import ScrollToTop from "../Components/ScrollToTop";
-import Hero from "../Components/Hero";
+import Hero from "../Components/heroSection/Hero";
 import TrendingDestinations from "../Components/TrendingDestinations";
 import PackageSlider from "../Components/PackageSlider";
 import InternationalDestinations from "../Components/InternationalDestinations";
@@ -28,7 +28,8 @@ const Home = () => {
     <div className="home-page">
       {/* <ScrollToTop /> */}
       <NavBar />
-      <Hero />
+      <Hero videoSrc="src/assets/videos/Hero-video.mp4"
+        title="Discover Domestic Destinations"/>
 
       <TrendingDestinations />
 
