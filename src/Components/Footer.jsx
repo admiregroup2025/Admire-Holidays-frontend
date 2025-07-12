@@ -22,7 +22,7 @@ const Footer = () => {
               <div className="bg-amber-400 p-1">
                 <div className="bg-gray-900 p-1">
                   <img 
-                    src="https://admireholidays.com/_next/image?url=%2Flogo.jpg&w=384&q=75" 
+                    src="src/assets/images/admire-logo.webp" 
                     alt="Admire Holidays Logo" 
                     className="rounded-full"
                     width="50"
@@ -61,11 +61,11 @@ const Footer = () => {
             <Link to="/about" className="block text-gray-400 hover:text-amber-400 capitalize py-1 text-sm transition-colors">
               About
             </Link>
-            <Link to="/destinations" className="block text-gray-400 hover:text-amber-400 capitalize py-1 text-sm transition-colors">
-              Destinations
+            <Link to="/domestic" className="block text-gray-400 hover:text-amber-400 capitalize py-1 text-sm transition-colors">
+              Domestic
             </Link>
-            <Link to="/packages" className="block text-gray-400 hover:text-amber-400 capitalize py-1 text-sm transition-colors">
-              Packages
+            <Link to="/international" className="block text-gray-400 hover:text-amber-400 capitalize py-1 text-sm transition-colors">
+              International
             </Link>
             <Link to="/blog" className="block text-gray-400 hover:text-amber-400 capitalize py-1 text-sm transition-colors">
               Blog

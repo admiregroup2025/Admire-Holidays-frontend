@@ -1,3 +1,4 @@
+
 import React from 'react'
 import NavBar from '../Components/NavBar'
 import SubscribeUs from '../forms/SubscribeUs'
@@ -6,25 +7,33 @@ import TravelGallery from '../Components/TravelGallery'
 import Footer from '../Components/Footer'
 import HeroDomestic from '../Components/heroSection/HeroReusable'
 import internationalVideo from '../assets/videos/hero-international.mp4'
+import { internationalDestinations } from "../data/destinations";
+
 
 const International = () => {
   return (
     <div>
+      <NavBar/>
+
 
         <NavBar/>
 
         <HeroDomestic videoSrc={internationalVideo}
         title="Discover Domestic Destinations"/>
+            <DestinationGrid 
+        destinations={internationalDestinations}
+        title="Popular International Destinations"
+        type="international"
+      />
         
 
-        <TravelGallery/>
+
+      <TravelGallery/>
       <VideoTestimonials/>
       <SubscribeUs/>
-
-        <Footer/>
-      
+      <Footer/>
     </div>
-  )
-}
+  );
+};
 
-export default International
+export default International;

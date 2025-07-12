@@ -22,6 +22,7 @@ import TravelGallery from "../Components/TravelGallery";
 import VideoTestimonials from "../Components/VideoTestimonials";
 import SubscribeUs from "../forms/SubscribeUs";
 import StatsAndPartners from "../Components/StatsAndPartners";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -75,6 +76,35 @@ const Home = () => {
       <StatsAndPartners/>
       <SubscribeUs />
       <Footer />
+
+      {/* Sticky small form button */}
+       <Link
+        to="/HomeStickyFormPage"
+        className="
+          fixed
+          right-0
+          top-1/2
+          -translate-y-1/2
+          bg-red-500
+          text-white
+          px-1.5
+          py-2.5
+          rounded-tl-md
+          rounded-bl-md
+          font-semibold
+          cursor-pointer
+          z-[1000]
+          no-underline
+          shadow-md
+          text-[14px]
+          w-10
+          text-center
+          [writing-mode:vertical-lr]
+          [text-orientation:mixed]
+        "
+      >
+        Suggestions/Complaints
+    </Link>
     </div>
   );
 };
