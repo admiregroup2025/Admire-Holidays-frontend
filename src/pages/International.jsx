@@ -5,26 +5,22 @@ import VideoTestimonials from '../Components/VideoTestimonials'
 import TravelGallery from '../Components/TravelGallery'
 import Footer from '../Components/Footer'
 import HeroDomestic from '../Components/heroSection/HeroReusable'
-import internationalVideo from '../assets/videos/hero-international.mp4'
 
 const International = () => {
   return (
     <div>
+      <NavBar/>
 
-        <NavBar/>
-
-        <HeroDomestic videoSrc={internationalVideo}
+        <HeroDomestic videoSrc="src/assets/videos/hero-international.mp4"
         title="Discover Domestic Destinations"/>
         
 
-        <TravelGallery/>
+      <TravelGallery/>
       <VideoTestimonials/>
       <SubscribeUs/>
-
-        <Footer/>
-      
+      <Footer/>
     </div>
-  )
-}
+  );
+};
 
-export default International
+export default International;
