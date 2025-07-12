@@ -6,8 +6,9 @@ import VideoTestimonials from '../Components/VideoTestimonials'
 import TravelGallery from '../Components/TravelGallery'
 import Footer from '../Components/Footer'
 import HeroDomestic from '../Components/heroSection/HeroReusable'
+import { internationalDestinations } from "../data/destinations"; // Import international destinations
 import internationalVideo from '../assets/videos/hero-international.mp4'
-import { internationalDestinations } from "../data/destinations";
+import DestinationGrid from '../Components/destinations/DestinationGrid' // 
 
 
 const International = () => {
@@ -15,18 +16,17 @@ const International = () => {
     <div>
       <NavBar/>
 
-
-        <NavBar/>
-
-        <HeroDomestic videoSrc={internationalVideo}
+      <HeroDomestic videoSrc={internationalVideo}
         title="Discover Domestic Destinations"/>
-            <DestinationGrid 
+      <DestinationGrid 
         destinations={internationalDestinations}
         title="Popular International Destinations"
         type="international"
       />
-        
 
+
+        
+        
 
       <TravelGallery/>
       <VideoTestimonials/>
