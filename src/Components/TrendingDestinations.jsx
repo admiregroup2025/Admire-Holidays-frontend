@@ -15,6 +15,7 @@ const TrendingDestinations = () => {
     // First row
     {
       id: 1,
+      slug: "andaman", 
       name: "Andaman",
       description: "Pristine beaches & coral reefs",
       images: [
@@ -142,10 +143,8 @@ const DestinationCard = ({ destination, isVisible, index }) => {
       }`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <a
-        href={`/trending-destination/${destination.name.replace(/\s+/g, "-")}`}
-        className="no-underline text-inherit"
-      >
+      
+<a href={`/destinations/${destination.slug}`} className="no-underline text-inherit">
         <div className="h-80 relative overflow-hidden">
           <Swiper
             modules={[Autoplay, EffectFade]}

@@ -72,9 +72,14 @@ function NavBar() {
       <nav className="bg-white shadow-md sticky top-0 z-50 py-2">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            <NavLink to="/" className="text-2xl font-bold text-gray-800 flex items-center">
-              Admire <span className="text-orange-500 ml-1">Holidays</span>
-            </NavLink>
+            <NavLink to="/" className="flex items-center">
+  <img 
+    src="src/assets/images/admire-logo.webp"  // Update this path to your actual logo
+    alt="Admire Holidays Logo"
+    className="h-10" 
+     // Adjust height as needed
+  />
+</NavLink>
  
             {/* Hamburger menu for mobile */}
             <button
