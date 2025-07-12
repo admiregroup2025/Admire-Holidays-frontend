@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import EnquiryForm from '../forms/EnquiryForm';
+import aboutVideos from '../assets/videos/Hero-About.mp4'; 
 
 const AboutDetails = () => {
   const [showEnquiryForm, setShowEnquiryForm] = useState(false);
@@ -15,7 +16,7 @@ const AboutDetails = () => {
           playsInline 
           className="w-full h-full object-cover"
         >
-          <source src="src/assets/videos/Hero-About.mp4" type="video/mp4" />
+          <source src={aboutVideos} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         
