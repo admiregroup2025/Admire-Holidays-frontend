@@ -15,6 +15,7 @@ import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
 import HomeStickyFormPage from "./pages/HomeStickyFormPage";
 
+
 function App() {
   return (
     <Router>
@@ -37,7 +38,7 @@ function App() {
 
 
 
-         <Route path="/HomeStickyFormPage" element={<HomeStickyFormPage />} />
+        <Route path="/HomeStickyFormPage" element={<HomeStickyFormPage />} />
       </Routes>
       {/* <Footer /> */}
     </Router>

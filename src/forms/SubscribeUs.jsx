@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { User, Phone, Mail } from 'lucide-react';
 import Swal from 'sweetalert2';
 
+
+
 const SubscribeUs = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -74,7 +76,7 @@ const SubscribeUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     let isValid = true;
     const newErrors = { ...errors };
 
@@ -109,22 +111,58 @@ const SubscribeUs = () => {
       showErrorAlert('Please fix the errors in the form');
       return;
     }
+    // Simulate API call
+    try {
+      const response = await fetch("http://localhost:5000/api/v1/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        showSuccessAlert();
+        setFormData({ name: "", phone: "", email: "" });
+      } else {
+        showErrorAlert(data.message || "Something went wrong.");
+      }
+    } catch (error) {
+      showErrorAlert("Server error. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
+
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // In a real app, you would call your API here
-      // const response = await axios.post('/api/subscribe', formData);
-      
-      showSuccessAlert();
-      setFormData({ name: '', phone: '', email: '' });
+      const response = await fetch("http://localhost:5173/api/v1/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        showSuccessAlert();
+        setFormData({ name: "", phone: "", email: "" });
+      } else {
+        showErrorAlert(data.message || "Something went wrong.");
+      }
     } catch (error) {
-      showErrorAlert('Failed to submit form. Please try again later.');
+      showErrorAlert("Server error. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
   };
+
+
+  // create a api for save data of subscibe us form
+
 
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center px-4 py-16 sm:py-20">
@@ -207,11 +245,10 @@ const SubscribeUs = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className={`w-full py-3 rounded-full text-white font-semibold text-lg transition duration-300 shadow-md ${
-              isSubmitting
-                ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-yellow-500 hover:bg-red-600'
-            }`}
+            className={`w-full py-3 rounded-full text-white font-semibold text-lg transition duration-300 shadow-md ${isSubmitting
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-yellow-500 hover:bg-red-600'
+              }`}
             disabled={isSubmitting}
           >
             {isSubmitting ? (

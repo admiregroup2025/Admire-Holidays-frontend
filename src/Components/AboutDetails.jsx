@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import EnquiryForm from '../forms/EnquiryForm';
-import aboutVideos from '../assets/videos/Hero-About.mp4'; 
+import aboutVideos from '../assets/videos/Hero-About.mp4';
 
 const AboutDetails = () => {
   const [showEnquiryForm, setShowEnquiryForm] = useState(false);
@@ -9,17 +9,18 @@ const AboutDetails = () => {
     <div className="relative">
       {/* Hero Video Section */}
       <div className="relative w-full h-screen max-h-[80vh] overflow-hidden">
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           className="w-full h-full object-cover"
         >
           <source src={aboutVideos} type="video/mp4" />
           Your browser does not support the video tag.
+
         </video>
-        
+
         {/* Video overlay with text */}
         <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
           <div className="text-center px-4">
@@ -45,12 +46,12 @@ const AboutDetails = () => {
 
         {/* About Us Section with Video */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <video 
-            src="/about1.mp4" 
-            autoPlay 
-            loop 
-            muted 
-            playsInline 
+          <video
+            src="/about1.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-auto rounded-xl shadow-lg"
           />
           <div className="space-y-4">
@@ -75,10 +76,10 @@ const AboutDetails = () => {
               At Admire Holidays, we believe that travel is not just about reaching a destination; it's about the journey itself. That's why we go above and beyond to ensure that every aspect of your travel experience is seamless and unforgettable. From meticulously planned itineraries to personalized recommendations, our team of experienced professionals is dedicated to providing you with unparalleled service and support every step of the way.
             </p>
           </div>
-          <img 
-            alt="Difference" 
-            loading="lazy" 
-            className="rounded-xl shadow-lg w-full h-auto" 
+          <img
+            alt="Difference"
+            loading="lazy"
+            className="rounded-xl shadow-lg w-full h-auto"
             src="/about2.png"
           />
         </div>
@@ -102,10 +103,10 @@ const AboutDetails = () => {
               <li><strong>24/7 Support:</strong> Your safety and comfort are our top priorities. That's why our dedicated support team is available around the clock to assist you with any queries or concerns you may have before, during, or after your trip.</li>
             </ul>
           </div>
-          <img 
-            alt="Why Choose Us" 
-            loading="lazy" 
-            className="rounded-xl shadow-lg w-full h-auto" 
+          <img
+            alt="Why Choose Us"
+            loading="lazy"
+            className="rounded-xl shadow-lg w-full h-auto"
             src="/about3.png"
           />
         </div>
@@ -116,7 +117,7 @@ const AboutDetails = () => {
           <p className="text-lg mb-6 max-w-3xl mx-auto leading-relaxed">
             Whether you are embarking on a solo adventure, planning a romantic getaway, or organizing a group tour with friends and family, Admire Holidays is here to make your travel dreams come true. Join us on the journey of a lifetime and let us help you explore the wonders of our world, one unforgettable experience at a time.
           </p>
-          <button 
+          <button
             onClick={() => setShowEnquiryForm(true)}
             className="bg-amber-400 text-teal-900 font-semibold px-8 py-3 rounded-full hover:bg-amber-300 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
           >
@@ -129,7 +130,7 @@ const AboutDetails = () => {
       {showEnquiryForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl p-6 max-w-md w-full relative max-h-[90vh] overflow-y-auto">
-            <button 
+            <button
               onClick={() => setShowEnquiryForm(false)}
               className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl"
             >
