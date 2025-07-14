@@ -113,7 +113,7 @@ const SubscribeUs = () => {
     }
     // Simulate API call
     try {
-      const response = await fetch("http://localhost:5000/api/v1/subscribe", {
+      const response = await fetch("http://localhost:api/v1/subscribe", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
