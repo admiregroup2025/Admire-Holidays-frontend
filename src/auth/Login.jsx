@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Andman = () => {
+const Login = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const Andman = () => {
   )
 }
 
-export default Andman
+export default Login

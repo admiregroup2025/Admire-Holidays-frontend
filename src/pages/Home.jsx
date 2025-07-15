@@ -23,14 +23,25 @@ import VideoTestimonials from "../Components/VideoTestimonials";
 import SubscribeUs from "../forms/SubscribeUs";
 import StatsAndPartners from "../Components/StatsAndPartners";
 import { Link } from "react-router-dom";
+import EnquiryForm from "../forms/EnquiryForm";
+
+
+
 
 const Home = () => {
   return (
     <div className="home-page">
+      
+      
       {/* <ScrollToTop /> */}
+      <EnquiryForm/>
+
+
       <NavBar />
-      <Hero videoSrc="src/assets/videos/Hero-video.mp4"
-        title="Discover Domestic Destinations"/>
+      <Hero
+        videoSrc="src/assets/videos/Hero-video.mp4"
+        title="Discover Domestic Destinations"
+      />
 
       <TrendingDestinations />
 
@@ -73,12 +84,12 @@ const Home = () => {
 
       <TravelGallery />
       <VideoTestimonials />
-      <StatsAndPartners/>
+      <StatsAndPartners />
       <SubscribeUs />
       <Footer />
 
       {/* Sticky small form button */}
-       <Link
+      <Link
         to="/HomeStickyFormPage"
         className="
           fixed
@@ -104,7 +115,7 @@ const Home = () => {
         "
       >
         Suggestions/Complaints
-    </Link>
+      </Link>
     </div>
   );
 };

@@ -26,6 +26,7 @@ const TrendingDestinations = () => {
     },
     {
       id: 2,
+      slug: "vietnam", 
       name: "Vietnam",
       description: "Vibrant culture & landscapes",
       images: [
@@ -36,6 +37,7 @@ const TrendingDestinations = () => {
     },
     {
       id: 3,
+      slug: "kashmir", 
       name: "Kashmir",
       description: "Paradise on earth",
       images: [
@@ -46,6 +48,7 @@ const TrendingDestinations = () => {
     },
     {
       id: 4,
+      slug: "leh-ladakh", 
       name: "Leh-ladakh",
       description: "Majestic Himalayan beauty",
       images: [
@@ -57,6 +60,7 @@ const TrendingDestinations = () => {
     // Second row
     {
       id: 5,
+      slug: "sri lanka", 
       name: "Sri Lanka",
       description: "Teardrop of the Indian Ocean",
       images: [
@@ -67,6 +71,7 @@ const TrendingDestinations = () => {
     },
     {
       id: 6,
+      slug: "thailand", 
       name: "Thailand",
       description: "Land of smiles & temples",
       images: [
@@ -77,6 +82,7 @@ const TrendingDestinations = () => {
     },
     {
       id: 7,
+      slug: "uttarakhand", 
       name: "Uttarakhand",
       description: "Devbhumi - Land of the Gods",
       images: [
@@ -87,6 +93,7 @@ const TrendingDestinations = () => {
     },
     {
       id: 8,
+      slug: "sikkim", 
       name: "Sikkim",
       description: "Himalayan wonderland",
       images: [

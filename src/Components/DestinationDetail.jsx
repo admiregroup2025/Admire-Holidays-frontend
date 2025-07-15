@@ -124,7 +124,7 @@ const DestinationDetail = () => {
     },
     
     {
-      id: 32,
+      id: 33,
       slug: "maldives",
       name: "Maldives",
       description: "The Maldives evokes feelings of paradise.",
@@ -144,6 +144,30 @@ const DestinationDetail = () => {
           price: '₹On Request',
           highlights: [' stunning beaches', 'vibrant coral reefs', 'diverse marine life', 'rainforests'],
           description: 'stunning natural beauty, including the crystal-clear waters.'
+        }
+      ]
+    },
+    {
+      id: 34,
+      slug: "vietnam",
+      name: "Vietnam",
+      description: "Lost in the magic of Vietnamese landscapes ",
+      mainImage: "https://images.unsplash.com/photo-1528127269322-539801943592?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmlldG5hbXxlbnwwfHwwfHx8MA%3D%3D",
+      images: [
+        "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dmlldG5hbXxlbnwwfHwwfHx8MA%3D%3D",
+        "https://images.unsplash.com/photo-1531737212413-667205e1cda7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dmlldG5hbXxlbnwwfHwwfHx8MA%3D%3D",
+        "https://images.unsplash.com/photo-1504457047772-27faf1c00561?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dmlldG5hbXxlbnwwfHwwfHx8MA%3D%3D",
+        "https://images.unsplash.com/photo-1545172538-171a802bd867?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHZpZXRuYW18ZW58MHx8MHx8fDA%3D",
+        "https://images.unsplash.com/photo-1480996408299-fc0e830b5db1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHZpZXRuYW18ZW58MHx8MHx8fDA%3D"
+      ],
+      packages: [
+        {
+          id: 'p20',
+          name: 'Royal Paris Experience',
+          duration: '8 Days / 7 Nights',
+          price: '₹On Request',
+          highlights: [' stunning beaches', 'vibrant coral reefs', 'diverse marine life', 'rainforests'],
+          description: 'Finding paradise in Vietnam  hidden corners.'
         }
       ]
     },

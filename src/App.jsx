@@ -14,6 +14,9 @@ import DestinationDetail from "./Components/DestinationDetail";
 import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
 import HomeStickyFormPage from "./pages/HomeStickyFormPage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
+
 
 function App() {
   return (
@@ -35,9 +38,13 @@ function App() {
         <Route path="/destinations/:slug" element={<DestinationDetail />} />
 
 
-
-
          <Route path="/HomeStickyFormPage" element={<HomeStickyFormPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-conditions" element={<TermsAndConditions />} />
+        <Route path="/destinations/:slug" element={<DestinationDetail />} />
+
+
+
       </Routes>
       {/* <Footer /> */}
     </Router>

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Swal from 'sweetalert2';
- 
+import { submitContactForm } from '../../api/api';
+
 const ContactUs = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -11,7 +12,7 @@ const ContactUs = () => {
     subject: '',
     message: ''
   });
- 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -19,15 +20,16 @@ const ContactUs = () => {
       [name]: value
     }));
   };
- 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { firstName, lastName, email, phone } = formData;
- 
+    const { firstName, lastName, email, phone, subject, message } = formData;
+
+    // Validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const nameRegex = /^[A-Za-z\s]{2,}$/;
     const phoneRegex = /^[0-9]{10}$/;
- 
+
     if (!firstName || !phone || !email) {
       Swal.fire({
         icon: 'error',
@@ -36,7 +38,7 @@ const ContactUs = () => {
       });
       return;
     }
- 
+
     if (!nameRegex.test(firstName)) {
       Swal.fire({
         icon: 'error',
@@ -45,7 +47,7 @@ const ContactUs = () => {
       });
       return;
     }
- 
+
     if (lastName && !nameRegex.test(lastName)) {
       Swal.fire({
         icon: 'error',
@@ -54,7 +56,7 @@ const ContactUs = () => {
       });
       return;
     }
- 
+
     if (!emailRegex.test(email)) {
       Swal.fire({
         icon: 'error',
@@ -63,7 +65,7 @@ const ContactUs = () => {
       });
       return;
     }
- 
+
     if (!phoneRegex.test(phone)) {
       Swal.fire({
         icon: 'error',
@@ -72,27 +74,42 @@ const ContactUs = () => {
       });
       return;
     }
- 
-    Swal.fire({
-      icon: 'success',
-      title: 'Message Sent!',
-      text: 'Thank you for reaching out to us.',
-      showConfirmButton: false,
-      timer: 2000
-    });
- 
-    console.log(formData);
- 
-    setFormData({
-      firstName: '',
-      lastName: '',
-      phone: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
+
+    // Submit to backend
+    try {
+      await submitContactForm({
+        name: `${firstName} ${lastName}`.trim(),
+        email,
+        subject,
+        message
+      });
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Message Sent!',
+        text: 'Thank you for reaching out to us.',
+        showConfirmButton: false,
+        timer: 2000
+      });
+
+      setFormData({
+        firstName: '',
+        lastName: '',
+        phone: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Submission Failed',
+        text: error.response?.data?.message || 'Please try again later.'
+      });
+    }
   };
- 
+
   const contactItems = [
     {
       icon: (
@@ -132,7 +149,7 @@ const ContactUs = () => {
       content: "Mon - Sat: 10 AM - 6 PM\nSunday: Closed"
     }
   ];
- 
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -143,21 +160,18 @@ const ContactUs = () => {
       }
     }
   };
- 
+
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: {
-        duration: 0.5
-      }
+      transition: { duration: 0.5 }
     }
   };
- 
-  const inputClass =
-    "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all";
- 
+
+  const inputClass = "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all";
+
   return (
     <div className="bg-gray-50 py-8 px-4">
       <motion.section
@@ -167,17 +181,14 @@ const ContactUs = () => {
         variants={containerVariants}
       >
         <motion.div variants={itemVariants} className="text-center mb-10">
-          <motion.h1
-            className="text-4xl md:text-5xl font-bold text-red-600 mb-2"
-            whileHover={{ scale: 1.02 }}
-          >
+          <motion.h1 className="text-4xl md:text-5xl font-bold text-red-600 mb-2" whileHover={{ scale: 1.02 }}>
             Contact Us
           </motion.h1>
           <p className="text-gray-600 max-w-2xl mx-auto text-sm">
             We are here to help. Reach out to us for any inquiries, assistance, or collaboration.
           </p>
         </motion.div>
- 
+
         <div className="grid md:grid-cols-2 gap-10">
           {/* Contact Details */}
           <div className="space-y-4">
@@ -196,7 +207,7 @@ const ContactUs = () => {
               </motion.div>
             ))}
           </div>
- 
+
           {/* Contact Form */}
           <motion.form
             className="bg-white shadow-md rounded-xl p-5 space-y-4"
@@ -204,7 +215,7 @@ const ContactUs = () => {
             onSubmit={handleSubmit}
           >
             <h2 className="text-xl font-semibold">Leave a Message</h2>
- 
+
             <div className="flex flex-col md:flex-row gap-3">
               <input
                 placeholder="First Name*"
@@ -223,7 +234,7 @@ const ContactUs = () => {
                 onChange={handleChange}
               />
             </div>
- 
+
             <div className="flex flex-col md:flex-row gap-3">
               <input
                 placeholder="Phone Number*"
@@ -243,7 +254,7 @@ const ContactUs = () => {
                 onChange={handleChange}
               />
             </div>
- 
+
             <input
               placeholder="Subject (optional)"
               className={inputClass}
@@ -252,7 +263,7 @@ const ContactUs = () => {
               value={formData.subject}
               onChange={handleChange}
             />
- 
+
             <textarea
               name="message"
               placeholder="Your Message (optional)"
@@ -261,7 +272,7 @@ const ContactUs = () => {
               value={formData.message}
               onChange={handleChange}
             ></textarea>
- 
+
             <motion.button
               type="submit"
               className="w-full py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-semibold rounded-md transition-all duration-300"
@@ -272,23 +283,9 @@ const ContactUs = () => {
             </motion.button>
           </motion.form>
         </div>
- 
-        <motion.div className="mt-16" variants={itemVariants}>
-          <h3 className="text-xl font-bold text-center mb-4">Find Us On Map</h3>
-          <motion.div className="overflow-hidden rounded-xl shadow-md" whileHover={{ scale: 1.01 }}>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d7004.845431704971!2d77.0258597434756!3d28.61709035269247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1s34%2C%20Sewak%20Park%20(1st%20floor)%2C%20Dwarka%20More%20Metro%2C%20Near%20Metro%20Pillar%20No-772%2C%20New%20Delhi%20-%20110059!5e0!3m2!1sen!2sin!4v1744116126291!5m2!1sen!2sin"
-              className="w-full"
-              height="350"
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </motion.div>
-        </motion.div>
       </motion.section>
     </div>
   );
 };
- 
+
 export default ContactUs;

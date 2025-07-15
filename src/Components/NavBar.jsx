@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
- 
+
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [animateUnderline, setAnimateUnderline] = useState(false);
- 
+
   const location = useLocation();
- 
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
+      if (window.innerWidth >= 768) {
+        setIsOpen(false); // Close mobile menu when resizing to desktop
+      }
     };
- 
-    handleResize();
+
+    handleResize(); // Set initial value
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
- 
+
   // Trigger underline animation on route change
   useEffect(() => {
     setAnimateUnderline(false); // reset first to restart animation
@@ -26,7 +29,7 @@ function NavBar() {
     }, 100); // delay to start animation
     return () => clearTimeout(timeout);
   }, [location.pathname]);
- 
+
   const links = [
     { to: "/", label: "Home" },
     { to: "/domestic", label: "Domestic" },
@@ -35,7 +38,7 @@ function NavBar() {
     { to: "/blog", label: "Blog" },
     { to: "/contact", label: "Contact" },
   ];
- 
+
   return (
     <>
       {/* Top Bar */}
@@ -44,7 +47,7 @@ function NavBar() {
           <div className="flex flex-col md:flex-row items-center justify-between space-y-1 md:space-y-0 py-1">
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <a href="tel:011-23261775" className="hover:text-orange-400 transition-colors">
-                <i className="fas fa-phone-alt mr-1"></i> 011-23261775
+                <i className="fas fa-phone-alt mr-1"></i> 1800-121-4252
               </a>
               <a href="mailto:info@admireholidays.com" className="hover:text-orange-400 transition-colors">
                 <i className="fas fa-envelope mr-1"></i> info@admireholidays.com
@@ -67,21 +70,20 @@ function NavBar() {
           </div>
         </div>
       </div>
- 
+
       {/* Main Navigation */}
       <nav className="bg-white shadow-md sticky top-0 z-50 py-2">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
             <NavLink to="/" className="flex items-center">
-  <img 
-    src="src/assets/images/admire-logo.webp"  // Update this path to your actual logo
-    alt="Admire Holidays Logo"
-    className="h-10" 
-     // Adjust height as needed
-  />
-</NavLink>
- 
-            {/* Hamburger menu for mobile */}
+              <img 
+                src="src/assets/images/admire-logo.webp"
+                alt="Admire Holidays Logo"
+                className="h-10"
+              />
+            </NavLink>
+
+            {/* Hamburger menu for mobile - always visible on mobile */}
             <button
               className="md:hidden focus:outline-none"
               onClick={() => setIsOpen(!isOpen)}
@@ -89,8 +91,8 @@ function NavBar() {
             >
               <i className={isOpen ? "fas fa-times text-gray-800 text-2xl" : "fas fa-bars text-gray-800 text-2xl"}></i>
             </button>
- 
-            {/* Desktop Navigation */}
+
+            {/* Desktop Navigation - hidden on mobile */}
             <div className="hidden md:flex items-center space-x-6">
               <ul className="flex items-center space-x-6">
                 {links.map(({ to, label }) => {
@@ -107,7 +109,6 @@ function NavBar() {
                         end={to === "/"}
                       >
                         {label}
-                        {/* Underline */}
                         <span
                           className={`absolute left-0 bottom-0 h-[2px] bg-[#da3939] origin-left transform transition-transform duration-[1000ms] ease-in-out`}
                           style={{
@@ -121,7 +122,7 @@ function NavBar() {
                   );
                 })}
               </ul>
- 
+
               <NavLink
                 to="/contact"
                 className="ml-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded transition-colors"
@@ -130,15 +131,19 @@ function NavBar() {
               </NavLink>
             </div>
           </div>
- 
-          {/* Mobile Navigation */}
-          <div className={`md:hidden ${isOpen ? "block" : "hidden"}`}>
+
+          {/* Mobile Navigation - shown when isOpen is true */}
+          <div className={`md:hidden ${isOpen ? "block" : "hidden"} transition-all duration-300 ease-in-out`}>
             <ul className="bg-white py-2 space-y-1">
               {links.map(({ to, label }) => (
                 <li key={to}>
                   <NavLink
                     to={to}
-                    className="block px-4 py-2 font-medium text-gray-800 hover:bg-blue-800 hover:text-white rounded transition-colors"
+                    className={({ isActive }) =>
+                      `block px-4 py-2 font-medium rounded transition-colors ${
+                        isActive ? "bg-blue-800 text-white" : "text-gray-800 hover:bg-blue-800 hover:text-white"
+                      }`
+                    }
                     onClick={() => setIsOpen(false)}
                     end={to === "/"}
                   >
@@ -146,10 +151,9 @@ function NavBar() {
                   </NavLink>
                 </li>
               ))}
- 
               <li>
                 <NavLink
-                  to="/get-a-quote"
+                  to="/contact"
                   className="block text-center bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded transition-colors mx-4 mt-2"
                   onClick={() => setIsOpen(false)}
                 >
@@ -163,6 +167,5 @@ function NavBar() {
     </>
   );
 }
- 
+
 export default NavBar;
- 

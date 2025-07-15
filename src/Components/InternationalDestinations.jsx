@@ -1,42 +1,52 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const InternationalDestinations = () => {
   const destinations = [
     {
       name: "Maldives",
+      slug: "maldives",
       image: "https://admiredashboard.theholistay.in/destination_images/1750533766_68570686a9204oLjjZORL.jpg"
     },
     {
       name: "SINGAPORE",
+      slug: "singapore",
       image: "https://admiredashboard.theholistay.in/destination_images/1750532967_685703672e9c9w0aeeaYR.jpg"
     },
     {
       name: "DUBAI",
+      slug: "dubai",
       image: "https://admiredashboard.theholistay.in/destination_images/1750532692_68570254b7cf5sq9WV8yC.jpg"
     },
     {
       name: "MAURITIUS",
+      slug: "mauritius",
       image: "https://admiredashboard.theholistay.in/destination_images/1750533673_68570629810e4CiDtIW8D.jpg"
     },
     {
       name: "EUROPE",
+      slug: "europe",
       image: "https://admiredashboard.theholistay.in/destination_images/1750533500_6857057c33b37o0nRO3Zt.jpg"
     },
     {
       name: "China",
+      slug: "china",
       image: "https://admiredashboard.theholistay.in/destination_images/1744959810_6801f9420424bSChJcMNn.webp"
     },
     {
       name: "THAILAND",
+      slug: "thailand",
       image: "https://admiredashboard.theholistay.in/destination_images/1745002740_6802a0f4615e1lxl6tGLC.jpg"
     },
     {
       name: "SWITZERLAND",
+      slug: "switzerland",
       image: "https://admiredashboard.theholistay.in/destination_images/1750533063_685703c78dac5OJKUiro1.jpg"
     },
     {
       name: "VIETNAM",
+      slug: "vietnam",
       image: "https://admiredashboard.theholistay.in/destination_images/1744992883_68027a73ea810UwAxjYlT.jpg"
     }
   ];
@@ -98,28 +108,33 @@ const InternationalDestinations = () => {
               whileHover="hover"
               className="group relative"
             >
-              <div className="overflow-hidden rounded-lg shadow-lg bg-white h-full flex flex-col">
-                <div className="relative h-64 overflow-hidden">
-                  <motion.img
-                    alt={destination.name}
-                    src={destination.image}
-                    className="w-full h-full object-cover"
-                    initial={{ opacity: 0.8 }}
-                    whileHover={{ opacity: 1, scale: 1.1 }}
-                    transition={{ duration: 0.5 }}
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all duration-300 group-hover:bg-opacity-50">
-                    <h3 className="text-white text-xl font-bold tracking-wide transition-transform duration-300 group-hover:scale-110">
-                      {destination.name}
-                    </h3>
+              <Link 
+                to={`/destinations/${destination.slug}`} 
+                className="block h-full"
+              >
+                <div className="overflow-hidden rounded-lg shadow-lg bg-white h-full flex flex-col cursor-pointer">
+                  <div className="relative h-64 overflow-hidden">
+                    <motion.img
+                      alt={destination.name}
+                      src={destination.image}
+                      className="w-full h-full object-cover"
+                      initial={{ opacity: 0.8 }}
+                      whileHover={{ opacity: 1, scale: 1.1 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all duration-300 group-hover:bg-opacity-50">
+                      <h3 className="text-white text-xl font-bold tracking-wide transition-transform duration-300 group-hover:scale-110">
+                        {destination.name}
+                      </h3>
+                    </div>
+                  </div>
+                  <div className="p-4 text-center mt-auto">
+                    <p className="text-gray-600">
+                      Click to explore this amazing destination.
+                    </p>
                   </div>
                 </div>
-                <div className="p-4 text-center mt-auto">
-                  <p className="text-gray-600">
-                    Click to explore this amazing destination.
-                  </p>
-                </div>
-              </div>
+              </Link>
             </motion.div>
           ))}
         </motion.div>

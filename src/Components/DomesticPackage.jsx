@@ -7,7 +7,7 @@ const DomesticPackage = () => {
     {
       id: 1,
       name: "SOUTH-INDIA",
-      link: "trending-destination/SOUTH-INDIA",
+      link: "destinations/south-india",
       mainImage: "https://admiredashboard.theholistay.in/destination_images/1751095217_685f97b13c1b1LkcAU3dA.jpg",
       images: [
         "https://admiredashboard.theholistay.in/destination_images/1751095217_685f97b13c1b1LkcAU3dA.jpg"
@@ -16,7 +16,7 @@ const DomesticPackage = () => {
     {
       id: 2,
       name: "NAGPUR",
-      link: "trending-destination/NAGPUR",
+      link: "destinations/nagpur",
       mainImage: "https://admiredashboard.theholistay.in/destination_images/1750532047_6856ffcf26ca6WGc2QLFT.jpg",
       images: [
         "https://admiredashboard.theholistay.in/destination_images/1750532047_6856ffcf26b0bHOMWkHzQ.jpg",
@@ -27,7 +27,7 @@ const DomesticPackage = () => {
     {
       id: 3,
       name: "PUNE",
-      link: "trending-destination/PUNE",
+      link: "destinations/nagpur",
       mainImage: "https://admiredashboard.theholistay.in/destination_images/1750531928_6856ff5867820R1IrN4dG.jpg",
       images: [
         "https://admiredashboard.theholistay.in/destination_images/1750531928_6856ff58674f1yeguC5SC.jpg",

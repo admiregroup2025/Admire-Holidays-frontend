@@ -7,7 +7,7 @@ export const recommendedPackages = [
       price: "On Request",
       location: "Nairobi - Masai Mara",
       image: "https://dynamic.tourtravelworld.com/package-images/photo-small/dir_14/399653/94027.jpg",
-      link: "#"
+      link: "/contact"
     },
     {
       id: 2,
@@ -16,7 +16,7 @@ export const recommendedPackages = [
       price: "On Request",
       location: "Gangtok, Lachen, Lachu",
       image: "https://dynamic.tourtravelworld.com/package-images/photo-small/dir_41/1203841/399370.jpg",
-      link: "#"
+      link: "/destinations/sikkim"
     },
     {
       id: 3,
@@ -25,8 +25,9 @@ export const recommendedPackages = [
       price: "On Request",
       location: "Port Blair, Havelock",
       image: "https://dynamic.tourtravelworld.com/package-images/photo-small/dir_18/527492/252100.jpg",
-      link: "#"
-    }
+      link: "/destinations/andaman"
+    },
+   
   ],
   // Add more slides as needed
 ];
@@ -40,7 +41,7 @@ export const weekendPackages = [
       price: "On Request",
       location: "Goa",
       image: "https://example.com/goa-weekend.jpg",
-      link: "#"
+      link: "/contact"
     },
     {
       id: 102,
@@ -49,7 +50,7 @@ export const weekendPackages = [
       price: "On Request",
       location: "Shimla",
       image: "https://example.com/shimla-weekend.jpg",
-      link: "#"
+      link: "/contact"
     },
     {
       id: 103,
@@ -58,7 +59,7 @@ export const weekendPackages = [
       price: "On Request",
       location: "Pondicherry",
       image: "https://example.com/pondicherry-weekend.jpg",
-      link: "#"
+      link: "/contact"
     }
   ],
   // Add more slides as needed
@@ -73,7 +74,7 @@ export const internationalPackages = [
       price: "₹On Request",
       location: "Bali, Indonesia",
       image: "https://example.com/bali-package.jpg",
-      link: "#"
+      link: "/contact"
     },
     {
       id: 202,
@@ -82,7 +83,7 @@ export const internationalPackages = [
       price: "On Request",
       location: "Paris, Rome, Venice",
       image: "https://example.com/europe-tour.jpg",
-      link: "#"
+      link: "/contact"
     },
     {
       id: 203,
@@ -91,7 +92,7 @@ export const internationalPackages = [
       price: "₹On Request",
       location: "Dubai",
       image: "https://example.com/dubai-package.jpg",
-      link: "#"
+      link: "/contact"
     }
   ],
   // Add more slides as needed
@@ -106,7 +107,7 @@ export const domesticPackages = [
       price: "On Request",
       location: "Kochi, Alleppey",
       image: "https://example.com/kerala-tour.jpg",
-      link: "#"
+      link: "/contact"
     },
     {
       id: 302,
@@ -115,7 +116,7 @@ export const domesticPackages = [
       price: "₹On Request",
       location: "Jaipur, Udaipur",
       image: "https://example.com/rajasthan-tour.jpg",
-      link: "#"
+      link: "/contact"
     },
     {
       id: 303,
@@ -124,7 +125,7 @@ export const domesticPackages = [
       price: "On Request",
       location: "Manali, Leh",
       image: "https://example.com/himalaya-tour.jpg",
-      link: "#"
+      link: "/contact"
     }
   ],
   // Add more slides as needed

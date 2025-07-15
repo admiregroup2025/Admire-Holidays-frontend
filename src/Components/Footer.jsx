@@ -196,7 +196,7 @@ const Footer = () => {
             © {new Date().getFullYear()} Admire Holidays. All rights reserved.
           </p>
           <div className="flex items-center gap-2">
-            <Link to="/privacy-policy" className="text-gray-400 hover:text-amber-400 text-sm transition-colors">
+            <Link to="/Privacy-Policy" className="text-gray-400 hover:text-amber-400 text-sm transition-colors">
               Privacy Policy
             </Link>
             <span className="text-gray-400">|</span>

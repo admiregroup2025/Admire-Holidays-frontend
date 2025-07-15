@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const HeroDomestic = ({ videoSrc, title }) => {
+const HeroReusable = ({ videoSrc, title }) => {
   return (
     <section className="relative w-full h-[60vh] md:h-[80vh] overflow-hidden">
       <video
@@ -23,9 +23,9 @@ const HeroDomestic = ({ videoSrc, title }) => {
   );
 };
 
-HeroDomestic.propTypes = {
+HeroReusable.propTypes = {
   videoSrc: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
 
-export default HeroDomestic;
+export default HeroReusable;

@@ -123,6 +123,9 @@ const SubscribeUs = () => {
       showErrorAlert('Failed to submit form. Please try again later.');
     } finally {
       setIsSubmitting(false);
+
+
+
     }
   };
 
