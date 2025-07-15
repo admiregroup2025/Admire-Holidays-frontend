@@ -2,47 +2,18 @@ import React, { useState } from 'react';
 import { User, Phone, Mail } from 'lucide-react';
 import Swal from 'sweetalert2';
 
-
-
 const SubscribeUs = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: ''
-  });
-
-  const [errors, setErrors] = useState({
-    name: '',
-    phone: '',
-    email: ''
-  });
-
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
+  const [errors, setErrors] = useState({ name: '', phone: '', email: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const validatePhone = (phone) => {
-    // Enhanced phone validation that accepts international formats
-    const phoneRegex = /^[+]?[(]?[0-9]{1,4}[)]?[-\s./0-9]{7,}$/;
-    return phoneRegex.test(phone);
-  };
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
+  const validatePhone = (phone) => /^[+]?[(]?[0-9]{1,4}[)]?[-\s./0-9]{7,}$/.test(phone);
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
   const showSuccessAlert = () => {
@@ -52,24 +23,16 @@ const SubscribeUs = () => {
       icon: 'success',
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'OK',
-      customClass: {
-        popup: 'rounded-2xl',
-        confirmButton: 'rounded-full px-6 py-2'
-      }
     });
   };
 
   const showErrorAlert = (message) => {
     Swal.fire({
-      title: 'Validation Error',
+      title: 'Error',
       text: message,
       icon: 'error',
       confirmButtonColor: '#d33',
       confirmButtonText: 'OK',
-      customClass: {
-        popup: 'rounded-2xl',
-        confirmButton: 'rounded-full px-6 py-2'
-      }
     });
   };
 
@@ -78,24 +41,21 @@ const SubscribeUs = () => {
     setIsSubmitting(true);
 
     let isValid = true;
-    const newErrors = { ...errors };
+    const newErrors = { name: '', phone: '', email: '' };
 
-    // Name validation
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
       isValid = false;
     }
 
-    // Phone validation
     if (!formData.phone.trim()) {
       newErrors.phone = 'Phone number is required';
       isValid = false;
     } else if (!validatePhone(formData.phone)) {
-      newErrors.phone = 'Please enter a valid phone number (e.g., +1234567890)';
+      newErrors.phone = 'Please enter a valid phone number';
       isValid = false;
     }
 
-    // Email validation
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
       isValid = false;
@@ -108,16 +68,13 @@ const SubscribeUs = () => {
 
     if (!isValid) {
       setIsSubmitting(false);
-      showErrorAlert('Please fix the errors in the form');
       return;
     }
-    // Simulate API call
+
     try {
-      const response = await fetch("http://localhost:api/v1/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const response = await fetch('http://localhost:5000/api/v1/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
@@ -125,143 +82,82 @@ const SubscribeUs = () => {
 
       if (response.ok) {
         showSuccessAlert();
-        setFormData({ name: "", phone: "", email: "" });
+        setFormData({ name: '', phone: '', email: '' });
       } else {
-        showErrorAlert(data.message || "Something went wrong.");
+        showErrorAlert(data.message || 'Something went wrong.');
       }
     } catch (error) {
-      showErrorAlert("Server error. Please try again later.");
-    } finally {
-      setIsSubmitting(false);
-    }
-
-
-    try {
-      const response = await fetch("http://localhost:5173/api/v1/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        showSuccessAlert();
-        setFormData({ name: "", phone: "", email: "" });
-      } else {
-        showErrorAlert(data.message || "Something went wrong.");
-      }
-    } catch (error) {
-      showErrorAlert("Server error. Please try again later.");
+      showErrorAlert('Unable to connect to server. Please try again later.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-
-  // create a api for save data of subscibe us form
-
-
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center px-4 py-16 sm:py-20">
-      {/* Background Image */}
-      <div className="absolute inset-0 -z-10">
-        <img
-          alt="Newsletter Background"
-          fetchPriority="high"
-          decoding="async"
-          className="opacity-80 object-cover object-center w-full h-full"
-          src="src/assets/images/subscribe-back-image.jpg"
-          style={{ color: 'transparent' }}
-        />
-      </div>
+    <section className="w-full min-h-screen flex items-center justify-center px-4 py-16 bg-gray-100">
+      <div className="w-full max-w-lg bg-white p-6 rounded-2xl shadow-2xl">
+        <h2 className="text-3xl font-bold text-center text-yellow-600 mb-4">Stay in the Loop</h2>
+        <p className="text-center text-gray-600 mb-6">Subscribe to receive updates, offers, and more!</p>
 
-      {/* Form Container */}
-      <div className="z-10 w-full max-w-lg sm:max-w-3xl bg-white/30 backdrop-blur-xl p-6 sm:p-10 rounded-2xl shadow-2xl">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-4">
-          Stay in the Loop
-        </h2>
-        <p className="text-center text-gray-700 mb-8 px-2 sm:px-0">
-          Subscribe to receive updates, offers, and more!
-        </p>
-
-        <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
-          {/* Name Field */}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Name */}
           <div>
-            <div className={`flex items-center border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-full px-4 py-3 bg-white shadow-sm focus-within:ring-2 focus-within:ring-red-400`}>
-              <User className="text-gray-400 mr-3" size={24} />
+            <div className={`flex items-center border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-full px-4 py-2`}>
+              <User className="text-gray-400 mr-2" size={20} />
               <input
-                required
-                placeholder="Your Name"
-                className="w-full outline-none bg-transparent text-gray-700 text-sm sm:text-base"
                 type="text"
                 name="name"
+                placeholder="Your Name"
+                className="w-full outline-none bg-transparent"
                 value={formData.name}
                 onChange={handleChange}
                 disabled={isSubmitting}
               />
             </div>
-            {errors.name && <p className="text-red-500 text-sm mt-1 ml-4">{errors.name}</p>}
+            {errors.name && <p className="text-red-500 text-sm ml-3">{errors.name}</p>}
           </div>
 
-          {/* Phone Field */}
+          {/* Phone */}
           <div>
-            <div className={`flex items-center border ${errors.phone ? 'border-red-500' : 'border-gray-300'} rounded-full px-4 py-3 bg-white shadow-sm focus-within:ring-2 focus-within:ring-red-400`}>
-              <Phone className="text-gray-400 mr-3" size={24} />
+            <div className={`flex items-center border ${errors.phone ? 'border-red-500' : 'border-gray-300'} rounded-full px-4 py-2`}>
+              <Phone className="text-gray-400 mr-2" size={20} />
               <input
-                required
-                placeholder="Phone Number (e.g., +1234567890)"
-                className="w-full outline-none bg-transparent text-gray-700 text-sm sm:text-base"
                 type="tel"
                 name="phone"
+                placeholder="Phone Number"
+                className="w-full outline-none bg-transparent"
                 value={formData.phone}
                 onChange={handleChange}
                 disabled={isSubmitting}
               />
             </div>
-            {errors.phone && <p className="text-red-500 text-sm mt-1 ml-4">{errors.phone}</p>}
+            {errors.phone && <p className="text-red-500 text-sm ml-3">{errors.phone}</p>}
           </div>
 
-          {/* Email Field */}
+          {/* Email */}
           <div>
-            <div className={`flex items-center border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-full px-4 py-3 bg-white shadow-sm focus-within:ring-2 focus-within:ring-red-400`}>
-              <Mail className="text-gray-400 mr-3" size={24} />
+            <div className={`flex items-center border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-full px-4 py-2`}>
+              <Mail className="text-gray-400 mr-2" size={20} />
               <input
-                required
-                placeholder="Email Address"
-                className="w-full outline-none bg-transparent text-gray-700 text-sm sm:text-base"
                 type="email"
                 name="email"
+                placeholder="Email Address"
+                className="w-full outline-none bg-transparent"
                 value={formData.email}
                 onChange={handleChange}
                 disabled={isSubmitting}
               />
             </div>
-            {errors.email && <p className="text-red-500 text-sm mt-1 ml-4">{errors.email}</p>}
+            {errors.email && <p className="text-red-500 text-sm ml-3">{errors.email}</p>}
           </div>
 
-          {/* Submit Button */}
+          {/* Submit */}
           <button
             type="submit"
-            className={`w-full py-3 rounded-full text-white font-semibold text-lg transition duration-300 shadow-md ${isSubmitting
-              ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-yellow-500 hover:bg-red-600'
-              }`}
+            className={`w-full py-2 rounded-full text-white font-semibold ${isSubmitting ? 'bg-gray-400' : 'bg-yellow-500 hover:bg-yellow-600'}`}
             disabled={isSubmitting}
           >
-            {isSubmitting ? (
-              <span className="flex items-center justify-center">
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Processing...
-              </span>
-            ) : (
-              'Subscribe'
-            )}
+            {isSubmitting ? 'Submitting...' : 'Subscribe'}
           </button>
         </form>
       </div>
