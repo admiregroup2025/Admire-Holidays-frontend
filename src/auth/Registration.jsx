@@ -1,31 +1,29 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const Login = ({ onClose }) => {
+const RegistrationModal = ({ onClose }) => {
+  const [accountType, setAccountType] = useState('personal');
+  const [step, setStep] = useState(1); // 1: Mobile, 2: OTP, 3: Details
   const [mobile, setMobile] = useState('');
   const [otp, setOtp] = useState('');
-  const [otpSent, setOtpSent] = useState(false);
+  const [userDetails, setUserDetails] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
 
   const handleMobileSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    
-    if (!mobile || mobile.length !== 10) {
-      setError('Please enter a valid 10-digit mobile number');
-      return;
-    }
-
     setIsLoading(true);
+    // Simulate API call to send OTP
     try {
-      // Simulate API call to send OTP
       await new Promise(resolve => setTimeout(resolve, 1000));
       console.log('OTP sent to:', mobile);
-      setOtpSent(true);
+      setStep(2);
     } catch (error) {
-      setError('Failed to send OTP. Please try again.');
+      console.error('Error sending OTP:', error);
     } finally {
       setIsLoading(false);
     }
@@ -33,43 +31,59 @@ const Login = ({ onClose }) => {
 
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    
-    if (!otp || otp.length !== 6) {
-      setError('Please enter a valid 6-digit OTP');
-      return;
-    }
-
     setIsLoading(true);
+    // Simulate OTP verification
     try {
-      // Simulate OTP verification
       await new Promise(resolve => setTimeout(resolve, 1000));
       console.log('OTP verified:', otp);
-      // On successful verification, navigate to dashboard
-      navigate('/dashboard');
+      setStep(3);
     } catch (error) {
-      setError('Invalid OTP. Please try again.');
+      console.error('Error verifying OTP:', error);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleResendOtp = async () => {
+  const handleRegisterSubmit = async (e) => {
+    e.preventDefault();
+    if (userDetails.password !== userDetails.confirmPassword) {
+      alert("Passwords don't match!");
+      return;
+    }
+    
     setIsLoading(true);
-    setError('');
+    // Simulate registration API call
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log('Resending OTP to:', mobile);
-      setOtp('');
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      console.log('Registration successful:', userDetails);
+      onClose();
     } catch (error) {
-      setError('Failed to resend OTP. Please try again.');
+      console.error('Registration failed:', error);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserDetails(prev => ({ ...prev, [name]: value }));
   };
 
   const handleModalClick = (e) => {
     e.stopPropagation();
+  };
+
+  const handleResendOtp = async () => {
+    setIsLoading(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log('Resending OTP to:', mobile);
+      alert('OTP resent successfully!');
+    } catch (error) {
+      console.error('Error resending OTP:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -90,21 +104,28 @@ const Login = ({ onClose }) => {
           &times;
         </button>
 
-        {/* Header */}
+        {/* Header with Account Type Tabs */}
         <div className="px-6 pt-8 pb-2">
-          <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Welcome Back</h2>
+          <ul className="flex border-b border-gray-200">
+            <li 
+              className={`flex-1 text-center py-2 cursor-pointer ${accountType === 'personal' ? 'text-blue-600 border-b-2 border-blue-600 font-bold' : 'text-gray-500'}`}
+              onClick={() => setAccountType('personal')}
+            >
+              Personal Account
+            </li>
+            <li 
+              className={`flex-1 text-center py-2 cursor-pointer ${accountType === 'business' ? 'text-blue-600 border-b-2 border-blue-600 font-bold' : 'text-gray-500'}`}
+              onClick={() => setAccountType('business')}
+            >
+              Business Account
+            </li>
+          </ul>
         </div>
 
         {/* Form Content */}
         <div className="px-6 pb-6">
-          {error && (
-            <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-md text-sm">
-              {error}
-            </div>
-          )}
-
-          {/* Mobile Number Input */}
-          {!otpSent ? (
+          {/* Step 1: Mobile Number */}
+          {step === 1 && (
             <form onSubmit={handleMobileSubmit}>
               <div className="mb-6">
                 <label htmlFor="mobile" className="block text-sm font-bold text-gray-700 mb-2">
@@ -124,7 +145,7 @@ const Login = ({ onClose }) => {
                     className="flex-1 px-3 py-2 outline-none"
                     placeholder="Enter Mobile Number"
                     value={mobile}
-                    onChange={(e) => setMobile(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                    onChange={(e) => setMobile(e.target.value)}
                     pattern="[0-9]{10}"
                     required
                   />
@@ -139,8 +160,10 @@ const Login = ({ onClose }) => {
                 {isLoading ? 'Sending OTP...' : 'Continue'}
               </button>
             </form>
-          ) : (
-            /* OTP Verification */
+          )}
+
+          {/* Step 2: OTP Verification */}
+          {step === 2 && (
             <form onSubmit={handleOtpSubmit}>
               <div className="mb-6">
                 <label className="block text-sm font-bold text-gray-700 mb-2">
@@ -151,7 +174,7 @@ const Login = ({ onClose }) => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md outline-none"
                   placeholder="Enter 6-digit OTP"
                   value={otp}
-                  onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                  onChange={(e) => setOtp(e.target.value)}
                   pattern="[0-9]{6}"
                   required
                 />
@@ -173,13 +196,95 @@ const Login = ({ onClose }) => {
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md transition duration-200 disabled:opacity-50"
                 disabled={isLoading}
               >
-                {isLoading ? 'Verifying...' : 'Login'}
+                {isLoading ? 'Verifying...' : 'Verify OTP'}
               </button>
             </form>
           )}
 
-          {/* Social Login Divider */}
-          {!otpSent && (
+          {/* Step 3: Registration Details */}
+          {step === 3 && (
+            <form onSubmit={handleRegisterSubmit}>
+              <div className="mb-4">
+                <label htmlFor="name" className="block text-sm font-bold text-gray-700 mb-2">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md outline-none"
+                  placeholder="Enter your full name"
+                  value={userDetails.name}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md outline-none"
+                  placeholder="Enter your email"
+                  value={userDetails.email}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="password" className="block text-sm font-bold text-gray-700 mb-2">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md outline-none"
+                  placeholder="Create a password"
+                  value={userDetails.password}
+                  onChange={handleInputChange}
+                  minLength="8"
+                  required
+                />
+              </div>
+
+              <div className="mb-6">
+                <label htmlFor="confirmPassword" className="block text-sm font-bold text-gray-700 mb-2">
+                  Confirm Password
+                </label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md outline-none"
+                  placeholder="Re-enter your password"
+                  value={userDetails.confirmPassword}
+                  onChange={handleInputChange}
+                  minLength="8"
+                  required
+                />
+                {userDetails.password && userDetails.confirmPassword && userDetails.password !== userDetails.confirmPassword && (
+                  <p className="text-red-500 text-xs mt-1">Passwords don't match</p>
+                )}
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md transition duration-200 disabled:opacity-50"
+                disabled={isLoading || (userDetails.password && userDetails.confirmPassword && userDetails.password !== userDetails.confirmPassword)}
+              >
+                {isLoading ? 'Registering...' : 'Complete Registration'}
+              </button>
+            </form>
+          )}
+
+          {/* Social Login Divider - Only shown on first step */}
+          {step === 1 && (
             <>
               <div className="relative flex items-center my-6">
                 <div className="flex-grow border-t border-gray-300"></div>
@@ -218,26 +323,18 @@ const Login = ({ onClose }) => {
             </>
           )}
 
-          {/* Sign Up Link */}
-          <div className="mt-6 text-center text-sm text-gray-600">
-            Don't have an account?{' '}
-            <Link to="/signup" className="text-blue-600 font-bold hover:underline">
-              Sign up
-            </Link>
-          </div>
-
           {/* Footer Terms */}
           <div className="mt-8 text-center text-xs text-gray-500">
-            <p>By proceeding, you agree to our 
-              <Link to="/privacy-policy" className="text-blue-600 hover:underline"> Privacy Policy</Link>, 
-              <Link to="/terms-conditions" className="text-blue-600 hover:underline"> Terms of Service</Link> and 
-              <Link to="/user-agreement" className="text-blue-600 hover:underline"> User Agreement</Link>
-            </p>
-          </div>
+  <p>By proceeding, you agree to our 
+    <Link to="/privacy-policy" className="text-blue-600 hover:underline">Privacy Policy</Link>, 
+    <Link to="/terms-conditions" className="text-blue-600 hover:underline">Terms of Service</Link> and 
+    <Link to="/user-agreement" className="text-blue-600 hover:underline">User Agreement</Link>
+  </p>
+</div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default RegistrationModal;

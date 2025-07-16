@@ -1,7 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 // import TrendingDestinations from './TrendingDestinations';
+
  
 const Hero = () => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/explorenow'); // Make sure this matches your route
+  };
+ 
   return (
     <div className="w-full">
       {/* VIDEO HERO SECTION START */}
@@ -33,7 +40,7 @@ const Hero = () => {
                 Discover breathtaking places and create unforgettable memories
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
-                <button className="px-8 py-3 text-base font-semibold rounded-md bg-blue-600 text-white min-w-[140px] hover:bg-blue-700 hover:-translate-y-0.5 transition-all duration-300">
+                <button className="px-8 py-3 text-base font-semibold rounded-md bg-blue-600 text-white min-w-[140px] hover:bg-blue-700 hover:-translate-y-0.5 transition-all duration-300 " onClick={handleClick}>
                   Explore Now
                 </button>
                 <button className="px-8 py-3 text-base font-semibold rounded-md bg-transparent text-white border-2 border-white min-w-[140px] hover:bg-white hover:text-gray-800 hover:-translate-y-0.5 transition-all duration-300">

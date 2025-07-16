@@ -16,6 +16,15 @@ import Footer from "./Components/Footer";
 import HomeStickyFormPage from "./pages/HomeStickyFormPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
+import Registration from "./auth/Registration";
+import Login from "./auth/Login";
+import UserAgreement from "./pages/UserAgreement";
+import MyBooking from "./pages/MyBooking";
+import PackageDetail from "./Components/packageCardDetails/PackageDetail";
+import ExploreNow from "./pages/ExploreNow";
+// import ResortDetail from "./Components/ResortDetail";
+import ResortDetails from "./Components/ResortDetail";
+
 
 
 function App() {
@@ -25,6 +34,7 @@ function App() {
       {/* <NavBar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/explorenow" element={<ExploreNow />} />
         <Route path="/domestic" element={<Domestic />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
@@ -41,9 +51,22 @@ function App() {
          <Route path="/HomeStickyFormPage" element={<HomeStickyFormPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-conditions" element={<TermsAndConditions />} />
+        <Route path="/user-agreement" element={<UserAgreement />} />
+
+
         <Route path="/destinations/:slug" element={<DestinationDetail />} />
 
 
+        <Route path="/signin" element={<Login />} />
+
+        <Route path="/signup" element={<Registration />} />
+        <Route path="/my-bookings" element={<MyBooking />} />
+
+        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/destinations/:slug/packages/:packageId" element={<PackageDetail />} />
+
+        <Route path="/resort-detail/:id" element={<ResortDetails />} />
+        
 
       </Routes>
       {/* <Footer /> */}

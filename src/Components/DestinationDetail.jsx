@@ -289,48 +289,55 @@ const DestinationDetail = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                   {getVisiblePackages().map((pkg) => (
                     <div 
-                      key={pkg.id}
-                      className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 h-full flex flex-col border border-gray-200"
-                    >
-                      <div className="w-full h-64 overflow-hidden relative">
-                        <img 
-                          alt={pkg.name} 
-                          loading="lazy"
-                          className="object-cover w-full h-full transition-all duration-500 hover:scale-105"
-                          src={destination.mainImage}
-                        />
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                          <h3 className="text-xl font-bold text-white">{pkg.name}</h3>
-                        </div>
-                      </div>
-                      <div className="p-6 flex-1 flex flex-col">
-                        <div className="flex items-center mb-3">
-                          <FaCalendarAlt className="text-[#E69233] mr-2" />
-                          <span>{pkg.duration}</span>
-                        </div>
-                        <div className="flex items-center mb-4">
-                          <FaRupeeSign className="text-[#E69233] mr-2" />
-                          <span className="font-bold">{pkg.price}</span>
-                        </div>
-                        <div className="mb-4">
-                          <h4 className="font-semibold mb-2">Highlights:</h4>
-                          <ul className="space-y-1">
-                            {pkg.highlights.map((item, i) => (
-                              <li key={i} className="flex items-start">
-                                <span className="text-[#E69233] mr-2">•</span>
-                                {item}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        <p className="text-gray-600 mb-4">{pkg.description}</p>
-                        <div className="mt-auto flex gap-4 items-center">
-                          <button className="flex-1 px-4 py-3 bg-[#E69233] text-white font-semibold rounded-lg hover:bg-[#d5822b] transition flex items-center justify-center">
-                            <FaPhone className="mr-2" /> Enquire Now
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+  key={pkg.id}
+  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 h-full flex flex-col border border-gray-200 cursor-pointer"
+  onClick={() => navigate(`/destinations/${slug}/packages/${pkg.id}`)}
+>
+  <div className="w-full h-64 overflow-hidden relative">
+    <img 
+      alt={pkg.name} 
+      loading="lazy"
+      className="object-cover w-full h-full transition-all duration-500 hover:scale-105"
+      src={destination.mainImage}
+    />
+    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+      <h3 className="text-xl font-bold text-white">{pkg.name}</h3>
+    </div>
+  </div>
+  <div className="p-6 flex-1 flex flex-col">
+    <div className="flex items-center mb-3">
+      <FaCalendarAlt className="text-[#E69233] mr-2" />
+      <span>{pkg.duration}</span>
+    </div>
+    <div className="flex items-center mb-4">
+      <FaRupeeSign className="text-[#E69233] mr-2" />
+      <span className="font-bold">{pkg.price}</span>
+    </div>
+    <div className="mb-4">
+      <h4 className="font-semibold mb-2">Highlights:</h4>
+      <ul className="space-y-1">
+        {pkg.highlights.map((item, i) => (
+          <li key={i} className="flex items-start">
+            <span className="text-[#E69233] mr-2">•</span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+    <p className="text-gray-600 mb-4">{pkg.description}</p>
+    <div className="mt-auto flex gap-4 items-center">
+      <button 
+        className="flex-1 px-4 py-3 bg-[#E69233] text-white font-semibold rounded-lg hover:bg-[#d5822b] transition flex items-center justify-center"
+        onClick={(e) => {
+          e.stopPropagation();
+          // Handle enquire now action
+        }}
+      >
+        <FaPhone className="mr-2" /> Enquire Now
+      </button>
+    </div>
+  </div>
+</div>
                   ))}
                 </div>
               </div>
