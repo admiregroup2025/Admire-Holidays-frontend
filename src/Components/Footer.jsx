@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaPhone, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import logo from "../assets/images/admire-logo.webp";
 
 const Footer = () => {
   return (
@@ -21,16 +22,16 @@ const Footer = () => {
             <div className="flex items-center mb-4">
               <div className="bg-amber-400 p-1">
                 <div className="bg-gray-900 p-1">
-                  <img 
-                    src="src/assets/images/admire-logo.webp" 
-                    alt="Admire Holidays Logo" 
-                    className="rounded-full"
-                    width="50"
-                    height="50"
-                  />
-                </div>
+  <img 
+    src={logo} 
+    alt="Admire Holidays Logo" 
+    className="rounded-full"
+    width="50"
+    height="50"
+  />
+</div>
               </div>
-              <h5 className="ml-2 mb-0 text-amber-400 font-semibold">Admire Holidays</h5>
+              {/* <h5 className="ml-2 mb-0 text-amber-400 font-semibold">Admire Holidays</h5> */}
             </div>
             <p className="text-sm text-gray-400">
               Helping you explore the world with seamless travel experiences.

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faChevronUp, faChevronDown, faSignInAlt, faUserPlus, faSuitcase } from '@fortawesome/free-solid-svg-icons';
-import SearchBar from './SearchBar'; // Import the SearchBar component
+import SearchBar from './SearchBar'; 
+import logo from "../assets/images/admire-logo.webp"; 
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -117,13 +118,13 @@ function NavBar() {
       <nav className="bg-white shadow-md sticky top-0 z-40 py-2">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            <NavLink to="/" className="flex items-center">
-              <img 
-                src="src/assets/images/admire-logo.webp"
-                alt="Admire Holidays Logo"
-                className="h-10"
-              />
-            </NavLink>
+           <NavLink to="/" className="flex items-center">
+  <img 
+    src={logo}
+    alt="Admire Holidays Logo"
+    className="h-10"
+  />
+</NavLink>
 
             {/* Mobile Search Bar */}
             

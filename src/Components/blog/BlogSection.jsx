@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 const BlogSection = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showContactForm, setShowContactForm] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,31 +48,13 @@ const BlogSection = () => {
 
   const handleCardClick = (slug, e) => {
     if (!e.target.closest('.no-navigate')) {
-      navigate(`/blog/${blogId}/${slug}`);
+      navigate(`/blog/${slug}`);
     }
   };
 
-  const handleContactClick = (blogId, e) => {
+  const handleContactClick = (e) => {
     e.stopPropagation();
-    setShowContactForm(showContactForm === blogId ? null : blogId);
-  };
-
-  const handleContactSubmit = (e, blogId) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const formData = new FormData(e.target);
-    const contactData = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      phone: formData.get('phone'),
-      message: formData.get('message'),
-      blogId: blogId
-    };
-    
-    console.log("Contact form submitted:", contactData);
-    e.target.reset();
-    setShowContactForm(null);
-    alert('Thank you for your inquiry! We will contact you soon.');
+    navigate('/contact');
   };
 
   if (loading) {
@@ -103,7 +84,7 @@ const BlogSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col"
-            onClick={(e) => handleCardClick(blog.id, blog.slug, e)}
+            onClick={(e) => handleCardClick(blog.slug, e)}
           >
             <div className="relative h-56 w-full">
               <img 
@@ -135,79 +116,23 @@ const BlogSection = () => {
               </div>
               
               <div className="mt-auto">
-                {showContactForm === blog.id ? (
-                  <motion.div 
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    className="contact-form bg-gray-50 p-4 rounded-lg mb-3 no-navigate"
-                    onClick={(e) => e.stopPropagation()}
+                <div className="flex justify-between gap-3 no-navigate">
+                  <button 
+                    className="flex-1 bg-gray-100 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition font-medium border border-gray-200"
+                    onClick={handleContactClick}
                   >
-                    <form onSubmit={(e) => handleContactSubmit(e, blog.id)}>
-                      <input 
-                        type="text" 
-                        name="name" 
-                        placeholder="Your Name" 
-                        className="w-full p-2 mb-2 rounded border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500" 
-                        required 
-                      />
-                      <input 
-                        type="email" 
-                        name="email" 
-                        placeholder="Your Email" 
-                        className="w-full p-2 mb-2 rounded border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500" 
-                        required 
-                      />
-                      <input 
-                        type="tel" 
-                        name="phone" 
-                        placeholder="Phone Number" 
-                        className="w-full p-2 mb-2 rounded border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500" 
-                      />
-                      <textarea 
-                        name="message" 
-                        placeholder="Your Message" 
-                        className="w-full p-2 mb-3 rounded border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500" 
-                        rows="2"
-                      ></textarea>
-                      <div className="flex justify-between gap-2">
-                        <button 
-                          type="submit" 
-                          className="flex-1 bg-green-600 text-white px-3 py-2 rounded-lg hover:bg-green-700 transition font-medium"
-                        >
-                          Submit
-                        </button>
-                        <button 
-                          type="button" 
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setShowContactForm(null);
-                          }}
-                          className="flex-1 bg-gray-500 text-white px-3 py-2 rounded-lg hover:bg-gray-600 transition font-medium"
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    </form>
-                  </motion.div>
-                ) : (
-                  <div className="flex justify-between gap-3 no-navigate">
-                    <button 
-                      className="flex-1 bg-gray-100 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition font-medium border border-gray-200"
-                      onClick={(e) => handleContactClick(blog.id, e)}
-                    >
-                      Contact
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigate(`/blog/${blog.slug}`);
-                      }}
-                      className="flex-1 bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition font-medium"
-                    >
-                      Read More
-                    </button>
-                  </div>
-                )}
+                    Contact
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/blog/${blog.slug}`);
+                    }}
+                    className="flex-1 bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition font-medium"
+                  >
+                    Read More
+                  </button>
+                </div>
               </div>
             </div>
           </motion.div>

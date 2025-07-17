@@ -41,9 +41,9 @@ const TrendingDestinations = () => {
       name: "Kashmir",
       description: "Paradise on earth",
       images: [
-        "https://images.unsplash.com/photo-1588666309990-d68f08e3d4a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1458&q=80",
-        "https://images.unsplash.com/photo-1598940603846-a1edd0ef2574?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        "https://images.unsplash.com/photo-1605540436563-5bca919ae766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80",
+        "https://plus.unsplash.com/premium_photo-1697730277839-440df1a4415f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a2FzaG1pcnxlbnwwfHwwfHx8MA%3D%3D",
+        "https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8a2FzaG1pcnxlbnwwfHwwfHx8MA%3D%3D",
+        "https://plus.unsplash.com/premium_photo-1697730150003-26a1d469adb4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8a2FzaG1pcnxlbnwwfHwwfHx8MA%3D%3D",
       ],
     },
     {
@@ -52,15 +52,15 @@ const TrendingDestinations = () => {
       name: "Leh-ladakh",
       description: "Majestic Himalayan beauty",
       images: [
-        "https://images.unsplash.com/photo-1582972236019-ea9dfa7a45a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        "https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        "https://images.unsplash.com/photo-1587471388260-0d192f61b606?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "https://images.unsplash.com/photo-1569670380685-4582bf29a24a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3JpJTIwbGFua2F8ZW58MHx8MHx8fDA%3D",
+        "https://images.unsplash.com/photo-1593118845043-359e5f628214?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bGFkYWtofGVufDB8fDB8fHww",
+        "https://images.unsplash.com/photo-1709874859086-b50e500f4136?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGxhZGFraHxlbnwwfHwwfHx8MA%3D%3D",
       ],
     },
     // Second row
     {
       id: 5,
-      slug: "sri lanka", 
+      slug: "sri-lanka", 
       name: "Sri Lanka",
       description: "Teardrop of the Indian Ocean",
       images: [
@@ -86,9 +86,9 @@ const TrendingDestinations = () => {
       name: "Uttarakhand",
       description: "Devbhumi - Land of the Gods",
       images: [
-        "https://images.unsplash.com/photo-1587135991058-8816a5a7e0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80",
-        "https://images.unsplash.com/photo-1587135990991-61855bdfa6e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        "https://images.unsplash.com/photo-1587135991058-b5e6d8b8e9b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "https://plus.unsplash.com/premium_photo-1697730398251-40cd8dc57e0b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXR0cmFraGFuZHxlbnwwfHwwfHx8MA%3D%3D",
+        "https://images.unsplash.com/photo-1596599623428-87dbae5e7816?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXR0cmFraGFuZHxlbnwwfHwwfHx8MA%3D%3D",
+        "https://images.unsplash.com/photo-1724864814923-548d7fd5f42e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dXR0cmFraGFuZHxlbnwwfHwwfHx8MA%3D%3D",
       ],
     },
     {

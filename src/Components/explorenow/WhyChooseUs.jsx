@@ -10,40 +10,40 @@ import {
   Headphones,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-
+ 
 const WhyChooseUs = () => {
   const iconItems = [
     {
       icon: <Award className="w-10 h-10 text-blue-600" />,
-      title: 'Expert Guides',
-      desc: 'Locals with deep insight into history, culture, and hidden spots.',
+      title: 'Knowledgeable Team',
+      desc: 'Our guides bring local stories and practical insights to every trip.',
       bg: 'bg-blue-100',
     },
     {
       icon: <Shield className="w-10 h-10 text-green-600" />,
-      title: 'Safety First',
-      desc: 'Protocols, insurance, and planning — we’ve got your back.',
+      title: 'Focused on Safety',
+      desc: 'We prioritize secure travel experiences with careful planning.',
       bg: 'bg-green-100',
     },
     {
       icon: <Star className="w-10 h-10 text-amber-600" />,
-      title: '5-Star Support',
-      desc: 'Round-the-clock help with a smile. Your journey, stress-free.',
+      title: 'Reliable Assistance',
+      desc: 'Questions or concerns? We’re just a message away, ready to help.',
       bg: 'bg-amber-100',
     },
     {
       icon: <CheckCircle className="w-10 h-10 text-purple-600" />,
-      title: 'Best Value',
-      desc: 'No hidden costs. Just transparency and great experiences.',
+      title: 'Customized Quotes',
+      desc: 'Every journey is unique — we provide tailored plans and pricing based on your preferences.',
       bg: 'bg-purple-100',
     },
   ];
-
+ 
   const detailItems = [
     {
       icon: <UserCheck className="w-10 h-10 text-blue-600" />,
-      title: 'Experience',
-      desc: 'With over 10 years in the industry, we craft unforgettable travel experiences tailored to your unique preferences.',
+      title: 'Trusted Service',
+      desc: 'Each traveler is different, so we offer flexible planning that fits your style, budget, and goals.',
       bg: 'bg-blue-100',
     },
     {
@@ -54,18 +54,18 @@ const WhyChooseUs = () => {
     },
     {
       icon: <Eye className="w-10 h-10 text-amber-600" />,
-      title: 'Transparency',
-      desc: 'No hidden fees. Clear pricing, honest terms, and complete trust from day one.',
+      title: 'Honest Approach',
+      desc: 'We keep things simple, clear, and upfront so you always know what to expect.',
       bg: 'bg-amber-100',
     },
     {
       icon: <Headphones className="w-10 h-10 text-purple-600" />,
-      title: '24/7 Support',
-      desc: 'Travel with peace of mind knowing our support team is available around the clock, anytime you need us.',
+      title: 'Responsive Support',
+      desc: 'We respond quickly and care about your experience before, during, and after your trip.',
       bg: 'bg-purple-100',
     },
   ];
-
+ 
   return (
     <section className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-6 text-center">
@@ -75,11 +75,11 @@ const WhyChooseUs = () => {
         >
           Why Choose Admire Holidays
         </h2>
-
+ 
         <p className="text-xl text-gray-600 mb-12">
           We go beyond bookings — we create experiences that matter.
         </p>
-
+ 
         {/* Top Icon Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {iconItems.map((item, idx) => (
@@ -98,14 +98,14 @@ const WhyChooseUs = () => {
               >
                 {item.icon}
               </motion.div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              <h3 className="text-xl font-semibold text-primaryHeading mb-2">
                 {item.title}
               </h3>
               <p className="text-gray-600">{item.desc}</p>
             </motion.div>
           ))}
         </div>
-
+ 
         {/* Bottom Detail Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {detailItems.map((item, idx) => (
@@ -124,7 +124,7 @@ const WhyChooseUs = () => {
               >
                 {item.icon}
               </motion.div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              <h3 className="text-xl font-semibold text-primaryHeading mb-2">
                 {item.title}
               </h3>
               <p className="text-gray-600">{item.desc}</p>
@@ -135,5 +135,5 @@ const WhyChooseUs = () => {
     </section>
   );
 };
-
+ 
 export default WhyChooseUs;

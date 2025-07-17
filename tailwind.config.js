@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        primaryHeading: '#261F55',
+      },
       animation: {
         'fade-in-up': 'fadeInUp 1s ease-out forwards',
       },

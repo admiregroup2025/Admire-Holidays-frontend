@@ -81,6 +81,7 @@ const PackageDetail = () => {
             "Cancellation 30 days prior for full refund",
             "No refund for cancellations within 15 days of travel",
           ],
+          
         },
         {
           id: "p2",
@@ -93,6 +94,384 @@ const PackageDetail = () => {
         },
       ],
     },
+    {
+  id: 2,
+  slug: "kashmir",
+  name: "Kashmir",
+  description:
+    "Discover the paradise on earth with snow-capped mountains, scenic valleys, and tranquil lakes.",
+  mainImage:
+    "https://media.gettyimages.com/id/1133588884/photo/beautiful-kashmir-valley-during-autumn.jpg?s=612x612&w=0&k=20&c=r0Exl9-hmraC6sHtHieFiPz8HRKTdGP5uYeqKJZZ5B4=",
+  images: [
+    "https://media.gettyimages.com/id/1140249132/photo/dal-lake-srinagar.jpg?s=612x612&w=0&k=20&c=8TjHwlh8kD1ohrGTl7EzIs3AE2AHDd6n7qV8NzCG1j0=",
+    "https://media.gettyimages.com/id/1285686243/photo/beautiful-view-of-pahalgam-kashmir.jpg?s=612x612&w=0&k=20&c=iK5zvbR7GqHzfROv2La3JdV6kkkKgRbPMbbILRScs1o=",
+    "https://media.gettyimages.com/id/1397744922/photo/shikara-ride-on-dal-lake.jpg?s=612x612&w=0&k=20&c=piGqF9AHQZSPczKkVRXjQEBqxImnSCvqlY8jZCLWgEQ=",
+    "https://media.gettyimages.com/id/1397744935/photo/gulmarg-kashmir-snow-landscape.jpg?s=612x612&w=0&k=20&c=kC9jcAmD9BLy37GpLz3MxGe1nbTTt70YVtScKzwVmcQ=",
+    "https://media.gettyimages.com/id/1133588570/photo/snow-covered-pine-trees-in-kashmir.jpg?s=612x612&w=0&k=20&c=KMnK6Z1tTBGohKD9xyHfGkIb7NLB_3v7yQk3vUloyT4="
+  ],
+  packages: [
+    {
+      id: "p1",
+      name: "Kashmir Winter Wonderland",
+      duration: "6 Days / 5 Nights",
+      price: "₹28,000",
+      highlights: ["Srinagar", "Gulmarg", "Pahalgam", "Sonmarg"],
+      description:
+        "Enjoy snowfall, skiing, and mesmerizing landscapes in the snowy valleys of Kashmir.",
+      itinerary: [
+        {
+          day: 1,
+          title: "Arrival in Srinagar",
+          description:
+            "Arrive in Srinagar and enjoy a relaxing Shikara ride on Dal Lake. Overnight stay in a houseboat.",
+        },
+        {
+          day: 2,
+          title: "Srinagar to Gulmarg",
+          description:
+            "Proceed to Gulmarg. Enjoy snow activities such as skiing and a ride on the Gondola cable car.",
+        },
+        {
+          day: 3,
+          title: "Gulmarg to Pahalgam",
+          description:
+            "Drive to Pahalgam. Explore the Lidder River, Aru and Betaab Valleys.",
+        },
+        {
+          day: 4,
+          title: "Pahalgam to Srinagar",
+          description:
+            "Return to Srinagar. Visit Mughal Gardens including Nishat Bagh and Shalimar Bagh.",
+        },
+        {
+          day: 5,
+          title: "Excursion to Sonmarg",
+          description:
+            "Take a full-day excursion to Sonmarg. Enjoy the scenic Thajiwas Glacier (pony ride optional).",
+        },
+        {
+          day: 6,
+          title: "Departure",
+          description:
+            "After breakfast, transfer to airport with wonderful memories of Kashmir.",
+        },
+      ],
+      inclusions: [
+        "5 nights accommodation in deluxe hotels/houseboat",
+        "Daily breakfast and dinner",
+        "All sightseeing and transfers by private AC vehicle",
+        "Shikara ride on Dal Lake",
+        "All applicable taxes",
+      ],
+      exclusions: [
+        "Airfare/train tickets",
+        "Lunch",
+        "Pony rides, Gondola ride, skiing charges",
+        "Personal expenses",
+        "Anything not mentioned in inclusions",
+      ],
+      terms: [
+        "30% advance to confirm booking",
+        "Cancellation 30 days prior for full refund",
+        "No refund for cancellations within 15 days of travel",
+      ],
+    },
+    {
+      id: "p2",
+      name: "Romantic Kashmir Retreat",
+      duration: "4 Days / 3 Nights",
+      price: "₹20,000",
+      highlights: ["Dal Lake Shikara Ride", "Mughal Gardens", "Local Handicrafts"],
+      description:
+        "Perfect getaway for couples seeking peace, nature, and romance in Kashmir.",
+      itinerary: [
+        {
+          day: 1,
+          title: "Arrival in Srinagar",
+          description:
+            "Arrive in Srinagar. Enjoy Shikara ride and overnight in a romantic houseboat.",
+        },
+        {
+          day: 2,
+          title: "Local Sightseeing",
+          description:
+            "Visit Mughal Gardens, Shankaracharya Temple, and explore local markets.",
+        },
+        {
+          day: 3,
+          title: "Excursion to Gulmarg",
+          description:
+            "Enjoy a day trip to Gulmarg. Experience the Gondola ride and snow activities.",
+        },
+        {
+          day: 4,
+          title: "Departure",
+          description:
+            "Transfer to the airport after breakfast for your onward journey.",
+        },
+      ],
+      inclusions: [
+        "3 nights accommodation in deluxe hotel/houseboat",
+        "Breakfast and dinner",
+        "Shikara ride",
+        "Sightseeing and transfers by private vehicle",
+        "All applicable taxes",
+      ],
+      exclusions: [
+        "Airfare/train tickets",
+        "Lunch",
+        "Pony ride, Gondola tickets",
+        "Personal expenses",
+        "Anything not mentioned in inclusions",
+      ],
+      terms: [
+        "30% advance to confirm booking",
+        "Cancellation 15 days prior for full refund",
+        "50% refund for cancellations within 7 days of travel",
+      ],
+    },
+  ],
+},
+
+{
+  id: 3,
+  slug: "rajasthan",
+  name: "Rajasthan",
+  description:
+    "Discover the royal heritage, magnificent forts, and vibrant culture of Rajasthan.",
+  mainImage:
+    "https://admiredashboard.theholistay.in/destination_images/1745170357_68052fb5756b2YDpVGy3h.jpg",
+  images: [
+    "https://admiredashboard.theholistay.in/destination_images/1745170357_68052fb575318HrvR4tbl.jpg",
+    "https://admiredashboard.theholistay.in/destination_images/1745170357_68052fb575494mL1Rlbd7.jpg",
+    "https://admiredashboard.theholistay.in/destination_images/1745170357_68052fb5755a8tNIdWcuk.jpg",
+    "https://example.com/rajasthan-4.jpg",
+    "https://example.com/rajasthan-5.jpg"
+  ],
+  packages: [
+    {
+      id: "p3",
+      name: "Royal Rajasthan Experience",
+      duration: "8 Days / 7 Nights",
+      price: "₹32,000",
+      highlights: ["Jaipur", "Udaipur", "Jodhpur", "Jaisalmer"],
+      description:
+        "Live like royalty as you explore majestic forts and palaces.",
+      itinerary: [
+        {
+          day: 1,
+          title: "Arrival in Jaipur",
+          description:
+            "Arrive in Jaipur and check-in to your hotel. Visit the City Palace and local markets in the evening.",
+        },
+        {
+          day: 2,
+          title: "Explore Jaipur",
+          description:
+            "Visit Amber Fort, Hawa Mahal, Jantar Mantar, and enjoy a traditional Rajasthani dinner.",
+        },
+        {
+          day: 3,
+          title: "Jaipur to Udaipur",
+          description:
+            "Drive to Udaipur. En route, visit Chittorgarh Fort. Overnight stay at Udaipur.",
+        },
+        {
+          day: 4,
+          title: "Explore Udaipur",
+          description:
+            "Visit City Palace, Lake Pichola boat ride, Jag Mandir, and Saheliyon Ki Bari.",
+        },
+        {
+          day: 5,
+          title: "Udaipur to Jodhpur",
+          description:
+            "Proceed to Jodhpur. Visit the majestic Mehrangarh Fort and Jaswant Thada.",
+        },
+        {
+          day: 6,
+          title: "Jodhpur to Jaisalmer",
+          description:
+            "Travel to Jaisalmer. Evening visit to local markets and overnight stay.",
+        },
+        {
+          day: 7,
+          title: "Explore Jaisalmer",
+          description:
+            "Visit Jaisalmer Fort, Patwon Ki Haveli, and enjoy a desert safari with cultural evening and dinner at Sam Sand Dunes.",
+        },
+        {
+          day: 8,
+          title: "Departure",
+          description:
+            "After breakfast, transfer to the nearest airport/railway station with royal memories.",
+        },
+      ],
+      inclusions: [
+        "7 nights accommodation in 3-star hotels",
+        "Daily breakfast and 2 cultural dinners",
+        "All transfers and sightseeing in AC vehicle",
+        "Desert safari in Jaisalmer",
+        "All applicable taxes",
+      ],
+      exclusions: [
+        "Airfare/train tickets",
+        "Lunch and additional dinners",
+        "Entrance fees at monuments",
+        "Personal expenses",
+        "Anything not mentioned in inclusions",
+      ],
+      terms: [
+        "30% advance to confirm booking",
+        "Cancellation 30 days prior for full refund",
+        "No refund for cancellations within 15 days of travel",
+      ],
+    },
+  ],
+},
+
+{
+  id: 4,
+  slug: "kerala",
+  name: "Kerala",
+  description:
+    "Explore God’s Own Country with its serene backwaters, lush landscapes, and rich traditions.",
+  mainImage:
+    "https://images.unsplash.com/photo-1603252110481-3d9a95c940ff?auto=format&fit=crop&w=800&q=80",
+  images: [
+    "https://images.unsplash.com/photo-1600334129128-44f84e032fde?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1628920413393-c891d9a2a95d?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1599733580041-11880e8f6dbf?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1576753894824-50cb4f4e3c09?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1610003453726-26d1b6c50d7e?auto=format&fit=crop&w=800&q=80"
+  ],
+  packages: [
+    {
+      id: "p4",
+      name: "Backwaters & Beaches of Kerala",
+      duration: "6 Days / 5 Nights",
+      price: "₹22,000",
+      highlights: ["Alleppey", "Varkala Beach", "Kumarakom", "Kochi"],
+      description:
+        "Experience houseboat cruises, peaceful beaches, and Ayurvedic bliss.",
+      itinerary: [
+        {
+          day: 1,
+          title: "Arrival in Kochi",
+          description:
+            "Arrive at Kochi. Explore Fort Kochi, Chinese Fishing Nets, and enjoy a Kathakali performance in the evening.",
+        },
+        {
+          day: 2,
+          title: "Kochi to Alleppey (Houseboat)",
+          description:
+            "Transfer to Alleppey and check-in to a private houseboat. Cruise through the serene backwaters with onboard meals.",
+        },
+        {
+          day: 3,
+          title: "Alleppey to Kumarakom",
+          description:
+            "Check-out from houseboat and transfer to Kumarakom. Visit bird sanctuary and relax at the lakeside resort.",
+        },
+        {
+          day: 4,
+          title: "Kumarakom to Varkala",
+          description:
+            "Drive to Varkala. Relax at the cliffside beach and enjoy the sunset views.",
+        },
+        {
+          day: 5,
+          title: "Varkala to Kochi",
+          description:
+            "Return to Kochi and enjoy local shopping or visit Marine Drive. Overnight stay.",
+        },
+        {
+          day: 6,
+          title: "Departure",
+          description:
+            "Transfer to Kochi airport/railway station for departure with sweet memories.",
+        }
+      ],
+      inclusions: [
+        "5 nights accommodation in deluxe hotels/houseboat",
+        "Daily breakfast, lunch, and dinner on houseboat",
+        "Private vehicle for transfers and sightseeing",
+        "All applicable taxes",
+      ],
+      exclusions: [
+        "Airfare/train tickets",
+        "Personal expenses",
+        "Entrance fees at monuments and parks",
+        "Anything not mentioned in inclusions",
+      ],
+      terms: [
+        "30% advance to confirm booking",
+        "Cancellation 15 days prior for full refund",
+        "50% refund for cancellations within 7 days of travel",
+      ],
+    },
+    {
+      id: "p5",
+      name: "Munnar & Thekkady Hills Tour",
+      duration: "5 Days / 4 Nights",
+      price: "₹19,500",
+      highlights: ["Munnar Tea Gardens", "Thekkady Wildlife Sanctuary"],
+      description:
+        "A perfect blend of nature, hills, and adventure in Kerala’s greenest spots.",
+      itinerary: [
+        {
+          day: 1,
+          title: "Arrival in Kochi - Transfer to Munnar",
+          description:
+            "Drive through scenic hills to reach Munnar. En route, visit waterfalls and spice plantations.",
+        },
+        {
+          day: 2,
+          title: "Explore Munnar",
+          description:
+            "Visit Tea Museum, Mattupetty Dam, Echo Point, and enjoy a walk through tea gardens.",
+        },
+        {
+          day: 3,
+          title: "Munnar to Thekkady",
+          description:
+            "Drive to Thekkady. Enjoy a boat ride in Periyar Lake and optional elephant ride or Kalari show.",
+        },
+        {
+          day: 4,
+          title: "Thekkady to Kochi",
+          description:
+            "Return to Kochi with en route visits to spice gardens and optional shopping.",
+        },
+        {
+          day: 5,
+          title: "Departure from Kochi",
+          description:
+            "Transfer to airport/railway station for your onward journey.",
+        }
+      ],
+      inclusions: [
+        "4 nights accommodation in 3-star hotels",
+        "Daily breakfast",
+        "Private AC vehicle for all transfers and sightseeing",
+        "All applicable taxes",
+      ],
+      exclusions: [
+        "Airfare/train tickets",
+        "Lunch and dinner",
+        "Boating and safari charges",
+        "Anything not mentioned in inclusions",
+      ],
+      terms: [
+        "30% advance to confirm booking",
+        "Full refund on cancellations 15+ days before travel",
+        "25% cancellation charge within 7 days of travel",
+      ],
+    }
+  ]
+},
+
+
 
     {
       id: 18,
@@ -173,6 +552,210 @@ const PackageDetail = () => {
         },
       ],
     },
+    {
+  id: 20,
+  slug: "sri-lanka",
+  name: "Sri Lanka",
+  description:
+    "A tropical paradise with golden beaches, ancient temples, lush tea plantations, and vibrant wildlife.",
+  mainImage:
+    "https://images.unsplash.com/photo-1582568888745-88b25b5e3895?auto=format&fit=crop&w=800&q=80",
+  images: [
+    "https://images.unsplash.com/photo-1565498255681-4b51a011f8b2?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1558346648-9757f2fa4474?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1598940603846-a1edd0ef2574?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1523482589397-3d33397a85a1?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1598948484349-938219e9a1f3?auto=format&fit=crop&w=800&q=80"
+  ],
+  packages: [
+    {
+      id: "p25",
+      name: "Sri Lanka Highlights Tour",
+      duration: "5 Days / 4 Nights",
+      price: "₹25,000",
+      highlights: [
+        "Sigiriya Rock Fortress",
+        "Kandy Temple",
+        "Mirissa Beach"
+      ],
+      description:
+        "Explore Sri Lanka's iconic landmarks, from ancient ruins to coastal beauty.",
+      itinerary: [
+        {
+          day: 1,
+          title: "Arrival in Colombo",
+          description:
+            "Arrive in Colombo and transfer to Sigiriya. En route, enjoy a scenic drive through the countryside."
+        },
+        {
+          day: 2,
+          title: "Sigiriya and Dambulla",
+          description:
+            "Climb the famous Sigiriya Rock Fortress and explore the Dambulla Cave Temple."
+        }
+      ],
+      inclusions: [
+        "4 nights accommodation in 3-star hotels",
+        "Daily breakfast",
+        "All transfers and sightseeing by AC vehicle",
+        "Entrance fees to monuments",
+        "English speaking guide",
+        "All applicable taxes"
+      ],
+      exclusions: [
+        "Airfare",
+        "Lunch and dinner",
+        "Camera/video charges",
+        "Personal expenses",
+        "Anything not mentioned in inclusions"
+      ],
+      terms: [
+        "30% advance to confirm booking",
+        "Full refund for cancellations made 30+ days before travel",
+        "No refund for cancellations within 15 days of travel"
+      ]
+    },
+    {
+      id: "p26",
+      name: "Sri Lanka Wildlife & Beaches",
+      duration: "7 Days / 6 Nights",
+      price: "₹35,000",
+      highlights: [
+        "Yala National Park",
+        "Galle Fort",
+        "Bentota Beach"
+      ],
+      description:
+        "A perfect blend of safari adventures and tropical beach relaxation.",
+      itinerary: [
+        {
+          day: 1,
+          title: "Colombo to Yala",
+          description:
+            "Drive to Yala and enjoy a scenic countryside route. Check-in to your hotel."
+        },
+        {
+          day: 2,
+          title: "Yala Safari",
+          description:
+            "Morning jeep safari in Yala National Park – home to leopards, elephants, and exotic birds."
+        }
+      ],
+      inclusions: [
+        "6 nights accommodation in 3-star hotels/resorts",
+        "Daily breakfast",
+        "Private AC vehicle with driver",
+        "Yala Safari entry and jeep",
+        "English speaking guide",
+        "All taxes and permits"
+      ],
+      exclusions: [
+        "Flights to/from Sri Lanka",
+        "Meals other than breakfast",
+        "Optional excursions",
+        "Travel insurance",
+        "Items of personal nature"
+      ],
+      terms: [
+        "Advance of ₹10,000 per person required for confirmation",
+        "Free cancellation up to 20 days before travel",
+        "50% refund for cancellations within 10 days"
+      ]
+    }
+  ]
+},
+
+
+    {
+  id: 34,
+  slug: "vietnam",
+  name: "Vietnam",
+  description: "Lost in the magic of Vietnamese landscapes",
+  mainImage: "https://images.unsplash.com/photo-1528127269322-539801943592?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmlldG5hbXxlbnwwfHwwfHx8MA%3D%3D",
+  images: [
+    "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dmlldG5hbXxlbnwwfHwwfHx8MA%3D%3D",
+    "https://images.unsplash.com/photo-1531737212413-667205e1cda7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dmlldG5hbXxlbnwwfHwwfHx8MA%3D%3D",
+    "https://images.unsplash.com/photo-1504457047772-27faf1c00561?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dmlldG5hbXxlbnwwfHwwfHx8MA%3D%3D",
+    "https://images.unsplash.com/photo-1545172538-171a802bd867?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHZpZXRuYW18ZW58MHx8MHx8fDA%3D",
+    "https://images.unsplash.com/photo-1480996408299-fc0e830b5db1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHZpZXRuYW18ZW58MHx8MHx8fDA%3D"
+  ],
+  packages: [
+    {
+      id: "p20",
+      name: "Royal Vietnam Experience",
+      duration: "8 Days / 7 Nights",
+      price: "₹On Request",
+      highlights: ["Stunning beaches", "Vibrant coral reefs", "Diverse marine life", "Rainforests"],
+      description: "Finding paradise in Vietnam's hidden corners.",
+      itinerary: [
+        {
+          day: 1,
+          title: "Arrival in Hanoi",
+          description: "Arrive at Hanoi airport and transfer to hotel. Explore the Old Quarter and enjoy a traditional Water Puppet show.",
+        },
+        {
+          day: 2,
+          title: "Hanoi City Tour",
+          description: "Visit Ho Chi Minh Mausoleum, One Pillar Pagoda, Temple of Literature, and the serene Hoan Kiem Lake.",
+        },
+        {
+          day: 3,
+          title: "Hanoi to Halong Bay",
+          description: "Drive to Halong Bay. Board a luxury cruise and explore limestone islands, caves, and enjoy onboard activities.",
+        },
+        {
+          day: 4,
+          title: "Halong Bay to Da Nang",
+          description: "Morning cruise ends. Transfer to Hanoi and take a flight to Da Nang. Relax by the beach.",
+        },
+        {
+          day: 5,
+          title: "Ba Na Hills & Golden Bridge",
+          description: "Excursion to Ba Na Hills. Walk on the famous Golden Bridge and enjoy cable car rides.",
+        },
+        {
+          day: 6,
+          title: "Hoi An Heritage Town",
+          description: "Visit the ancient town of Hoi An, explore lantern-lit streets, local markets, and traditional architecture.",
+        },
+        {
+          day: 7,
+          title: "Explore Marine Life",
+          description: "Day trip to Cham Islands for snorkeling and coral reef viewing. Relax on pristine beaches.",
+        },
+        {
+          day: 8,
+          title: "Departure",
+          description: "Transfer to Da Nang airport for departure with beautiful memories of Vietnam.",
+        }
+      ],
+      inclusions: [
+        "7 nights accommodation in 3-star or deluxe hotels",
+        "Daily breakfast and 2 lunches on cruise",
+        "Luxury cruise in Halong Bay",
+        "Domestic flight from Hanoi to Da Nang",
+        "All sightseeing and transfers in private AC vehicle",
+        "English-speaking guide",
+        "All applicable taxes"
+      ],
+      exclusions: [
+        "International flights",
+        "Visa fees",
+        "Dinner and remaining lunches",
+        "Personal expenses",
+        "Activities not mentioned in itinerary",
+        "Travel insurance"
+      ],
+      terms: [
+        "50% advance to confirm booking",
+        "Full refund for cancellations 30 days before travel",
+        "25% cancellation fee within 15–30 days",
+        "No refund within 14 days of departure"
+      ]
+    }
+  ]
+}
+
 
     // Add other destinations from your DestinationDetail.jsx here
   ];

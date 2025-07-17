@@ -46,14 +46,14 @@ const ResortDetails = () => {
         { name: "Hot Tub", icon: <FaHotTub /> },
         { name: "Kids Play Area", icon: <FaChild /> }
       ],
-      price: "₹8,500 per night",
+      price: "₹On request",
       rating: 4.8,
       reviews: 128,
       roomTypes: [
         {
           name: "Deluxe Room",
           description: "Spacious room with king bed, forest view, and modern amenities",
-          price: "₹8,500",
+          price: "₹On request",
           capacity: "2 Adults",
           size: "350 sq ft",
           features: ["Air Conditioning", "Free WiFi", "Minibar", "Safe Deposit Box"]
@@ -61,7 +61,7 @@ const ResortDetails = () => {
         {
           name: "Premium Suite",
           description: "Luxurious suite with separate living area and private balcony",
-          price: "₹12,000",
+          price: "₹On request",
           capacity: "2 Adults + 1 Child",
           size: "550 sq ft",
           features: ["Air Conditioning", "Free WiFi", "Minibar", "Safe Deposit Box", "Bathtub"]
@@ -69,7 +69,7 @@ const ResortDetails = () => {
         {
           name: "Family Villa",
           description: "Two-bedroom villa with private garden and pool access",
-          price: "₹18,000",
+          price: "₹On request",
           capacity: "4 Adults",
           size: "900 sq ft",
           features: ["Air Conditioning", "Free WiFi", "Kitchenette", "Private Garden", "Living Area"]
@@ -136,7 +136,7 @@ const ResortDetails = () => {
         {
           name: "Heritage Room",
           description: "Elegant room with period furniture and modern amenities",
-          price: "₹12,000",
+          price: "₹On request",
           capacity: "2 Adults",
           size: "400 sq ft",
           features: ["Air Conditioning", "Free WiFi", "Minibar", "Safe Deposit Box"]
@@ -144,7 +144,7 @@ const ResortDetails = () => {
         {
           name: "Royal Suite",
           description: "Spacious suite with separate living area and palace views",
-          price: "₹18,000",
+          price: "₹On request",
           capacity: "2 Adults + 1 Child",
           size: "650 sq ft",
           features: ["Air Conditioning", "Free WiFi", "Minibar", "Safe Deposit Box", "Butler Service"]
@@ -152,7 +152,7 @@ const ResortDetails = () => {
         {
           name: "Grand Presidential Suite",
           description: "Luxurious suite with antique furnishings and private terrace",
-          price: "₹30,000",
+          price: "₹On request",
           capacity: "2 Adults",
           size: "1200 sq ft",
           features: ["Air Conditioning", "Free WiFi", "Kitchenette", "Private Terrace", "Living Area", "Dining Area"]

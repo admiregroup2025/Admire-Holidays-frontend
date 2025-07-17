@@ -183,7 +183,16 @@ export const domesticDestinations = [
     images: [
       'https://plus.unsplash.com/premium_photo-1661963839850-b4be117aff11?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aGFyeWFuYXxlbnwwfHwwfHx8MA%3D%3D'
     ]
-  }
+  },
+  {
+    "id": "20",
+    "name": "Sri Lanka",
+    "slug": "sri-lanka",
+    "type": "international",
+    "images": [
+      "https://images.unsplash.com/photo-1582568888745-88b25b5e3895?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c3JpJTIwbGFua2F8ZW58MHx8MHx8fDA%3D"
+    ]
+}
 ];
 
 // Sample international destinations

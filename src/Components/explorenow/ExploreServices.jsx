@@ -4,19 +4,20 @@ import {
   Globe, Clock, Award
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+ 
 const ExploreServices = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
-
+  const navigate = useNavigate(); // Initialize navigate
+ 
   const services = [
     {
       icon: <Plane className="w-8 h-8 text-white" />,
       title: 'International Tours',
       bg: '#2C8780',
-      textColor: 'text-[#261F43]',
+      textColor: 'text-primaryHeading',
       desc: 'Explore breathtaking destinations across the globe with our expertly curated international tour packages.',
       features: ['Europe Tours', 'Asia Adventures', 'American Journeys'],
-      duration: '7–21 Days',
       emoji: '🌍',
       popular: true
     },
@@ -24,10 +25,9 @@ const ExploreServices = () => {
       icon: <MapPin className="w-8 h-8 text-white" />,
       title: 'Domestic Packages',
       bg: '#2C8780',
-      textColor: 'text-[#261F43]',
+      textColor: 'text-primaryHeading',
       desc: 'Discover the incredible beauty of India with our comprehensive domestic holiday packages.',
       features: ['Kerala Backwaters', 'Rajasthan Heritage', 'Himalayan Treks'],
-      duration: '3–10 Days',
       emoji: '🏔️',
       popular: false
     },
@@ -35,10 +35,9 @@ const ExploreServices = () => {
       icon: <Heart className="w-8 h-8 text-white" />,
       title: 'Honeymoon Specials',
       bg: '#2C8780',
-      textColor: 'text-[#261F43]',
-      desc: 'Create unforgettable romantic memories with our specially designed honeymoon packages.',
+      textColor: 'text-primaryHeading',
+      desc: 'Create unforgettable romantic memories together with our specially designed honeymoon packages.',
       features: ['Romantic Dinners', 'Couple Spa', 'Private Transfers'],
-      duration: '6–15 Days',
       emoji: '💕',
       popular: true
     },
@@ -46,10 +45,9 @@ const ExploreServices = () => {
       icon: <Users className="w-8 h-8 text-white" />,
       title: 'Group Tours',
       bg: '#2C8780',
-      textColor: 'text-[#261F43]',
+      textColor: 'text-primaryHeading',
       desc: 'Join like-minded travelers and make new friends with our exciting group tour packages.',
       features: ['Family Groups', 'Corporate Tours', 'Student Trips'],
-      duration: '5–18 Days',
       emoji: '👨‍👩‍👧‍👦',
       popular: false
     },
@@ -57,10 +55,9 @@ const ExploreServices = () => {
       icon: <Compass className="w-8 h-8 text-white" />,
       title: 'Adventure Tours',
       bg: '#2C8780',
-      textColor: 'text-[#261F43]',
+      textColor: 'text-primaryHeading',
       desc: 'Experience thrilling adventures and outdoor activities with our action-packed tour packages.',
       features: ['Trekking Expeditions', 'River Rafting', 'Paragliding'],
-      duration: '4–12 Days',
       emoji: '🏕️',
       popular: false
     },
@@ -68,15 +65,19 @@ const ExploreServices = () => {
       icon: <Globe className="w-8 h-8 text-white" />,
       title: 'Beach Holidays',
       bg: '#2C8780',
-      textColor: 'text-[#261F43]',
+      textColor: 'text-primaryHeading',
       desc: 'Relax and unwind at the world\'s most beautiful beaches with our tropical getaway packages.',
       features: ['Maldives Resorts', 'Bali Escapes', 'Thailand Islands'],
-      duration: '5–14 Days',
       emoji: '🏖️',
       popular: false
     }
   ];
-
+ 
+ 
+  const handleGetQuoteClick = () => {
+    navigate('/contact');
+  };
+ 
   return (
     <section className="py-20 bg-[#F0F9FF]">
       <div className="max-w-7xl mx-auto px-6">
@@ -96,7 +97,7 @@ const ExploreServices = () => {
             Everything you need to craft the perfect journey — from logistics to once-in-a-lifetime adventures.
           </p>
         </div>
-
+ 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, idx) => (
             <motion.div
@@ -115,24 +116,24 @@ const ExploreServices = () => {
                   Popular
                 </div>
               )}
-
+ 
               <div className="text-5xl mb-4 text-center">
                 {service.emoji}
               </div>
-
+ 
               <div
                 className="w-16 h-16 mb-6 flex items-center justify-center rounded-2xl"
                 style={{ backgroundColor: service.bg }}
               >
                 {service.icon}
               </div>
-
+ 
               <h3 className={`text-2xl font-bold mb-4 ${service.textColor}`}>
                 {service.title}
               </h3>
-
+ 
               <p className="text-gray-600 mb-6">{service.desc}</p>
-
+ 
               <ul className="space-y-2 mb-6">
                 {service.features.map((f, i) => (
                   <li key={i} className="text-sm text-gray-700 flex items-center">
@@ -144,12 +145,6 @@ const ExploreServices = () => {
                   </li>
                 ))}
               </ul>
-
-              <div className="flex items-center text-sm text-gray-600 mb-6">
-                <Clock className="h-4 w-4 mr-2 text-[#2C8780]" />
-                {service.duration}
-              </div>
-
               <button
                 className="w-full py-3 px-4 rounded-xl text-white font-semibold transition-all duration-300 hover:scale-105"
                 style={{ backgroundColor: '#DC2626' }}
@@ -159,7 +154,7 @@ const ExploreServices = () => {
             </motion.div>
           ))}
         </div>
-
+ 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -177,7 +172,10 @@ const ExploreServices = () => {
                 <Calendar className="h-5 w-5 mr-2" />
                 Plan My Trip
               </button>
-              <button className="px-6 py-3 border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-[#0D9488] transition-all duration-200 flex items-center justify-center">
+              <button
+                onClick={handleGetQuoteClick}
+                className="px-6 py-3 border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-[#0D9488] transition-all duration-200 flex items-center justify-center"
+              >
                 <Award className="h-5 w-5 mr-2" />
                 Get Quote
               </button>
@@ -188,6 +186,5 @@ const ExploreServices = () => {
     </section>
   );
 };
-
-export default ExploreServices;
  
+export default ExploreServices;

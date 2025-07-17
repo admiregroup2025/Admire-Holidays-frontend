@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const BannerCarousel = () => {
   const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
   const banners = [
-    "/banner/Banner1.png",
+    "src/assets/banner/Banner1.png",
     "/banner/banner4.png",
     "/banner/banner5.png"
   ];

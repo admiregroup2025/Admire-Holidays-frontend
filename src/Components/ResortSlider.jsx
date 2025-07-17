@@ -38,21 +38,21 @@ const ResortsSlider = () => {
     {
       id: 3,
       name: "Mountain Retreat",
-      image: "https://example.com/mountain-retreat.jpg",
+      image: "https://images.unsplash.com/photo-1684262206285-f853809d7473?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bW91bnRhaW4lMjByZXNvcnR8ZW58MHx8MHx8fDA%3D",
       discount: "10%",
       buttonColor: "rgb(56, 182, 155)"
     },
     {
       id: 4,
       name: "Beach Paradise",
-      image: "https://example.com/beach-paradise.jpg",
+      image: "https://images.unsplash.com/photo-1483757164972-ca7f0837a227?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YmVhY2glMjBwZXJhZGlzZXxlbnwwfHwwfHx8MA%3D%3D",
       discount: "15%",
       buttonColor: "rgb(66, 153, 225)"
     },
     {
       id: 5,
       name: "Luxury Valley",
-      image: "https://example.com/luxury-valley.jpg",
+      image: "https://images.unsplash.com/photo-1705690421635-f6227eafb670?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHZhbGxleSUyMGhvdGVsfGVufDB8fDB8fHww",
       discount: "8%",
       buttonColor: "rgb(159, 122, 234)"
     }

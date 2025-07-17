@@ -24,6 +24,7 @@ import SubscribeUs from "../forms/SubscribeUs";
 import StatsAndPartners from "../Components/StatsAndPartners";
 import { Link } from "react-router-dom";
 import EnquiryForm from "../forms/EnquiryForm";
+import TestimonialSlider from "../Components/TestimonialSlider";
 
 
 
@@ -43,13 +44,14 @@ const Home = () => {
         title="Discover Domestic Destinations"
       />
 
-      <TrendingDestinations />
 
       <PackageSlider
         title="Recommended Tour Packages"
         description="Curated packages designed to suit every traveler's needs"
         packages={recommendedPackages}
       />
+      <TrendingDestinations />
+
 
       <PackageSlider
         title="Weekend Trending Packages"
@@ -84,7 +86,9 @@ const Home = () => {
 
       <TravelGallery />
       <VideoTestimonials />
+      <TestimonialSlider/>
       <StatsAndPartners />
+    
       <SubscribeUs />
       <Footer />
 

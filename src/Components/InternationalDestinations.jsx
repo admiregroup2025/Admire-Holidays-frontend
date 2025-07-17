@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const InternationalDestinations = () => {
   const destinations = [
@@ -51,6 +52,8 @@ const InternationalDestinations = () => {
     }
   ];
 
+
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -76,6 +79,13 @@ const InternationalDestinations = () => {
         duration: 0.3
       }
     }
+  };
+
+   const navigate = useNavigate(); // Initialize navigate
+
+  // Function to handle click
+  const handleClick = () => {
+    navigate("/international");
   };
 
   return (
@@ -145,9 +155,12 @@ const InternationalDestinations = () => {
           transition={{ delay: 0.5 }}
           className="text-center mt-12"
         >
-          <button className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-full transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg">
-            Explore More
-          </button>
+           <button
+      onClick={handleClick}
+      className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-full transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg"
+    >
+      Explore More
+    </button>
         </motion.div>
       </div>
 

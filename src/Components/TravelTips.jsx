@@ -204,7 +204,7 @@ function TravelTips() {
           </p>
         </div>
 
-        <div className="space-y-0">
+        <div className="space-y-20">
           {travelTips.map((tip, index) => (
             <TravelTipCard key={tip.id} tip={tip} index={index} />
           ))}
