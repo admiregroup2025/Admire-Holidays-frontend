@@ -15,7 +15,7 @@ const TravelGallery = () => {
     try {
       setIsLoading(true);
       // Replace with your actual API endpoint
-      const response = await fetch('/api/travel-images');
+      // const response = await fetch('/api/travel-images');
       const data = await response.json();
       setImages(data);
     } catch (error) {

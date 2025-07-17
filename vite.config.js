@@ -1,13 +1,7 @@
-import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-export default defineConfig({
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:5000',  // <--- this must match your backend
-        changeOrigin: true,
-        secure: false,
-      }
-    }
-  }
-});
+export default {
+  plugins: [react({
+    jsxRuntime: 'automatic' // 👈 enables new JSX transform
+  })]
+};
