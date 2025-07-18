@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import complaintImage from "../assets/images/complaint.jpg";
- 
+
 const HomeStickyForm = () => {
   const [activeTab, setActiveTab] = useState("suggestion");
   const [formData, setFormData] = useState({
@@ -9,41 +9,60 @@ const HomeStickyForm = () => {
     email: "",
     message: "",
   });
- 
+
   const validateEmail = (email) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
- 
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
- 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
- 
-    const { name, email } = formData;
- 
+
+    const { name, email, message } = formData;
+
     if (name.trim().length < 2) {
       Swal.fire("Oops!", "Name must be at least 2 characters.", "warning");
       return;
     }
- 
+
     if (!validateEmail(email)) {
       Swal.fire("Invalid Email", "Please enter a valid email address.", "error");
       return;
     }
- 
-    Swal.fire({
-      icon: "success",
-      title: "Submitted!",
-      text: "Your message has been sent.",
-      timer: 2500,
-      timerProgressBar: true,
-      showConfirmButton: false,
-    });
- 
-    setFormData({ name: "", email: "", message: "" });
+
+    try {
+      const res = await fetch("http://localhost:5000/api/v1/feedback/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+          
+        },
+        body: JSON.stringify({ name, email, message })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        Swal.fire({
+          icon: "success",
+          title: "Submitted!",
+          text: data.message || "Your message has been sent.",
+          timer: 2500,
+          timerProgressBar: true,
+          showConfirmButton: false,
+        });
+
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        Swal.fire("Error", data.message || "Something went wrong.", "error");
+      }
+    } catch (error) {
+      Swal.fire("Server Error", "Please try again later.", "error");
+    }
   };
- 
+
   return (
     <div className="flex max-w-[900px] w-full mx-auto mt-24 mb-10 rounded-xl overflow-hidden shadow-lg bg-white font-segoe min-h-[420px]">
       <div
@@ -52,31 +71,29 @@ const HomeStickyForm = () => {
       >
         <div className="h-full bg-black/20" />
       </div>
- 
+
       <div className="flex-1 p-6 flex flex-col justify-start">
         <div className="flex gap-2 mb-4">
           <button
-            className={`flex-1 px-3 py-2 rounded-full text-sm font-semibold transition ${
-              activeTab === "suggestion"
-                ? "bg-red-500 text-white"
-                : "bg-gray-100 text-black"
-            }`}
+            className={`flex-1 px-3 py-2 rounded-full text-sm font-semibold transition ${activeTab === "suggestion"
+              ? "bg-red-500 text-white"
+              : "bg-gray-100 text-black"
+              }`}
             onClick={() => setActiveTab("suggestion")}
           >
             Suggestions or Complaints
           </button>
           <button
-            className={`flex-1 px-3 py-2 rounded-full text-sm font-semibold transition ${
-              activeTab === "not_response"
-                ? "bg-red-500 text-white"
-                : "bg-gray-100 text-black"
-            }`}
+            className={`flex-1 px-3 py-2 rounded-full text-sm font-semibold transition ${activeTab === "not_response"
+              ? "bg-red-500 text-white"
+              : "bg-gray-100 text-black"
+              }`}
             onClick={() => setActiveTab("not_response")}
           >
             Not Getting Response
           </button>
         </div>
- 
+
         {activeTab === "suggestion" ? (
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -135,5 +152,5 @@ const HomeStickyForm = () => {
     </div>
   );
 };
- 
+
 export default HomeStickyForm;

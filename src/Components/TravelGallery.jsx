@@ -34,33 +34,51 @@ const TravelGallery = () => {
   const [showAllPopup, setShowAllPopup] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [images, setImages] = useState([]);
- 
+
+
+
+  // Fetch images from backend
+  const fetchImages = async () => {
+    try {
+      setIsLoading(true);
+      // Replace with your actual API endpoint
+      // const response = await fetch('/api/travel-images');
+      const data = await response.json();
+      setImages(data);
+    } catch (error) {
+      console.error('Error fetching images:', error);
+      // Fallback to mock data for demo
+      const mockImages = Array.from({ length: 300 }, (_, i) => ({
+        id: i + 1,
+        url: `https://picsum.photos/800/600?random=${i + 1}`,
+        thumbnail: `https://picsum.photos/400/300?random=${i + 1}`,
+        title: `Travel Destination ${i + 1}`,
+        experience: 'Amazing Experience',
+        date: new Date().toLocaleDateString(),
+        travelers: Math.floor(Math.random() * 10) + 1
+      }));
+      setImages(mockImages);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const imgs = importAllImages();
-    setImages(imgs);
+    fetchImages();
   }, []);
- 
-  const mainGalleryImages = images.slice(45);
- 
-  const openImageModal = (image, index) => {
-    setSelectedImage(image);
-    setCurrentImageIndex(index);
-  };
- 
-  const closeImageModal = () => {
-    setSelectedImage(null);
-  };
- 
-  const closeAllPopup = () => {
-    setShowAllPopup(false);
-  };
+
+
+  
  
   const navigateImage = (direction) => {
+
     const newIndex =
       direction === "next"
         ? (currentImageIndex + 1) % images.length
         : (currentImageIndex - 1 + images.length) % images.length;
  
+
+    
     setCurrentImageIndex(newIndex);
     setSelectedImage(images[newIndex]);
   };
@@ -81,7 +99,8 @@ const TravelGallery = () => {
     } else {
       document.body.style.overflow = "unset";
     }
- 
+
+
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "unset";
@@ -124,8 +143,10 @@ const TravelGallery = () => {
             Discover Unforgettable Moments
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+
             We have created countless memories for our travelers. Explore the
             beautiful destinations and experiences that await you.
+
           </p>
         </div>
  
@@ -147,6 +168,29 @@ const TravelGallery = () => {
                   alt={image.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <Eye className="w-5 h-5 text-white" />
+                </div>
+              </div>
+
+              <div className="p-5">
+                <h3 className="font-bold text-lg text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">
+                  {image.title}
+                </h3>
+                <p className="text-blue-600 font-medium mb-3">{image.experience}</p>
+                <div className="flex items-center justify-between text-sm text-gray-500">
+                  <div className="flex items-center">
+                    <Calendar className="w-4 h-4 mr-1" />
+                    {image.date}
+                  </div>
+                  <div className="flex items-center">
+                    <Users className="w-4 h-4 mr-1" />
+                    {image.travelers}
+                  </div>
+                </div>
+
               </div>
             </div>
           ))}
@@ -207,9 +251,11 @@ const TravelGallery = () => {
               alt={selectedImage.title}
               className="w-full h-auto max-h-[90vh] object-contain"
             />
+
             <div className="absolute bottom-6 left-6 right-6 bg-black/50 backdrop-blur-md rounded-2xl p-4 text-white">
               <h3 className="text-2xl font-bold mb-2">{selectedImage.title}</h3>
               <p className="text-lg">{selectedImage.experience}</p>
+
             </div>
           </div>
         </div>

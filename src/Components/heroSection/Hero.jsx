@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-// import TrendingDestinations from './TrendingDestinations';
+
+import heroVideo from '../../assets/videos/Hero-video.mp4';
 
  
 const Hero = () => {
@@ -25,7 +26,7 @@ const Hero = () => {
               preload="auto"
               className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover z-10"
             >
-              <source src="src/assets/videos/Hero-video.mp4" type="video/mp4" />
+              <source src={heroVideo} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>

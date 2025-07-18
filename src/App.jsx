@@ -27,6 +27,7 @@ import ResortDetails from "./Components/ResortDetail";
 
 
 
+
 function App() {
   return (
     <Router>
@@ -46,6 +47,10 @@ function App() {
         <Route path="/blog/top-10-hidden-gems-to-visit-in-india" element={<BlogDetails2 />} />
         <Route path="/international" element={<International />} />
         <Route path="/destinations/:slug" element={<DestinationDetail />} />
+        <Route path="/HomeStickyForm" element={<HomeStickyFormPage />} />
+        
+        {/* Redirect to HomeStickyFormPage for the sticky form */}
+
 
 
          <Route path="/HomeStickyFormPage" element={<HomeStickyFormPage />} />
@@ -68,8 +73,10 @@ function App() {
         <Route path="/resort-detail/:id" element={<ResortDetails />} />
         
 
-      </Routes>
-      {/* <Footer /> */}
+
+        <Route path="/HomeStickyFormPage" element={<HomeStickyFormPage />} />
+
+     
     </Router>
   );
 }

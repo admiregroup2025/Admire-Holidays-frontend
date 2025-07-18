@@ -1,26 +1,22 @@
-import React from 'react'
-import NavBar from '../Components/NavBar'
-import Footer from '../Components/Footer'
+import React from "react";
+import NavBar from "../Components/NavBar";
+import Footer from "../Components/Footer";
 import SubscribeUs from "../forms/SubscribeUs";
-import BlogHero from '../Components/blog/BlogHero';
-import BlogSection from '../Components/blog/BlogSection';
-
+import BlogHero from "../Components/blog/BlogHero";
+import BlogSection from "../Components/blog/BlogSection";
 
 const Blog = () => {
   return (
     <div>
-        <NavBar/>
-        <BlogHero/>
+      <NavBar />
+      <BlogHero />
 
-        <BlogSection/>
+      <BlogSection />
 
-
-
-       <SubscribeUs/>
-        <Footer/>
-      
+      <SubscribeUs />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Blog
+export default Blog;

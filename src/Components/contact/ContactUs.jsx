@@ -1,7 +1,11 @@
+import React from 'react';
 import { useState } from 'react';
+
 import { motion } from 'framer-motion';
 import Swal from 'sweetalert2';
+
 import { submitContactForm } from '../../api/api';
+
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -21,11 +25,12 @@ const ContactUs = () => {
     }));
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { firstName, lastName, email, phone, subject, message } = formData;
 
-    // Validation
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const nameRegex = /^[A-Za-z\s]{2,}$/;
     const phoneRegex = /^[0-9]{10}$/;
@@ -75,6 +80,7 @@ const ContactUs = () => {
       return;
     }
 
+
     // Submit to backend
     try {
       await submitContactForm({
@@ -108,6 +114,7 @@ const ContactUs = () => {
         text: error.response?.data?.message || 'Please try again later.'
       });
     }
+
   };
 
   const contactItems = [
@@ -170,7 +177,10 @@ const ContactUs = () => {
     }
   };
 
+
   const inputClass = "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all";
+
+ 
 
   return (
     <div className="bg-gray-50 py-8 px-4">
@@ -283,9 +293,28 @@ const ContactUs = () => {
             </motion.button>
           </motion.form>
         </div>
+
+
+        <motion.div className="mt-16" variants={itemVariants}>
+          <h3 className="text-xl font-bold text-center mb-4">Find Us On Map</h3>
+          <motion.div className="overflow-hidden rounded-xl shadow-md" whileHover={{ scale: 1.01 }}>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d7004.845431704971!2d77.0258597434756!3d28.61709035269247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1s34%2C%20Sewak%20Park%20(1st%20floor)%2C%20Dwarka%20More%20Metro%2C%20Near%20Metro%20Pillar%20No-772%2C%20New%20Delhi%20-%20110059!5e0!3m2!1sen!2sin!4v1744116126291!5m2!1sen!2sin"
+              className="w-full"
+              height="350"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </motion.div>
+        </motion.div>
+
       </motion.section>
     </div>
   );
 };
 
+
 export default ContactUs;
+
+
