@@ -15,7 +15,7 @@ const TravelGallery = () => {
     try {
       setIsLoading(true);
       // Replace with your actual API endpoint
-      const response = await fetch('/api/travel-images');
+      // const response = await fetch('/api/travel-images');
       const data = await response.json();
       setImages(data);
     } catch (error) {
@@ -59,10 +59,10 @@ const TravelGallery = () => {
   };
 
   const navigateImage = (direction) => {
-    const newIndex = direction === 'next' 
-      ? (currentImageIndex + 1) % images.length 
+    const newIndex = direction === 'next'
+      ? (currentImageIndex + 1) % images.length
       : (currentImageIndex - 1 + images.length) % images.length;
-    
+
     setCurrentImageIndex(newIndex);
     setSelectedImage(images[newIndex]);
   };
@@ -83,7 +83,7 @@ const TravelGallery = () => {
     } else {
       document.body.style.overflow = 'unset';
     }
-    
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
@@ -129,7 +129,7 @@ const TravelGallery = () => {
             Discover Unforgettable Moments
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We have created countless memories for our travelers. Explore the beautiful destinations 
+            We have created countless memories for our travelers. Explore the beautiful destinations
             and experiences that await you.
           </p>
         </div>
@@ -157,7 +157,7 @@ const TravelGallery = () => {
                   <Eye className="w-5 h-5 text-white" />
                 </div>
               </div>
-              
+
               <div className="p-5">
                 <h3 className="font-bold text-lg text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">
                   {image.title}
@@ -225,7 +225,7 @@ const TravelGallery = () => {
               alt={selectedImage.title}
               className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
             />
-            
+
             {/* Image Info */}
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
               <div className="text-white">

@@ -34,6 +34,10 @@ function App() {
         <Route path="/blog/top-10-hidden-gems-to-visit-in-india" element={<BlogDetails2 />} />
         <Route path="/international" element={<International />} />
         <Route path="/destinations/:slug" element={<DestinationDetail />} />
+        <Route path="/HomeStickyForm" element={<HomeStickyFormPage />} />
+        
+        {/* Redirect to HomeStickyFormPage for the sticky form */}
+
 
 
 

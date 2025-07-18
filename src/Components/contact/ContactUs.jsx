@@ -1,7 +1,9 @@
+import React from 'react';
 import { useState } from 'react';
+
 import { motion } from 'framer-motion';
 import Swal from 'sweetalert2';
- 
+
 const ContactUs = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -11,7 +13,7 @@ const ContactUs = () => {
     subject: '',
     message: ''
   });
- 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -19,15 +21,15 @@ const ContactUs = () => {
       [name]: value
     }));
   };
- 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { firstName, lastName, email, phone } = formData;
- 
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const nameRegex = /^[A-Za-z\s]{2,}$/;
     const phoneRegex = /^[0-9]{10}$/;
- 
+
     if (!firstName || !phone || !email) {
       Swal.fire({
         icon: 'error',
@@ -36,7 +38,7 @@ const ContactUs = () => {
       });
       return;
     }
- 
+
     if (!nameRegex.test(firstName)) {
       Swal.fire({
         icon: 'error',
@@ -45,7 +47,7 @@ const ContactUs = () => {
       });
       return;
     }
- 
+
     if (lastName && !nameRegex.test(lastName)) {
       Swal.fire({
         icon: 'error',
@@ -54,7 +56,7 @@ const ContactUs = () => {
       });
       return;
     }
- 
+
     if (!emailRegex.test(email)) {
       Swal.fire({
         icon: 'error',
@@ -63,7 +65,7 @@ const ContactUs = () => {
       });
       return;
     }
- 
+
     if (!phoneRegex.test(phone)) {
       Swal.fire({
         icon: 'error',
@@ -72,17 +74,46 @@ const ContactUs = () => {
       });
       return;
     }
- 
-    Swal.fire({
-      icon: 'success',
-      title: 'Message Sent!',
-      text: 'Thank you for reaching out to us.',
-      showConfirmButton: false,
-      timer: 2000
-    });
- 
+    // api for form submission
+    fetch('http://localhost:5000/api/v1/contact/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Form Submitted Successfully',
+            text: 'Thank you for contacting us!'
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Submission Failed',
+            text: data.message || 'Please try again later.'
+
+          });
+        }
+      })
+      .catch(error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Server Error',
+          text: 'Please try again later.'
+        });
+        console.error('Error submitting form:', error);
+      });
+    // // Reset form data after submission
+
+    // For debugging purposes, you can log the form data
+
+
     console.log(formData);
- 
+
     setFormData({
       firstName: '',
       lastName: '',
@@ -92,7 +123,7 @@ const ContactUs = () => {
       message: ''
     });
   };
- 
+
   const contactItems = [
     {
       icon: (
@@ -132,7 +163,7 @@ const ContactUs = () => {
       content: "Mon - Sat: 10 AM - 6 PM\nSunday: Closed"
     }
   ];
- 
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -143,7 +174,7 @@ const ContactUs = () => {
       }
     }
   };
- 
+
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -154,10 +185,10 @@ const ContactUs = () => {
       }
     }
   };
- 
+
   const inputClass =
     "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all";
- 
+
   return (
     <div className="bg-gray-50 py-8 px-4">
       <motion.section
@@ -177,7 +208,7 @@ const ContactUs = () => {
             We are here to help. Reach out to us for any inquiries, assistance, or collaboration.
           </p>
         </motion.div>
- 
+
         <div className="grid md:grid-cols-2 gap-10">
           {/* Contact Details */}
           <div className="space-y-4">
@@ -196,7 +227,7 @@ const ContactUs = () => {
               </motion.div>
             ))}
           </div>
- 
+
           {/* Contact Form */}
           <motion.form
             className="bg-white shadow-md rounded-xl p-5 space-y-4"
@@ -204,7 +235,7 @@ const ContactUs = () => {
             onSubmit={handleSubmit}
           >
             <h2 className="text-xl font-semibold">Leave a Message</h2>
- 
+
             <div className="flex flex-col md:flex-row gap-3">
               <input
                 placeholder="First Name*"
@@ -223,7 +254,7 @@ const ContactUs = () => {
                 onChange={handleChange}
               />
             </div>
- 
+
             <div className="flex flex-col md:flex-row gap-3">
               <input
                 placeholder="Phone Number*"
@@ -243,7 +274,7 @@ const ContactUs = () => {
                 onChange={handleChange}
               />
             </div>
- 
+
             <input
               placeholder="Subject (optional)"
               className={inputClass}
@@ -252,7 +283,7 @@ const ContactUs = () => {
               value={formData.subject}
               onChange={handleChange}
             />
- 
+
             <textarea
               name="message"
               placeholder="Your Message (optional)"
@@ -261,7 +292,7 @@ const ContactUs = () => {
               value={formData.message}
               onChange={handleChange}
             ></textarea>
- 
+
             <motion.button
               type="submit"
               className="w-full py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-semibold rounded-md transition-all duration-300"
@@ -272,7 +303,7 @@ const ContactUs = () => {
             </motion.button>
           </motion.form>
         </div>
- 
+
         <motion.div className="mt-16" variants={itemVariants}>
           <h3 className="text-xl font-bold text-center mb-4">Find Us On Map</h3>
           <motion.div className="overflow-hidden rounded-xl shadow-md" whileHover={{ scale: 1.01 }}>
@@ -290,5 +321,5 @@ const ContactUs = () => {
     </div>
   );
 };
- 
+
 export default ContactUs;

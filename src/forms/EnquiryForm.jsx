@@ -17,32 +17,50 @@ const TravelEnquiryForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    Swal.fire({
-      title: 'Enquiry Submitted!',
-      html: `
-        <div class="text-left">
-          <p class="mb-2"><strong>Name:</strong> ${formData.name}</p>
-          <p class="mb-2"><strong>Email:</strong> ${formData.email}</p>
-          <p class="mb-2"><strong>Phone:</strong> ${formData.phone}</p>
-          <p class="mb-2"><strong>Destination:</strong> ${formData.destination || 'Not specified'}</p>
-        </div>
-      `,
-      icon: 'success',
-      confirmButtonColor: '#d97706',
-      confirmButtonText: 'Great!',
-      footer: 'Our travel expert will contact you soon!'
-    }).then(() => {
-      // Reset form after submission
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        destination: ''
+
+
+    try {
+      const response = await fetch('http://localhost:5000/api/v1/enquiry/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-    });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        Swal.fire({
+          title: 'Enquiry Submitted!',
+          html: `
+            <div class="text-left">
+              <p class="mb-2"><strong>Name:</strong> ${formData.name}</p>
+              <p class="mb-2"><strong>Email:</strong> ${formData.email}</p>
+              <p class="mb-2"><strong>Phone:</strong> ${formData.phone}</p>
+              <p class="mb-2"><strong>Destination:</strong> ${formData.destination || 'Not specified'}</p>
+            </div>
+          `,
+          icon: 'success',
+          confirmButtonColor: '#d97706',
+          confirmButtonText: 'Great!',
+          footer: 'Our travel expert will contact you soon!'
+        });
+
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          destination: ''
+        });
+      } else {
+        Swal.fire('Error', result.message || 'Something went wrong.', 'error');
+      }
+    } catch (error) {
+      Swal.fire('Server Error', 'Please try again later.', 'error');
+    }
   };
 
   const handleClose = () => {
@@ -74,9 +92,9 @@ const TravelEnquiryForm = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-lg relative border border-blue-200">
-        <button 
+        <button
           onClick={handleClose}
-          className="absolute top-3 right-4 text-gray-700 hover:text-red-500 text-2xl close-btn" 
+          className="absolute top-3 right-4 text-gray-700 hover:text-red-500 text-2xl close-btn"
           aria-label="Close modal"
         >
           ×
