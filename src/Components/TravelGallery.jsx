@@ -27,6 +27,8 @@ const TravelGallery = () => {
         const response = await travelGallery();
         // console.log(response)
         setImages(response?.data?.customerGalleryData[0].image);
+        console.log(response.data.customerGalleryData[0].image)
+        console.log(`Imgae => ${images}`)
       } catch (error) {
         console.error("Failed to fetch travel gallery:", error);
       }
@@ -136,7 +138,7 @@ const TravelGallery = () => {
             >
               <div className="aspect-[4/3] overflow-hidden">
                 <img
-                  src={image}
+                  src={image.url}
                   alt="image"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />

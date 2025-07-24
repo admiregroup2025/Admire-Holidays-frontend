@@ -4,6 +4,8 @@ import Profile from '../Components/Dashboard/Profile';
 import Bookings from '../Components/Dashboard/Bookings';
 import Header from '../Components/Dashboard/Header';
 import NavBar from '../Components/NavBar';
+import Review from '../Components/Dashboard/Review';
+import Payments from '../Components/Dashboard/Payments';
 
 const MyBooking = () => {
   return (
@@ -20,6 +22,12 @@ const MyBooking = () => {
               <Route index element={<Profile />} /> {/* This handles /my-profile */}
               <Route path="profile" element={<Profile />} /> 
               <Route path="bookings" element={<Bookings />} /> 
+              <Route path="reviews" element={<Review />} />
+              <Route path="payments" element={<Payments />} /> 
+
+
+
+
             </Routes>
           </main>
         </div>
