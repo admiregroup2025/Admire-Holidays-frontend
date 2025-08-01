@@ -30,7 +30,11 @@ export const getBlogDetails=()=> api.get('/blog');
 
 export const getBlogDetailsPage=()=> api.get('/blog/id');
 
-// export const getdomesticDestinations=(type)=> api.get(`/image-gallary/:${type}`);
+export const getDomesticDestinations = (type) => api.get(`/destination/image-gallery/${type}`);
+
+export const getItenary = (type) => api.get(`/itineraries/${type}`);
+
+
 
 
 

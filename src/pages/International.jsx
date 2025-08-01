@@ -10,6 +10,8 @@ import HeroDomestic from "../Components/heroSection/HeroReusable";
 import DestinationGrid from "../Components/destinations/DestinationGrid";
 import { internationalDestinations } from "../data/destinations"; // Import international destinations
 import HeroReusable from "../Components/heroSection/HeroReusable";
+import { getDomesticDestinations } from "../api/api";
+
 
 const International = () => {
   const navigate = useNavigate();
@@ -35,7 +37,28 @@ const International = () => {
   }, []);
 
 
-  //  for domestic
+  //  for
+   useEffect(() => {
+    const fetchDomesticData = async () => {
+      try {
+        setLoading(true);
+        const response = await getDomesticDestinations("international");
+        console.log("response", response);
+  
+        if (response.data) {
+          setDestinations(response.data); // Make sure to set the data to state
+        }
+      } catch (error) {
+        console.error("Error loading domestic data:", error);
+        setDestinations(domesticDestinations);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchDomesticData();
+  }, []);
+  
 
  
 

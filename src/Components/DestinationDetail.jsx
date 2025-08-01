@@ -4,6 +4,7 @@ import { FaPhone, FaChevronLeft, FaChevronRight, FaMapMarkerAlt, FaCalendarAlt, 
 import BannerCarousel from './BannerCarousel';
 import NavBar from './NavBar';
 import Footer from './Footer';
+import {getItenary} from "../api/api"
 
 const DestinationDetail = () => {
   const { slug } = useParams();
@@ -1006,6 +1007,29 @@ const DestinationDetail = () => {
       ]
     },
   ];
+
+  //  useEffect(() => {
+  //   const fetchDomesticData = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const response = await getItenary("domesticItinery");
+  //       console.log("response", response);
+  
+  //       if (response.data) {
+  //         setDestinations(response.data); // Make sure to set the data to state
+  //       }
+  //     } catch (error) {
+  //       console.error("Error loading domestic data:", error);
+  //       // setDestinations(internationalDestinations);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  
+  //   fetchDomesticData();
+  // }, []);
+  
+
 
   useEffect(() => {
   const found = destinations.find(dest => dest.slug === slug);
