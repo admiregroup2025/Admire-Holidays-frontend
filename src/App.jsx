@@ -29,12 +29,14 @@ import LearnMore from "./pages/LearnMore";
 import HoneymoonSpecialPackages from "./pages/HoneymoonSpecialPackages";
 import PackageDetailsWithBooking from "./pages/OtherPackageDetails";
 import TourDetails from "./pages/TourDetails";
+import AutoScrollToTop from "./Components/AutoScrollToTop";
 
 
 
 function App() {
   return (
     <Router>
+      <AutoScrollToTop />
       <ScrollToTop />
       {/* <NavBar /> */}
       <Routes>
