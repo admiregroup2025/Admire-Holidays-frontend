@@ -1,29 +1,17 @@
 import axios from 'axios';
+const baseURL=import.meta.env.VITE_API_URL
 
-// Safely get base URL with fallback
-const getBaseURL = () => {
-  // 1. Check Vite environment variable
-  if (import.meta.env.VITE_API_URL) {
-    return import.meta.env.VITE_API_URL;
-  }
-  
-  // 2. Fallback for production
-  return 'https://api.admireholidays.com';
-};
-
-// Create API instance
 const api = axios.create({
-  baseURL: `${getBaseURL()}/api/v1`,
+  // baseURL: "https://api.admireholidays.com",
+
+  baseURL: `${baseURL}/api/v1`,
+
   headers: {
     'Content-Type': 'application/json',
   },
 });
+console.log('ertyu+' +api.defaults.baseURL)
 
-// Debug output
-console.log('API Configuration:', {
-  baseURL: api.defaults.baseURL,
-  env: import.meta.env
-});
 // POST: contact form
 export const submitContactForm = (data) => api.post('/contact', data);
 
