@@ -1,19 +1,16 @@
 import axios from 'axios';
-const baseURL=import.meta.env.VITE_API_URL
+// const baseURL=import.meta.env.VITE_API_URL
 
 const api = axios.create({
- 
- 
+  // baseURL: "https://api.admireholidays.com",
 
-
-  baseURL: `${baseURL}/api/v1`,
+  baseURL: `https://api.admireholidays.com/api/v1`,
 
   headers: {
     'Content-Type': 'application/json',
   },
 });
 console.log('ertyu+' +api.defaults.baseURL)
-console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
 
 // POST: contact form
 export const submitContactForm = (data) => api.post('/contact', data);
