@@ -3,7 +3,7 @@ const baseURL=import.meta.env.VITE_API_URL
 
 const api = axios.create({
  
- console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
+ 
 
 
   baseURL: `${baseURL}/api/v1`,
@@ -13,6 +13,7 @@ const api = axios.create({
   },
 });
 console.log('ertyu+' +api.defaults.baseURL)
+console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
 
 // POST: contact form
 export const submitContactForm = (data) => api.post('/contact', data);
