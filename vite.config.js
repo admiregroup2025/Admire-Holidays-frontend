@@ -1,9 +1,14 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig, loadEnv } from 'vite';
 
-export default defineConfig({
-  plugins: [react()],
-  define: {
-    'process.env': process.env, // Explicitly pass environment variables
-  },
+export default defineConfig(({ mode }) => {
+  // Load .env files based on the mode (development, production)
+  const env = loadEnv(mode, process.cwd(), '');
+
+  return {
+    define: {
+      'process.env.VITE_API_URL': JSON.stringify(env.VITE_API_URL),
+      // add other specific env vars you need here
+    },
+    // ... other config options
+  };
 });
