@@ -25,7 +25,7 @@ export default function ScrollToTop() {
 const ToTop = styled.div`
   display: ${({ scrollState }) => (scrollState ? "block" : "none")};
   position: fixed;
-  bottom: 1rem;
+  bottom: 2rem;
   right: 2rem;
   z-index: 999 !important;
 

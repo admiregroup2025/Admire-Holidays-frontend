@@ -30,6 +30,7 @@ import HoneymoonSpecialPackages from "./pages/HoneymoonSpecialPackages";
 import PackageDetailsWithBooking from "./pages/OtherPackageDetails";
 import TourDetails from "./pages/TourDetails";
 import AutoScrollToTop from "./Components/AutoScrollToTop";
+import Sitemap from "./pages/Sitemap";
 
 
 
@@ -67,6 +68,8 @@ function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-conditions" element={<TermsAndConditions />} />
         <Route path="/user-agreement" element={<UserAgreement />} />
+        <Route path="/sitemap" element={<Sitemap />} />
+
 
 
         {/* <Route path="/destinations/:slug" element={<DestinationDetail />} /> */}

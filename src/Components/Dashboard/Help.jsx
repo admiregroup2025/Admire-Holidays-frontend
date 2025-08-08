@@ -1,5 +1,5 @@
-import React from 'react';
-import { FaQuestionCircle, FaPhone, FaEnvelope, FaClock } from 'react-icons/fa';
+import React from "react";
+import { FaQuestionCircle, FaPhone, FaEnvelope, FaClock } from "react-icons/fa";
 
 const Help = () => {
   return (
@@ -7,7 +7,7 @@ const Help = () => {
       <h2 className="text-3xl font-bold text-blue-800 mb-8 flex items-center gap-2">
         <FaQuestionCircle className="text-blue-600" /> Help Center
       </h2>
-      
+
       {/* <div className="bg-gray-50 rounded-lg p-6 mb-8">
         <h3 className="text-2xl font-semibold text-blue-700 mb-4">Frequently Asked Questions</h3>
         
@@ -34,53 +34,73 @@ const Help = () => {
           </p>
         </div>
       </div> */}
-      
+
       <div className="bg-gray-50 rounded-lg p-6 mb-8">
-        <h3 className="text-2xl font-semibold text-blue-700 mb-4">Contact Us</h3>
-        <p className="text-gray-700 mb-4">Our customer service team is available to assist you:</p>
-        
+        <h3 className="text-2xl font-semibold text-blue-700 mb-4">
+          Contact Us
+        </h3>
+        <p className="text-gray-700 mb-4">
+          Our customer service team is available to assist you:
+        </p>
+
         <div className="flex items-center gap-3 mb-3 text-gray-800">
-          <FaPhone className="text-blue-600" /> 
-          <span><strong>Phone:</strong> +1 (800) 555-ADMIRE (2364)</span>
-        </div>
-        
-        <div className="flex items-center gap-3 mb-3 text-gray-800">
-          <FaEnvelope className="text-blue-600" /> 
-          <span><strong>Email:</strong> help@traveladmire.com</span>
-        </div>
-        
-        <div className="flex items-center gap-3 mb-4 text-gray-800">
-          <FaClock className="text-blue-600" /> 
+          <FaPhone className="text-blue-600" />
           <span>
-            <strong>Hours:</strong> Monday-Friday: 8AM-8PM, Saturday: 9AM-5PM, Sunday: 10AM-4PM (EST)
+            <strong>Phone:</strong> 01140612834
           </span>
         </div>
-        
+
+        <div className="flex items-center gap-3 mb-3 text-gray-800">
+          <FaEnvelope className="text-blue-600" />
+          <span>
+            <strong>Email:</strong> info@admireholidays.com
+
+          </span>
+        </div>
+
+        <div className="flex items-center gap-3 mb-4 text-gray-800">
+          <FaClock className="text-blue-600" />
+          <span>
+            <strong>Hours:</strong> Monday-Friday: 8AM-8PM, Saturday: 9AM-5PM,
+            Sunday: 10AM-4PM (EST)
+          </span>
+        </div>
+
         <p className="text-gray-700">
-          For urgent matters during travel, please call our 24/7 emergency line: 
-          <span className="font-semibold"> +1 (800) 555-HELP (4357)</span>
+          For urgent matters during travel, please call our 24/7 emergency line:
+          <span className="font-semibold"> 18001214252</span>
         </p>
       </div>
-      
+
       <div className="bg-gray-50 rounded-lg p-6">
-        <h3 className="text-2xl font-semibold text-blue-700 mb-4">Additional Resources</h3>
+        <h3 className="text-2xl font-semibold text-blue-700 mb-4">
+          Additional Resources
+        </h3>
         <ul className="space-y-3">
           <li>
-            <a href="/terms" className="text-blue-600 hover:text-blue-800 hover:underline">
+            <a
+              href="/terms-conditions"
+              className="text-blue-600 hover:text-blue-800 hover:underline"
+            >
               Terms and Conditions
             </a>
           </li>
           <li>
-            <a href="/privacy" className="text-blue-600 hover:text-blue-800 hover:underline">
+            <a
+              href="/privacy-policy"
+              className="text-blue-600 hover:text-blue-800 hover:underline"
+            >
               Privacy Policy
             </a>
           </li>
-          <li>
-            <a href="/travel-tips" className="text-blue-600 hover:text-blue-800 hover:underline">
+          {/* <li>
+            <a
+              href="/travel-tips"
+              className="text-blue-600 hover:text-blue-800 hover:underline"
+            >
               Travel Tips and Guides
             </a>
-          </li>
-          
+          </li> */}
         </ul>
       </div>
     </div>

@@ -17,6 +17,7 @@ const WeekendGatewayDestinations = () => {
     {
       id: 1,
       name: "SOUTH-INDIA",
+      link: "/destinations/paris",
       image: "https://admiredashboard.theholistay.in/destination_images/1751095217_685f97b13c1b1LkcAU3dA.jpg",
       count: 2
     },

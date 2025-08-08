@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faChevronUp, faChevronDown, faSignInAlt, faUserPlus, faSuitcase } from '@fortawesome/free-solid-svg-icons';
+import { FaPhone, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
+
 import SearchBar from './SearchBar';
 import logo from "../assets/images/admire-logo.webp";
 import PlanMyTripForm from "../forms/PlanMyTripForm";
@@ -75,14 +77,14 @@ function NavBar() {
   };
  
   const searchSuggestions = [
-    { id: 1, text: "Goa Beach Package", type: "destination", icon: "faMapMarkerAlt" },
-    { id: 2, text: "Kashmir Honeymoon", type: "destination", icon: "faMapMarkerAlt" },
-    { id: 3, text: "Kerala Backwaters", type: "destination", icon: "faMapMarkerAlt" },
-    { id: 4, text: "Rajasthan Tour", type: "destination", icon: "faMapMarkerAlt" },
-    { id: 5, text: "International Packages", type: "category", icon: "faGlobe" },
-    { id: 6, text: "Domestic Tours", type: "category", icon: "faGlobe" },
-    { id: 7, text: "Adventure Tours", type: "category", icon: "faGlobe" },
-    { id: 8, text: "Family Packages", type: "category", icon: "faGlobe" },
+    { id: 1, text: "Goa Beach Package", type: "destination", icon: "faMapMarkerAlt", path: "/destinations/goa" },
+    { id: 2, text: "Kashmir Honeymoon", type: "destination", icon: "faMapMarkerAlt", path: "/destinations/kashmir"  },
+    { id: 3, text: "Kerala Backwaters", type: "destination", icon: "faMapMarkerAlt", path: "/destinations/kerala"  },
+    { id: 4, text: "Rajasthan Tour", type: "destination", icon: "faMapMarkerAlt", path: "/destinations/rajasthan" },
+    { id: 5, text: "International Packages", type: "category", icon: "faGlobe", path: "/international"  },
+    { id: 6, text: "Domestic Tours", type: "category", icon: "faGlobe", path: "domestic"  },
+    // { id: 7, text: "Adventure Tours", type: "category", icon: "faGlobe" },
+    // { id: 8, text: "Family Packages", type: "category", icon: "faGlobe" },
   ];
  
   const links = [
@@ -123,7 +125,7 @@ function NavBar() {
             </div>
  
             {/* Social Media Links */}
-            <div className="flex gap-3">
+            {/* <div className="flex gap-3">
               <a href="#" aria-label="Facebook" className="hover:text-orange-400 transition-colors">
                 <i className="fab fa-facebook-f"></i>
               </a>
@@ -136,7 +138,25 @@ function NavBar() {
               <a href="#" aria-label="LinkedIn" className="hover:text-orange-400 transition-colors">
                 <i className="fab fa-linkedin-in"></i>
               </a>
+            </div> */}
+            <div className="flex gap-2 mt-3">
+              <Link to="https://www.facebook.com/people/Admire-Holidays/100090809996697/?mibextid=ZbWKwL" className="text-gray-300 hover:text-amber-400 text-xl transition-colors">
+                <FaFacebook />
+              </Link>
+              <a href="https://twitter.com/admireholidays" className="text-gray-300 hover:text-amber-400 text-xl transition-colors">
+                <FaTwitter />
+              </a>
+              <a href="https://www.instagram.com/admireholidays_official?igsh=MWVydXI0ejY5OW9hdQ%3D%3D" className="text-gray-300 hover:text-amber-400 text-xl transition-colors">
+                <FaInstagram />
+              </a>
+              <a href="https://www.youtube.com/@AdmireHolidays_official" className="text-gray-300 hover:text-amber-400 text-xl transition-colors">
+                <FaYoutube />
+              </a>
+              <a href="https://www.linkedin.com/company/103593428/admin/dashboard/" className="text-gray-300 hover:text-amber-400 text-xl transition-colors">
+                <FaLinkedin />
+              </a>
             </div>
+
           </div>
         </div>
       </div>

@@ -24,8 +24,8 @@ const SearchBar = ({
     { id: 2, text: "Kashmir Honeymoon", type: "destination", icon: faMapMarkerAlt, path: "/destinations/kashmir" },
     { id: 3, text: "Kerala Backwaters", type: "destination", icon: faMapMarkerAlt, path: "/destinations/kerala" },
     { id: 4, text: "Rajasthan Tour", type: "destination", icon: faMapMarkerAlt, path: "/destinations/rajasthan" },
-    { id: 5, text: "International Packages", type: "category", icon: faGlobe, path: "/categories/international" },
-    { id: 6, text: "Domestic Tours", type: "category", icon: faGlobe, path: "/categories/domestic" },
+    { id: 5, text: "International Packages", type: "category", icon: faGlobe, path: "/international" },
+    { id: 6, text: "Domestic Tours", type: "category", icon: faGlobe, path: "/domestic" },
   ];
 
   const currentSuggestions = suggestions.length > 0 ? suggestions : defaultSuggestions;

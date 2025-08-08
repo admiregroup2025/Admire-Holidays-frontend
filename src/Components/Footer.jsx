@@ -1,6 +1,6 @@
 import React from 'react';
-import { FaPhone, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { FaPhone, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
+import { Link, NavLink, } from 'react-router-dom';
 import logo from "../assets/images/admire-logo.webp";
 
 const Footer = () => {
@@ -20,15 +20,15 @@ const Footer = () => {
           {/* Company info */}
           <div className="w-full md:w-1/4 lg:w-1/4 mb-4 px-2">
             <div className="flex items-center mb-4">
-              <div className="bg-amber-400 p-1">
+              <div>
                 <div className="bg-gray-900 p-1">
-  <img 
-    src={logo} 
-    alt="Admire Holidays Logo" 
-    className="rounded-full"
-    width="50"
-    height="50"
-  />
+ <NavLink to="/" className="flex items-center z-50">
+              <img
+                src={logo}
+                alt="Admire Holidays Logo"
+                className="h-10"
+              />
+            </NavLink>
 </div>
               </div>
               {/* <h5 className="ml-2 mb-0 text-amber-400 font-semibold">Admire Holidays</h5> */}
@@ -38,18 +38,21 @@ const Footer = () => {
               <span className="block mt-1 text-amber-400 font-semibold">10+ years of expertise!</span>
             </p>
             <div className="flex gap-2 mt-3">
-              <a href="https://facebook.com/admireholidays" className="text-gray-400 hover:text-amber-400 text-xl transition-colors">
+              <Link to="https://www.facebook.com/people/Admire-Holidays/100090809996697/?mibextid=ZbWKwL" className="text-gray-400 hover:text-amber-400 text-xl transition-colors">
                 <FaFacebook />
-              </a>
+              </Link>
               <a href="https://twitter.com/admireholidays" className="text-gray-400 hover:text-amber-400 text-xl transition-colors">
                 <FaTwitter />
               </a>
-              <a href="https://instagram.com/admireholidays" className="text-gray-400 hover:text-amber-400 text-xl transition-colors">
+              <a href="https://www.instagram.com/admireholidays_official?igsh=MWVydXI0ejY5OW9hdQ%3D%3D" className="text-gray-400 hover:text-amber-400 text-xl transition-colors">
                 <FaInstagram />
               </a>
-              <a href="https://linkedin.com/company/admireholidays" className="text-gray-400 hover:text-amber-400 text-xl transition-colors">
-                <FaLinkedin />
+              <a href="https://www.youtube.com/@AdmireHolidays_official" className="text-gray-400 hover:text-amber-400 text-xl transition-colors">
+                <FaYoutube />
               </a>
+              <a href="https://www.linkedin.com/company/103593428/admin/dashboard/" className="text-gray-400 hover:text-amber-400 text-xl transition-colors">
+                              <FaLinkedin />
+                            </a>
             </div>
           </div>
 
@@ -177,14 +180,22 @@ const Footer = () => {
               </a>
             </div>
             <div className="flex items-center gap-2">
-              <FaMapMarkerAlt className="text-amber-400" />
-              <span className="text-gray-400 text-sm">
-                34, Sewak Park, Dwarka More Metro, Near Pillar No-772, New Delhi
-              </span>
+              <a
+  href="https://maps.app.goo.gl/2tYd2jo4Ai8B8HJ1A"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-center gap-2 hover:underline"
+>
+  <FaMapMarkerAlt className="text-amber-400" />
+  <span className="text-gray-400 text-sm">
+    34, Sewak Park, Dwarka More Metro, Near Pillar No-772, New Delhi
+  </span>
+</a>
+
             </div>
           </div>
           <Link 
-            to="/free-quote" 
+            to="/contact" 
             className="bg-amber-400 hover:bg-amber-500 text-gray-900 font-medium text-sm px-3 py-1 rounded transition-colors"
           >
             Get a Free Quote

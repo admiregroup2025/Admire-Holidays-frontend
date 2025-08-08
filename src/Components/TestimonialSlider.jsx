@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Star, MapPin, Calendar } from 'lucide-react';
 
 const TestimonialSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const sliderRef = useRef(null);
 
   const testimonials = [
     {
@@ -80,10 +81,10 @@ const TestimonialSlider = () => {
     
     const interval = setInterval(() => {
       nextSlide();
-    }, 5000);
+    }, 3000); // Changed to 3 seconds for better auto-slide experience
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, currentSlide]); // Added currentSlide to dependencies
 
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
@@ -105,6 +106,7 @@ const TestimonialSlider = () => {
 
       <div 
         className="relative bg-white rounded-2xl shadow-2xl overflow-hidden"
+        ref={sliderRef}
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
       >
@@ -193,10 +195,13 @@ const TestimonialSlider = () => {
       </div>
 
       {/* Progress Bar */}
-      <div className="w-full bg-gray-200 rounded-full h-1 mt-6">
+      <div className="w-full bg-gray-200 rounded-full h-1.5 mt-6">
         <div 
-          className="bg-blue-500 h-1 rounded-full transition-all duration-300"
-          style={{ width: `${((currentSlide + 1) / testimonials.length) * 100}%` }}
+          className="bg-blue-500 h-1.5 rounded-full transition-all duration-1000 ease-linear"
+          style={{ 
+            width: isAutoPlaying ? `${((currentSlide + 1) / testimonials.length) * 100}%` : `${((currentSlide + 1) / testimonials.length) * 100}%`,
+            transition: isAutoPlaying ? 'width 3s linear' : 'width 0.3s ease'
+          }}
         />
       </div>
 

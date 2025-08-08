@@ -129,7 +129,7 @@ const AboutDetails = () => {
             alt="Difference"
             loading="lazy"
             className="rounded-xl shadow-lg w-full h-auto"
-            src="https://images.pexels.com/photos/2681319/pexels-photo-2681319.jpeg?auto=compress&cs=tinysrgb&w=600"
+            src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dHJhdmVsfGVufDB8fDB8fHww"
           />
         </div>
 
@@ -183,7 +183,7 @@ const AboutDetails = () => {
             alt="Why Choose Us"
             loading="lazy"
             className="rounded-xl shadow-lg w-full h-auto"
-            src="https://images.pexels.com/photos/28832655/pexels-photo-28832655.jpeg"
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D"
           />
         </div>
 
