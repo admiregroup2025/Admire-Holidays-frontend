@@ -5,6 +5,7 @@ import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
 import DestinationGrid from "../Components/destinations/DestinationGrid";
 import HeroReusable from "../Components/heroSection/HeroReusable";
+import TravelGallery from "../Components/TravelGallery";
 
 const Domestic = () => {
   const [videoUrl, setVideoUrl] = useState(null);
@@ -12,6 +13,7 @@ const Domestic = () => {
   const [heroLoading, setHeroLoading] = useState(true);
   const [destinationsLoading, setDestinationsLoading] = useState(true);
 
+  // hero video
   useEffect(() => {
     const fetchVideo = async () => {
       try {
@@ -24,35 +26,29 @@ const Domestic = () => {
         setHeroLoading(false);
       }
     };
-
     fetchVideo();
   }, []);
 
+  // fetch domestic destinations
   useEffect(() => {
     const fetchData = async () => {
       try {
         setDestinationsLoading(true);
         const response = await getDomesticDestinations("domestic");
-        console.log("API Response:", response);
         
-        // Check different response structures
-        const responseData = response.data || response;
-        
-        if (Array.isArray(responseData)) {
-          // Direct array response
-          setDestinations(responseData);
-        } else if (responseData.data && Array.isArray(responseData.data)) {
-          // Nested data array
-          setDestinations(responseData.data);
-        } else if (responseData.destinations && Array.isArray(responseData.destinations)) {
-          // Another common structure
-          setDestinations(responseData.destinations);
+        // Check if response exists and has the expected structure
+        if (response?.data?.success && Array.isArray(response.data.data)) {
+          console.log("Destinations data:", response.data.data);
+          setDestinations(response.data.data);
         } else {
-          console.warn("Unexpected API response structure:", responseData);
+          console.warn("Unexpected response structure:", response);
           setDestinations([]);
         }
       } catch (error) {
-        console.error("Error loading data:", error);
+        console.error("Error loading destinations:", {
+          message: error.message,
+          response: error.response?.data,
+        });
         setDestinations([]);
       } finally {
         setDestinationsLoading(false);
@@ -81,6 +77,7 @@ const Domestic = () => {
         />
       </div>
 
+      <TravelGallery />
       <Footer />
     </div>
   );

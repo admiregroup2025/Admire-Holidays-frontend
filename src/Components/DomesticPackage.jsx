@@ -2,82 +2,56 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { getDomesticDestinations } from "../api/api";
 
 const DomesticPackage = () => {
-  const destinations = [
-    {
-      id: 1,
-      name: "SOUTH-INDIA",
-      slug: "south-india",
-      image: "https://admiredashboard.theholistay.in/destination_images/1751095217_685f97b13c1b1LkcAU3dA.jpg"
-    },
-    {
-      id: 2,
-      name: "NAGPUR",
-      slug: "nagpur",
-      image: "https://plus.unsplash.com/premium_photo-1697730320983-f99aab252a44?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fG5hZ3B1cnxlbnwwfHwwfHx8MA%3D%3D"
-    },
-    {
-      id: 3,
-      name: "PUNE",
-      slug: "pune",
-      image: "https://admiredashboard.theholistay.in/destination_images/1750531928_6856ff5867820R1IrN4dG.jpg"
-    },
-    {
-      id: 4,
-      name: "BANGALORE",
-      slug: "banglore",
-      image: "https://admiredashboard.theholistay.in/destination_images/1750531677_6856fe5d0cfdcAIvVFMxJ.jpg"
-    },
-    {
-      id: 5,
-      name: "AHMEDABAD",
-      slug: "ahmedabad",
-      image: "https://admiredashboard.theholistay.in/destination_images/1750531498_6856fdaac00a2X2PRnqwa.jpg"
-    },
-    {
-      id: 6,
-      name: "SIKKIM",
-      slug: "sikkim",
-      image: "https://admiredashboard.theholistay.in/destination_images/1745332441_6807a8d9c88449JatTSup.jpg"
-    },
-    // {
-    //   id: 7,
-    //   name: "Rajasthan",
-    //   slug: "rajasthan",
-    //   image: "https://admiredashboard.theholistay.in/destination_images/1745170357_68052fb5756b2YDpVGy3h.jpg"
-    // },
-    // {
-    //   id: 8,
-    //   name: "UTTARAKHAND",
-    //   slug: "uttarakhand",
-    //   image: "https://admiredashboard.theholistay.in/destination_images/1745003507_6802a3f32238e4FqQ3SSA.jpg"
-    // },
-    // {
-    //   id: 9,
-    //   name: "LEH-LADAKH",
-    //   slug: "leh-ladakh",
-    //   image: "https://admiredashboard.theholistay.in/destination_images/1745000682_680298eaeae6db9X0N3bk.webp"
-    // },
-    // {
-    //   id: 10,
-    //   name: "Kashmir",
-    //   slug: "kashmir",
-    //   image: "https://admiredashboard.theholistay.in/destination_images/1745000392_680297c828a24xTJgA47h.jpg"
-    // },
-    // {
-    //   id: 11,
-    //   name: "Andaman",
-    //   slug: "andaman",
-    //   image: "https://admiredashboard.theholistay.in/destination_images/1744988960_68026b2038ce1NkJDUysY.jpg"
-    // },
-    // {
-    //   id: 12,
-    //   name: "Kerala",
-    //   slug: "kerala",
-    //   image: "https://admiredashboard.theholistay.in/destination_images/1744986187_6802604b45a4a.jpg"
-    // }
-  ];
+  const [destinations, setDestinations] = useState([]);
+  const [destinationsLoading, setDestinationsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  // Helper function to validate image URLs
+  const isValidUrl = (url) => {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setDestinationsLoading(true);
+        setError(null);
+        const response = await getDomesticDestinations("domestic");
+        
+        if (response?.data?.success && Array.isArray(response.data.data)) {
+          
+          const processedDestinations = response.data.data.map(dest => ({
+            id: dest._id,
+            name: dest.destination_name,
+            slug: dest.destination_name.toLowerCase().replace(/\s+/g, '-'),
+            image: dest.image?.find(img => isValidUrl(img)) || null
+          })).filter(dest => dest.image); 
+          
+          setDestinations(processedDestinations);
+        } else {
+          setError("Unexpected response structure from server");
+          setDestinations([]);
+        }
+      } catch (error) {
+        console.error("Error loading destinations:", error);
+        setError("Failed to load destinations. Please try again later.");
+        setDestinations([]);
+      } finally {
+        setDestinationsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -106,8 +80,6 @@ const DomesticPackage = () => {
     }
   };
 
-  const navigate = useNavigate();
-
   const handleClick = () => {
     navigate("/domestic");
   };
@@ -129,49 +101,72 @@ const DomesticPackage = () => {
           </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-        >
-          {destinations.map((destination, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover="hover"
-              className="group relative"
-            >
-              <Link 
-                to={`/destinations/${destination.slug}`} 
-                className="block h-full"
+        {error && (
+          <div className="text-center text-red-500 py-4">
+            {error}
+          </div>
+        )}
+
+        {destinationsLoading ? (
+          <div className="text-center py-12">
+            <p>Loading destinations...</p>
+          </div>
+        ) : destinations.length === 0 ? (
+          <div className="text-center py-12">
+            <p>No destinations available at the moment.</p>
+          </div>
+        ) : (
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          >
+            {destinations.map((destination) => (
+              <motion.div
+                key={destination.id}
+                variants={itemVariants}
+                whileHover="hover"
+                className="group relative"
               >
-                <div className="overflow-hidden rounded-lg shadow-lg bg-white h-full flex flex-col cursor-pointer">
-                  <div className="relative h-64 overflow-hidden">
-                    <motion.img
-                      alt={destination.name}
-                      src={destination.image}
-                      className="w-full h-full object-cover"
-                      initial={{ opacity: 0.8 }}
-                      whileHover={{ opacity: 1, scale: 1.1 }}
-                      transition={{ duration: 0.5 }}
-                    />
-                    <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all duration-300 group-hover:bg-opacity-50">
-                      <h3 className="text-white text-xl font-bold tracking-wide transition-transform duration-300 group-hover:scale-110">
-                        {destination.name}
-                      </h3>
+                <Link 
+                  to={`/destinations/${destination.slug}`} 
+                  className="block h-full"
+                >
+                  <div className="overflow-hidden rounded-lg shadow-lg bg-white h-full flex flex-col cursor-pointer">
+                    <div className="relative h-64 overflow-hidden">
+                      {destination.image ? (
+                        <motion.img
+                          alt={destination.name}
+                          src={destination.image}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                          initial={{ opacity: 0.8 }}
+                          whileHover={{ opacity: 1, scale: 1.1 }}
+                          transition={{ duration: 0.5 }}
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                          <span>Image not available</span>
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all duration-300 group-hover:bg-opacity-50">
+                        <h3 className="text-white text-xl font-bold tracking-wide transition-transform duration-300 group-hover:scale-110">
+                          {destination.name}
+                        </h3>
+                      </div>
+                    </div>
+                    <div className="p-4 text-center mt-auto">
+                      <p className="text-gray-600">
+                        Click to explore {destination.name}
+                      </p>
                     </div>
                   </div>
-                  <div className="p-4 text-center mt-auto">
-                    <p className="text-gray-600">
-                      Click to explore this amazing destination.
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </motion.div>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
 
         <motion.div
           initial={{ opacity: 0 }}

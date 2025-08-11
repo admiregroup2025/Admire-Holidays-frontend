@@ -1,59 +1,57 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { getDomesticDestinations } from "../api/api";
 
-const InternationalDestinations = () => {
-  const destinations = [
-    {
-      name: "Maldives",
-      slug: "maldives",
-      image: "https://admiredashboard.theholistay.in/destination_images/1750533766_68570686a9204oLjjZORL.jpg"
-    },
-    {
-      name: "SINGAPORE",
-      slug: "singapore",
-      image: "https://admiredashboard.theholistay.in/destination_images/1750532967_685703672e9c9w0aeeaYR.jpg"
-    },
-    {
-      name: "DUBAI",
-      slug: "dubai",
-      image: "https://admiredashboard.theholistay.in/destination_images/1750532692_68570254b7cf5sq9WV8yC.jpg"
-    },
-    {
-      name: "MAURITIUS",
-      slug: "mauritius",
-      image: "https://admiredashboard.theholistay.in/destination_images/1750533673_68570629810e4CiDtIW8D.jpg"
-    },
-    {
-      name: "EUROPE",
-      slug: "europe",
-      image: "https://admiredashboard.theholistay.in/destination_images/1750533500_6857057c33b37o0nRO3Zt.jpg"
-    },
-    {
-      name: "China",
-      slug: "china",
-      image: "https://admiredashboard.theholistay.in/destination_images/1744959810_6801f9420424bSChJcMNn.webp"
-    },
-    {
-      name: "THAILAND",
-      slug: "thailand",
-      image: "https://admiredashboard.theholistay.in/destination_images/1745002740_6802a0f4615e1lxl6tGLC.jpg"
-    },
-    {
-      name: "SWITZERLAND",
-      slug: "switzerland",
-      image: "https://admiredashboard.theholistay.in/destination_images/1750533063_685703c78dac5OJKUiro1.jpg"
-    },
-    {
-      name: "VIETNAM",
-      slug: "vietnam",
-      image: "https://admiredashboard.theholistay.in/destination_images/1744992883_68027a73ea810UwAxjYlT.jpg"
+const InternationalPackage = () => {
+  const [destinations, setDestinations] = useState([]);
+  const [destinationsLoading, setDestinationsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  // Helper function to validate image URLs
+  const isValidUrl = (url) => {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
     }
-  ];
+  };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setDestinationsLoading(true);
+        setError(null);
+        const response = await getDomesticDestinations("international");
+        
+        if (response?.data?.success && Array.isArray(response.data.data)) {
+          const processedDestinations = response.data.data.map(dest => ({
+            id: dest._id,
+            name: dest.destination_name,
+            slug: dest.destination_name.toLowerCase().replace(/\s+/g, '-'),
+            image: dest.image?.find(img => isValidUrl(img)) || null
+          })).filter(dest => dest.image); 
+          
+          setDestinations(processedDestinations);
+        } else {
+          setError("Unexpected response structure from server");
+          setDestinations([]);
+        }
+      } catch (error) {
+        console.error("Error loading destinations:", error);
+        setError("Failed to load destinations. Please try again later.");
+        setDestinations([]);
+      } finally {
+        setDestinationsLoading(false);
+      }
+    };
 
-  
+    fetchData();
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -81,15 +79,12 @@ const InternationalDestinations = () => {
     }
   };
 
-   const navigate = useNavigate(); // Initialize navigate
-
-  // Function to handle click
   const handleClick = () => {
     navigate("/international");
   };
 
   return (
-    <section className="relative py-20 bg-gradient-to-b from-white to-yellow-600 mt-16">
+    <section className="relative py-20 bg-gradient-to-b from-white to-red-600 mt-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
@@ -97,7 +92,7 @@ const InternationalDestinations = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-red-600 mb-2">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#261F43] mb-2">
             Explore International Destinations
           </h1>
           <p className="text-lg text-red-600 max-w-2xl mx-auto">
@@ -105,49 +100,72 @@ const InternationalDestinations = () => {
           </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-        >
-          {destinations.map((destination, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover="hover"
-              className="group relative"
-            >
-              <Link 
-                to={`/destinations/${destination.slug}`} 
-                className="block h-full"
+        {error && (
+          <div className="text-center text-yellow-300 py-4">
+            {error}
+          </div>
+        )}
+
+        {destinationsLoading ? (
+          <div className="text-center py-12">
+            <p className="text-white">Loading destinations...</p>
+          </div>
+        ) : destinations.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-white">No destinations available at the moment.</p>
+          </div>
+        ) : (
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          >
+            {destinations.map((destination) => (
+              <motion.div
+                key={destination.id}
+                variants={itemVariants}
+                whileHover="hover"
+                className="group relative"
               >
-                <div className="overflow-hidden rounded-lg shadow-lg bg-white h-full flex flex-col cursor-pointer">
-                  <div className="relative h-64 overflow-hidden">
-                    <motion.img
-                      alt={destination.name}
-                      src={destination.image}
-                      className="w-full h-full object-cover"
-                      initial={{ opacity: 0.8 }}
-                      whileHover={{ opacity: 1, scale: 1.1 }}
-                      transition={{ duration: 0.5 }}
-                    />
-                    <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all duration-300 group-hover:bg-opacity-50">
-                      <h3 className="text-white text-xl font-bold tracking-wide transition-transform duration-300 group-hover:scale-110">
-                        {destination.name}
-                      </h3>
+                <Link 
+                  to={`/destinations/${destination.slug}`} 
+                  className="block h-full"
+                >
+                  <div className="overflow-hidden rounded-lg shadow-lg bg-white h-full flex flex-col cursor-pointer">
+                    <div className="relative h-64 overflow-hidden">
+                      {destination.image ? (
+                        <motion.img
+                          alt={destination.name}
+                          src={destination.image}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                          initial={{ opacity: 0.8 }}
+                          whileHover={{ opacity: 1, scale: 1.1 }}
+                          transition={{ duration: 0.5 }}
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                          <span>Image not available</span>
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all duration-300 group-hover:bg-opacity-50">
+                        <h3 className="text-white text-xl font-bold tracking-wide transition-transform duration-300 group-hover:scale-110">
+                          {destination.name}
+                        </h3>
+                      </div>
+                    </div>
+                    <div className="p-4 text-center mt-auto">
+                      <p className="text-gray-600">
+                        Click to explore {destination.name}
+                      </p>
                     </div>
                   </div>
-                  <div className="p-4 text-center mt-auto">
-                    <p className="text-gray-600">
-                      Click to explore this amazing destination.
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </motion.div>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
 
         <motion.div
           initial={{ opacity: 0 }}
@@ -155,18 +173,18 @@ const InternationalDestinations = () => {
           transition={{ delay: 0.5 }}
           className="text-center mt-12"
         >
-           <button
-      onClick={handleClick}
-      className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-full transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg"
-    >
-      Explore More
-    </button>
+          <button
+            onClick={handleClick}
+            className="px-8 py-3 bg-yellow-400 hover:bg-yellow-500 text-red-700 font-bold rounded-full transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg"
+          >
+            Explore More
+          </button>
         </motion.div>
       </div>
 
       {/* Decorative animated elements */}
       <motion.div
-        className="absolute top-20 left-10 w-8 h-8 rounded-full bg-yellow-400 opacity-30"
+        className="absolute top-20 left-10 w-8 h-8 rounded-full bg-white opacity-30"
         animate={{
           y: [0, 20, 0],
           x: [0, 10, 0]
@@ -178,7 +196,7 @@ const InternationalDestinations = () => {
         }}
       />
       <motion.div
-        className="absolute bottom-20 right-10 w-12 h-12 rounded-full bg-red-400 opacity-20"
+        className="absolute bottom-20 right-10 w-12 h-12 rounded-full bg-yellow-300 opacity-20"
         animate={{
           y: [0, -20, 0],
           x: [0, -10, 0]
@@ -194,4 +212,4 @@ const InternationalDestinations = () => {
   );
 };
 
-export default InternationalDestinations;
+export default InternationalPackage;

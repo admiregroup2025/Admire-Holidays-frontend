@@ -46,7 +46,7 @@ const International = () => {
         console.log("response", response);
   
         if (response.data) {
-          setDestinations(response.data); // Make sure to set the data to state
+          setDestinations(response.data); 
         }
       } catch (error) {
         console.error("Error loading domestic data:", error);
