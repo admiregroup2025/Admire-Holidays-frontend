@@ -26,6 +26,8 @@ const DomesticPackage = () => {
         setDestinationsLoading(true);
         setError(null);
         const response = await getDomesticDestinations("domestic");
+        console.log(response);
+        
         
         if (response?.data?.success && Array.isArray(response.data.data)) {
           

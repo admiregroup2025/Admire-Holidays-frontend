@@ -31,6 +31,15 @@ import PackageDetailsWithBooking from "./pages/OtherPackageDetails";
 import TourDetails from "./pages/TourDetails";
 import AutoScrollToTop from "./Components/AutoScrollToTop";
 import Sitemap from "./pages/Sitemap";
+import WildlifeCategory from "./pages/category/WildlifeCategory";
+import Adventure from "./pages/category/Adventure";
+import Honeymoon from "./pages/category/Honeymoon";
+import Beach from "./pages/category/Beach";
+// import HeritageTours from "./pages/category/HeritageTours";
+// import AyurvedaTours from "./pages/category/ayurveda-tours";
+// import Cultural from "./pages/category/Cultural";
+// import HillStation from "./pages/category/HillStation";
+// import Pilgrimage from "./pages/category/Pilgrimage";
 
 
 
@@ -90,6 +99,32 @@ function App() {
         <Route path="/honeymoon-special-package" element={<HoneymoonSpecialPackages />} />
         <Route path="/destinations/:slug" element={<TourDetails />} />
 <Route path="/destinations/:slug/detail" element={<DestinationDetail />} />
+
+
+
+
+
+
+
+
+   {/* category */}
+    <Route path="/category/wildlife" element={<WildlifeCategory />} />
+    <Route path="/category/adventure" element={<Adventure />} />
+    <Route path="/category/honeymoon" element={<Honeymoon />} />
+    <Route path="/category/beach" element={<Beach />} />
+    {/* <Route path="/category/pilgrimage" element={<Pilgrimage />} /> */}
+    {/* <Route path="/category/hill-station" element={<HillStation />} /> */}
+    {/* <Route path="/category/heritage-tours" element={<HeritageTours />} /> */}
+    {/* <Route path="/category/ayurveda-tours" element={<AyurvedaTours />} />
+    <Route path="/category/cultural" element={<Cultural />} /> */}
+
+
+
+
+
+
+
+
 
 
 

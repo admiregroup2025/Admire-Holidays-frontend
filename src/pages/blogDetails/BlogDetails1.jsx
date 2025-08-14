@@ -5,6 +5,17 @@ import NavBar from '../../Components/NavBar';
 import Footer from '../../Components/Footer';
 import { BlogDetailsContext } from '../../context/blogContext.jsx';
 import { getBlogDetailsPage } from "../../api/api.js";
+import { 
+  FaFacebook, 
+  FaTwitter, 
+  FaLinkedin, 
+  FaWhatsapp, 
+  FaLink,
+  FaShareAlt,
+  FaEnvelope,
+  FaTimes
+} from 'react-icons/fa';
+import companyLogo from '../../assets/images//admire-logo.webp'; // Import your company logo
 
 const BlogDetails1 = () => {
   const navigate = useNavigate();
@@ -14,7 +25,6 @@ const BlogDetails1 = () => {
   const [loading, setLoading] = useState(true);
   const [blogData, setBlogData] = useState(null);
   
-  // Get blog details from context
   const { blogDetails } = useContext(BlogDetailsContext);
 
   useEffect(() => {
@@ -22,7 +32,6 @@ const BlogDetails1 = () => {
       try {
         setLoading(true);
         
-        // If we have context data for this blog, use that
         if (blogDetails && blogDetails.id === id) {
           setBlogData({
             ...blogDetails,
@@ -30,7 +39,6 @@ const BlogDetails1 = () => {
             hashtags: blogDetails.tags ? blogDetails.tags.join(',') : "Travel,Blog,Vacation"
           });
         } else {
-          // Otherwise fetch from API
           const response = await getBlogDetailsPage(id);
           const blog = response.data;
           setBlogData({
@@ -62,6 +70,7 @@ const BlogDetails1 = () => {
           title: blogData.title,
           text: blogData.description || blogData.content.substring(0, 100),
           url: blogData.url,
+          files: [new File([companyLogo], 'company-logo.png', { type: 'image/png' })]
         });
       } else {
         setShowShareDialog(true);
@@ -74,24 +83,26 @@ const BlogDetails1 = () => {
   const shareTo = (platform) => {
     let shareUrl = '';
     const encodedUrl = encodeURIComponent(blogData.url);
-    const encodedTitle = encodeURIComponent(blogData.title);
+    const encodedTitle = encodeURIComponent(`${blogData.title} | Admire Holidays`);
     const encodedHashtags = encodeURIComponent(blogData.hashtags);
+    const encodedDescription = encodeURIComponent(blogData.description || blogData.content.substring(0, 150));
+    const logoUrl = encodeURIComponent(window.location.origin + companyLogo);
 
     switch (platform) {
       case 'twitter':
         shareUrl = `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}&hashtags=${encodedHashtags}`;
         break;
       case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedTitle}&picture=${logoUrl}`;
         break;
       case 'linkedin':
-        shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}&summary=${encodeURIComponent(blogData.description || '')}`;
+        shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}&summary=${encodedDescription}&source=AdmireHolidays`;
         break;
       case 'whatsapp':
-        shareUrl = `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`;
+        shareUrl = `https://wa.me/?text=${encodedTitle}%0A%0A${encodedDescription}%0A%0A${encodedUrl}`;
         break;
       case 'email':
-        shareUrl = `mailto:?subject=${encodedTitle}&body=${encodeURIComponent(blogData.description || '')}%0A%0ARead more: ${blogData.url}`;
+        shareUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%0ARead more: ${blogData.url}`;
         break;
       default:
         break;
@@ -173,90 +184,104 @@ const BlogDetails1 = () => {
               className="flex items-center text-yellow-600 hover:text-yellow-700 transition"
               whileHover={{ scale: 1.05 }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" clipRule="evenodd" />
-              </svg>
+              <FaShareAlt className="h-5 w-5 mr-2" />
               Share
             </motion.button>
 
             {showShareDialog && (
               <motion.div 
-                className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-10"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
+                className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setShowShareDialog(false)}
               >
-                <div className="py-1">
-                  <button
-                    onClick={() => shareTo('twitter')}
-                    className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    <svg className="h-5 w-5 mr-2 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                    </svg>
-                    Twitter
-                  </button>
-                  <button
-                    onClick={() => shareTo('facebook')}
-                    className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    <svg className="h-5 w-5 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                      <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
-                    </svg>
-                    Facebook
-                  </button>
-                  <button
-                    onClick={() => shareTo('linkedin')}
-                    className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    <svg className="h-5 w-5 mr-2 text-blue-700" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                    </svg>
-                    LinkedIn
-                  </button>
-                  <button
-                    onClick={() => shareTo('whatsapp')}
-                    className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    <svg className="h-5 w-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335 .157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                    </svg>
-                    WhatsApp
-                  </button>
-                  <button
-                    onClick={() => shareTo('email')}
-                    className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    <svg className="h-5 w-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    Email
-                  </button>
-                  <button
-                    onClick={copyToClipboard}
-                    className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    <svg className="h-5 w-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                    </svg>
-                    {isCopied ? 'Copied!' : 'Copy Link'}
-                  </button>
-                </div>
+                <motion.div 
+                  className="bg-white rounded-lg shadow-xl w-full max-w-md"
+                  initial={{ scale: 0.9, y: 20 }}
+                  animate={{ scale: 1, y: 0 }}
+                  exit={{ scale: 0.9, y: 20 }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="flex justify-between items-center border-b p-4">
+                    <h3 className="text-lg font-semibold">Share this article</h3>
+                    <button 
+                      onClick={() => setShowShareDialog(false)}
+                      className="text-gray-500 hover:text-gray-700"
+                    >
+                      <FaTimes />
+                    </button>
+                  </div>
+                  
+                  <div className="p-6 grid grid-cols-3 gap-4">
+                    <button
+                      onClick={() => shareTo('facebook')}
+                      className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-2">
+                        <FaFacebook className="text-blue-600 text-xl" />
+                      </div>
+                      <span className="text-sm">Facebook</span>
+                    </button>
+                    
+                    <button
+                      onClick={() => shareTo('twitter')}
+                      className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-2">
+                        <FaTwitter className="text-blue-400 text-xl" />
+                      </div>
+                      <span className="text-sm">Twitter</span>
+                    </button>
+                    
+                    <button
+                      onClick={() => shareTo('linkedin')}
+                      className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-2">
+                        <FaLinkedin className="text-blue-700 text-xl" />
+                      </div>
+                      <span className="text-sm">LinkedIn</span>
+                    </button>
+                    
+                    <button
+                      onClick={() => shareTo('whatsapp')}
+                      className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-2">
+                        <FaWhatsapp className="text-green-500 text-xl" />
+                      </div>
+                      <span className="text-sm">WhatsApp</span>
+                    </button>
+                    
+                    <button
+                      onClick={() => shareTo('email')}
+                      className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-2">
+                        <FaEnvelope className="text-gray-600 text-xl" />
+                      </div>
+                      <span className="text-sm">Email</span>
+                    </button>
+                    
+                    <button
+                      onClick={copyToClipboard}
+                      className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-2">
+                        <FaLink className="text-gray-600 text-xl" />
+                      </div>
+                      <span className="text-sm">{isCopied ? 'Copied!' : 'Copy Link'}</span>
+                    </button>
+                  </div>
+                </motion.div>
               </motion.div>
             )}
           </div>
         </div>
 
-        {/* Click outside to close share dialog */}
-        {showShareDialog && (
-          <div 
-            className="fixed inset-0 z-0"
-            onClick={() => setShowShareDialog(false)}
-          />
-        )}
-
         <motion.article 
-          className="bg-white rounded-xl shadow-md overflow-hidden"
+          className="bg-white rounded-xl shadow-md overflow-hidden mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
@@ -291,6 +316,48 @@ const BlogDetails1 = () => {
               className="prose prose-lg max-w-none text-gray-700"
               dangerouslySetInnerHTML={{ __html: blogData.content }} 
             />
+
+            {/* Fixed share buttons at bottom of article */}
+            <div className="mt-12 pt-6 border-t border-gray-200">
+              <h3 className="text-lg font-semibold mb-4">Share this article</h3>
+              <div className="flex space-x-4">
+                <button
+                  onClick={() => shareTo('facebook')}
+                  className="p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
+                  title="Share on Facebook"
+                >
+                  <FaFacebook className="text-xl" />
+                </button>
+                <button
+                  onClick={() => shareTo('twitter')}
+                  className="p-3 bg-blue-400 text-white rounded-full hover:bg-blue-500 transition-colors"
+                  title="Share on Twitter"
+                >
+                  <FaTwitter className="text-xl" />
+                </button>
+                <button
+                  onClick={() => shareTo('linkedin')}
+                  className="p-3 bg-blue-700 text-white rounded-full hover:bg-blue-800 transition-colors"
+                  title="Share on LinkedIn"
+                >
+                  <FaLinkedin className="text-xl" />
+                </button>
+                <button
+                  onClick={() => shareTo('whatsapp')}
+                  className="p-3 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors"
+                  title="Share on WhatsApp"
+                >
+                  <FaWhatsapp className="text-xl" />
+                </button>
+                <button
+                  onClick={copyToClipboard}
+                  className="p-3 bg-gray-600 text-white rounded-full hover:bg-gray-700 transition-colors"
+                  title="Copy link"
+                >
+                  <FaLink className="text-xl" />
+                </button>
+              </div>
+            </div>
           </div>
         </motion.article>
       </main>

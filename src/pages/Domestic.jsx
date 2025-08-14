@@ -31,32 +31,44 @@ const Domestic = () => {
 
   // fetch domestic destinations
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setDestinationsLoading(true);
-        const response = await getDomesticDestinations("domestic");
+  const fetchData = async () => {
+    try {
+      setDestinationsLoading(true);
+      const response = await getDomesticDestinations("domestic");
+      console.log(response);
+      
+      
+      
+      if (response?.data && Array.isArray(response.data.data)) {
+        const processedDestinations = response.data.data.map(dest => {
+          // Find first valid image (assuming images are in an array)
+          const image = Array.isArray(dest.image) 
+            ? dest.image.find(img => typeof img === 'string' && img.trim() !== '')
+            : null;
+            
+          return {
+            id: dest._id,
+            name: dest.destination_name,
+            slug: dest.destination_name?.toLowerCase().replace(/\s+/g, '-') || '',
+            image: image || null
+          };
+        }).filter(dest => dest.image); // Only include destinations with images
         
-        // Check if response exists and has the expected structure
-        if (response?.data?.success && Array.isArray(response.data.data)) {
-          console.log("Destinations data:", response.data.data);
-          setDestinations(response.data.data);
-        } else {
-          console.warn("Unexpected response structure:", response);
-          setDestinations([]);
-        }
-      } catch (error) {
-        console.error("Error loading destinations:", {
-          message: error.message,
-          response: error.response?.data,
-        });
+        setDestinations(processedDestinations);
+      } else {
+        console.error("Unexpected response structure:", response);
         setDestinations([]);
-      } finally {
-        setDestinationsLoading(false);
       }
-    };
+    } catch (error) {
+      console.error("Error loading destinations:", error);
+      setDestinations([]);
+    } finally {
+      setDestinationsLoading(false);
+    }
+  };
 
-    fetchData();
-  }, []);
+  fetchData();
+}, []);
 
   return (
     <div>

@@ -6,9 +6,21 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 const DestinationCard = ({ destination }) => {
   const navigate = useNavigate();
 
+  // Handle case where destination is not provided
+  if (!destination) {
+    return (
+      <div className="bg-gray-200 rounded-xl shadow-md overflow-hidden h-48 animate-pulse">
+        {/* Loading skeleton */}
+      </div>
+    );
+  }
+
   const handleCardClick = () => {
     navigate(`/destinations/${destination.slug}`);
   };
+
+  // Get the first image or use a fallback
+  const imageUrl = destination.images?.[0] || '/path-to-default-image.jpg';
 
   return (
     <div 
@@ -17,9 +29,13 @@ const DestinationCard = ({ destination }) => {
     >
       <div className="w-full h-48 relative overflow-hidden">
         <img
-          src={destination.images[0]}
+          src={imageUrl}
           alt={destination.name}
           className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = '/path-to-default-image.jpg';
+          }}
         />
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
           <div className="flex items-center text-white">
@@ -44,7 +60,11 @@ DestinationCard.propTypes = {
     slug: PropTypes.string.isRequired,
     images: PropTypes.arrayOf(PropTypes.string).isRequired,
     type: PropTypes.oneOf(['domestic', 'international']).isRequired
-  }).isRequired
+  })
+};
+
+DestinationCard.defaultProps = {
+  destination: null
 };
 
 export default DestinationCard;

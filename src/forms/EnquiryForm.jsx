@@ -21,7 +21,7 @@ const TravelEnquiryForm = ({ onClose }) => {
     const timer = setTimeout(() => {
       setIsOpen(true);
       setIsAnimating(true);
-    }, 500);
+    }, 10000);
 
     
     if (modalRef.current) {

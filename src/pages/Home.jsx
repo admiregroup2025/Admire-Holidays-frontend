@@ -47,7 +47,7 @@ const Home = () => {
 
 
       <PackageSlider
-        title="Recommended Tour Packages"
+        title="Exclusive Tour Packages"
         description="Curated packages designed to suit every traveler's needs"
         packages={recommendedPackages}
       />

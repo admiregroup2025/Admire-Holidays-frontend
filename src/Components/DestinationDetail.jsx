@@ -5,6 +5,7 @@ import BannerCarousel from './BannerCarousel';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import {getItenary} from "../api/api"
+import img1 from '../../src/img2.png';
 
 const DestinationDetail = () => {
   const { slug } = useParams();
@@ -545,7 +546,7 @@ const DestinationDetail = () => {
       description: "India's best nesting beaches for three species of marine turtles.",
       mainImage: "https://images.pexels.com/photos/29175703/pexels-photo-29175703/free-photo-of-pristine-beach-in-andaman-and-nicobar-islands.jpeg?auto=compress&cs=tinysrgb&w=600",
       images: [
-        "https://images.pexels.com/photos/31793700/pexels-photo-31793700.jpeg",
+       img1,
         "https://admiredashboard.theholistay.in/destination_images/1745170357_68052fb575494mL1Rlbd7.jpg",
         "https://admiredashboard.theholistay.in/destination_images/1745170357_68052fb5755a8tNIdWcuk.jpg",
         "https://example.com/rajasthan-4.jpg",

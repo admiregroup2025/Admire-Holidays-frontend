@@ -38,22 +38,76 @@ const Footer = () => {
               <span className="block mt-1 text-amber-400 font-semibold">10+ years of expertise!</span>
             </p>
             <div className="flex gap-2 mt-3">
-              <Link to="https://www.facebook.com/people/Admire-Holidays/100090809996697/?mibextid=ZbWKwL" className="text-gray-400 hover:text-amber-400 text-xl transition-colors">
-                <FaFacebook />
-              </Link>
-              <a href="https://twitter.com/admireholidays" className="text-gray-400 hover:text-amber-400 text-xl transition-colors">
-                <FaTwitter />
-              </a>
-              <a href="https://www.instagram.com/admireholidays_official?igsh=MWVydXI0ejY5OW9hdQ%3D%3D" className="text-gray-400 hover:text-amber-400 text-xl transition-colors">
-                <FaInstagram />
-              </a>
-              <a href="https://www.youtube.com/@AdmireHolidays_official" className="text-gray-400 hover:text-amber-400 text-xl transition-colors">
-                <FaYoutube />
-              </a>
-              <a href="https://www.linkedin.com/company/103593428/admin/dashboard/" className="text-gray-400 hover:text-amber-400 text-xl transition-colors">
-                              <FaLinkedin />
-                            </a>
-            </div>
+  <a 
+    href="https://www.facebook.com/people/Admire-Holidays/100090809996697/?mibextid=ZbWKwL"
+    className="text-gray-400 hover:text-amber-400 text-xl transition-colors"
+    target="_blank"
+    rel="noopener noreferrer"
+    onClick={(e) => {
+      e.preventDefault();
+      window.open('https://www.facebook.com/people/Admire-Holidays/100090809996697/?mibextid=ZbWKwL', '_blank');
+      navigate('/social-click'); // Change to your desired internal route
+    }}
+  >
+    <FaFacebook />
+  </a>
+  
+  <a 
+    href="https://twitter.com/admireholidays"
+    className="text-gray-400 hover:text-amber-400 text-xl transition-colors"
+    target="_blank"
+    rel="noopener noreferrer"
+    onClick={(e) => {
+      e.preventDefault();
+      window.open('https://twitter.com/admireholidays', '_blank');
+      navigate('/social-click');
+    }}
+  >
+    <FaTwitter />
+  </a>
+  
+  <a 
+    href="https://www.instagram.com/admireholidays_official?igsh=MWVydXI0ejY5OW9hdQ%3D%3D"
+    className="text-gray-400 hover:text-amber-400 text-xl transition-colors"
+    target="_blank"
+    rel="noopener noreferrer"
+    onClick={(e) => {
+      e.preventDefault();
+      window.open('https://www.instagram.com/admireholidays_official?igsh=MWVydXI0ejY5OW9hdQ%3D%3D', '_blank');
+      navigate('/social-click');
+    }}
+  >
+    <FaInstagram />
+  </a>
+  
+  <a 
+    href="https://www.youtube.com/@AdmireHolidays_official"
+    className="text-gray-400 hover:text-amber-400 text-xl transition-colors"
+    target="_blank"
+    rel="noopener noreferrer"
+    onClick={(e) => {
+      e.preventDefault();
+      window.open('https://www.youtube.com/@AdmireHolidays_official', '_blank');
+      navigate('/social-click');
+    }}
+  >
+    <FaYoutube />
+  </a>
+  
+  <a 
+    href="https://www.linkedin.com/company/103593428/admin/dashboard/"
+    className="text-gray-400 hover:text-amber-400 text-xl transition-colors"
+    target="_blank"
+    rel="noopener noreferrer"
+    onClick={(e) => {
+      e.preventDefault();
+      window.open('https://www.linkedin.com/company/103593428/admin/dashboard/', '_blank');
+      navigate('/social-click');
+    }}
+  >
+    <FaLinkedin />
+  </a>
+</div>
           </div>
 
           {/* Quick Links */}
