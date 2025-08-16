@@ -16,6 +16,8 @@ console.log('ertyu+' +api.defaults.baseURL)
 export const submitContactForm = (data) => api.post('/contact', data);
 
 export const submitJourneyEnquiry = (data) => api.post('/planYourJourney', data);
+export const planYourJourneyForm = (data) => api.post('/planYourTrip', data);
+
 
 // POST: suggestion or complaint
 export const subscribeForm=(data)=>api.post('/subscribe',data);
@@ -30,9 +32,17 @@ export const getBlogDetails=()=> api.get('/blog');
 
 export const getBlogDetailsPage=()=> api.get('/blog/id');
 
-export const getDomesticDestinations = (type) => api.get(`/destination/image-gallery/${type}`);
+export const getHomeDomesticInternational = (type) => api.get(`/destination/home/DomesticAndInternational`);
 
 export const getItenary = (type) => api.get(`/itineraries/${type}`);
+
+export const getExclusivePackages=()=> api.get('/destination/classified-itinerary');
+export const getTrendingDestinations=()=> api.get('/destination/home/trending-destination');
+
+// export const weekendTrendingItenary=()=> api.get('/destination/home/trending-destination');
+
+
+
 
 
 

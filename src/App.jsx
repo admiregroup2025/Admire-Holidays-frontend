@@ -35,6 +35,7 @@ import WildlifeCategory from "./pages/category/WildlifeCategory";
 import Adventure from "./pages/category/Adventure";
 import Honeymoon from "./pages/category/Honeymoon";
 import Beach from "./pages/category/Beach";
+import ItineraryDetails from "./pages/ItineraryDetails";
 // import HeritageTours from "./pages/category/HeritageTours";
 // import AyurvedaTours from "./pages/category/ayurveda-tours";
 // import Cultural from "./pages/category/Cultural";
@@ -99,6 +100,9 @@ function App() {
         <Route path="/honeymoon-special-package" element={<HoneymoonSpecialPackages />} />
         <Route path="/destinations/:slug" element={<TourDetails />} />
 <Route path="/destinations/:slug/detail" element={<DestinationDetail />} />
+
+
+<Route path="/itineraries/:id" element={<ItineraryDetails />} />
 
 
 

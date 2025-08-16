@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getHeroSection, getDomesticDestinations } from "../api/api";
+import { getHeroSection, getHomeDomesticInternational } from "../api/api";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
@@ -34,7 +34,7 @@ const Domestic = () => {
   const fetchData = async () => {
     try {
       setDestinationsLoading(true);
-      const response = await getDomesticDestinations("domestic");
+      const response = await getHomeDomesticInternational("domestic");
       console.log(response);
       
       

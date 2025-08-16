@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import EnquiryForm from "../../forms/EnquiryForm";
+import EnquiryForm from "../../forms/PlanMyTripForm.jsx";
 import { getHeroSection } from "../../api/api.js";
+
 
 
 const Hero = () => {

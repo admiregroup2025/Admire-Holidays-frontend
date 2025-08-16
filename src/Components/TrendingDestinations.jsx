@@ -4,106 +4,87 @@ import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import { Link } from 'react-router-dom';
+import { getTrendingDestinations } from '../api/api.js';
 
 const TrendingDestinations = () => {
   const [isVisible, setIsVisible] = useState(false);
-  
+  const [destinations, setDestinations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    setIsVisible(true);
+    const fetchTrendingDestinations = async () => {
+      try {
+        console.log('Fetching trending destinations...');
+        const response = await getTrendingDestinations();
+        console.log('API Response:', response);
+
+        // Validate response structure
+        if (!response.data?.success || !Array.isArray(response.data.data)) {
+          throw new Error('Invalid API response structure');
+        }
+
+        // Transform API data
+        const formattedDestinations = response.data.data.map(dest => ({
+          id: dest._id,
+          slug: dest.destination_name.toLowerCase().replace(/\s+/g, '-'),
+          name: dest.destination_name,
+          description: "Explore this beautiful destination",
+          images: Array.isArray(dest.title_image) ? dest.title_image : []
+        }));
+
+        setDestinations(formattedDestinations);
+        setIsVisible(true);
+        setError(null);
+        
+      } catch (error) {
+        console.error('Error fetching destinations:', error);
+        setError(error.message);
+        setDestinations([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTrendingDestinations();
   }, []);
 
-  const destinations = [
-    // First row
-    {
-      id: 1,
-      slug: "andaman", 
-      name: "Andaman",
-      description: "Pristine beaches & coral reefs",
-      images: [
-        "https://images.unsplash.com/photo-1589330694653-ded6df03f754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        "https://images.unsplash.com/photo-1590523278191-995cbcda646b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80",
-        "https://images.unsplash.com/photo-1563906267088-b029e7101114?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      ],
-    },
-    {
-      id: 2,
-      slug: "vietnam", 
-      name: "Vietnam",
-      description: "Vibrant culture & landscapes",
-      images: [
-        "https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        "https://images.unsplash.com/photo-1526653057-f3f40ad7b724?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        "https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      ],
-    },
-    {
-      id: 3,
-      slug: "kashmir", 
-      name: "Kashmir",
-      description: "Paradise on earth",
-      images: [
-        "https://plus.unsplash.com/premium_photo-1697730277839-440df1a4415f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a2FzaG1pcnxlbnwwfHwwfHx8MA%3D%3D",
-        "https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8a2FzaG1pcnxlbnwwfHwwfHx8MA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1697730150003-26a1d469adb4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8a2FzaG1pcnxlbnwwfHwwfHx8MA%3D%3D",
-      ],
-    },
-    {
-      id: 4,
-      slug: "leh-ladakh", 
-      name: "Leh-ladakh",
-      description: "Majestic Himalayan beauty",
-      images: [
-        "https://images.unsplash.com/photo-1569670380685-4582bf29a24a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3JpJTIwbGFua2F8ZW58MHx8MHx8fDA%3D",
-        "https://images.unsplash.com/photo-1593118845043-359e5f628214?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bGFkYWtofGVufDB8fDB8fHww",
-        "https://images.unsplash.com/photo-1709874859086-b50e500f4136?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGxhZGFraHxlbnwwfHwwfHx8MA%3D%3D",
-      ],
-    },
-    // Second row
-    {
-      id: 5,
-      slug: "sri-lanka", 
-      name: "Sri Lanka",
-      description: "Teardrop of the Indian Ocean",
-      images: [
-        "https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1530&q=80",
-        "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      ],
-    },
-    {
-      id: 6,
-      slug: "thailand", 
-      name: "Thailand",
-      description: "Land of smiles & temples",
-      images: [
-        "https://images.unsplash.com/photo-1528181304800-259b08848526?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-        "https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1527&q=80",
-        "https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      ],
-    },
-    {
-      id: 7,
-      slug: "uttarakhand", 
-      name: "Uttarakhand",
-      description: "Devbhumi - Land of the Gods",
-      images: [
-        "https://plus.unsplash.com/premium_photo-1697730398251-40cd8dc57e0b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXR0cmFraGFuZHxlbnwwfHwwfHx8MA%3D%3D",
-        "https://images.unsplash.com/photo-1596599623428-87dbae5e7816?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXR0cmFraGFuZHxlbnwwfHwwfHx8MA%3D%3D",
-        "https://images.unsplash.com/photo-1724864814923-548d7fd5f42e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dXR0cmFraGFuZHxlbnwwfHwwfHx8MA%3D%3D",
-      ],
-    },
-    {
-      id: 8,
-      slug: "sikkim", 
-      name: "Sikkim",
-      description: "Himalayan wonderland",
-      images: [
-        "https://images.unsplash.com/photo-1605540436563-5bca919ae766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80",
-        "https://images.unsplash.com/photo-1605540436563-5bca919ae766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80",
-        "https://images.unsplash.com/photo-1605540436563-5bca919ae766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80",
-      ],
-    },
-  ];
+  if (loading) {
+    return (
+      <section className="py-20 px-5 text-center bg-gradient-to-b from-gray-50 to-white">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-red-600 mb-16">
+          Trending Destinations
+        </h2>
+        <div className="flex justify-center gap-6 max-w-7xl mx-auto">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="w-72 h-96 bg-gray-200 rounded-xl animate-pulse"></div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-20 px-5 text-center bg-gradient-to-b from-gray-50 to-white">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-red-600 mb-4">
+          Trending Destinations
+        </h2>
+        <p className="text-red-500 mb-16">{error}</p>
+      </section>
+    );
+  }
+
+  if (destinations.length === 0) {
+    return (
+      <section className="py-20 px-5 text-center bg-gradient-to-b from-gray-50 to-white">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-red-600 mb-4">
+          Trending Destinations
+        </h2>
+        <p className="text-gray-600 mb-16">No destinations available at the moment</p>
+      </section>
+    );
+  }
 
   return (
     <section className="py-20 px-5 text-center bg-gradient-to-b from-gray-50 to-white">
@@ -116,7 +97,6 @@ const TrendingDestinations = () => {
         Trending Destinations
       </h2>
       
-      {/* First row */}
       <div className="flex justify-center gap-6 max-w-7xl mx-auto mb-8 flex-wrap">
         {destinations.slice(0, 4).map((destination, index) => (
           <DestinationCard 
@@ -124,18 +104,6 @@ const TrendingDestinations = () => {
             destination={destination}
             isVisible={isVisible}
             index={index}
-          />
-        ))}
-      </div>
-      
-      {/* Second row */}
-      <div className="flex justify-center gap-6 max-w-7xl mx-auto flex-wrap">
-        {destinations.slice(4, 8).map((destination, index) => (
-          <DestinationCard 
-            key={destination.id}
-            destination={destination}
-            isVisible={isVisible}
-            index={index + 4} // Offset index for staggered animation
           />
         ))}
       </div>

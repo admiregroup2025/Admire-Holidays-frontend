@@ -10,7 +10,7 @@ import HeroDomestic from "../Components/heroSection/HeroReusable";
 import DestinationGrid from "../Components/destinations/DestinationGrid";
 import { internationalDestinations } from "../data/destinations"; // Import international destinations
 import HeroReusable from "../Components/heroSection/HeroReusable";
-import { getDomesticDestinations } from "../api/api";
+// import { getDomesticDestinations } from "../api/api";
 
 
 const International = () => {

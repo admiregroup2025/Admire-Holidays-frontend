@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { getDomesticDestinations } from "../api/api";
+import { getHomeDomesticInternational } from "../api/api";
 
 const InternationalPackage = () => {
   const [destinations, setDestinations] = useState([]);
@@ -25,7 +25,7 @@ const InternationalPackage = () => {
       try {
         setDestinationsLoading(true);
         setError(null);
-        const response = await getDomesticDestinations("international");
+        const response = await getHomeDomesticInternational("international");
         
         if (response?.data?.success && Array.isArray(response.data.data)) {
           const processedDestinations = response.data.data.map(dest => ({

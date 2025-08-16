@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { getDomesticDestinations } from "../api/api";
+import { getHomeDomesticInternational } from "../api/api";
+// import { Skeleton } from './Skeleton'; // Assume you have a Skeleton component
 
 const DomesticPackage = () => {
   const [destinations, setDestinations] = useState([]);
@@ -10,7 +11,6 @@ const DomesticPackage = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // Helper function to validate image URLs
   const isValidUrl = (url) => {
     try {
       new URL(url);
@@ -25,19 +25,20 @@ const DomesticPackage = () => {
       try {
         setDestinationsLoading(true);
         setError(null);
-        const response = await getDomesticDestinations("domestic");
-        console.log(response);
-        
+        const response = await getHomeDomesticInternational();
         
         if (response?.data?.success && Array.isArray(response.data.data)) {
-          
-          const processedDestinations = response.data.data.map(dest => ({
-            id: dest._id,
-            name: dest.destination_name,
-            slug: dest.destination_name.toLowerCase().replace(/\s+/g, '-'),
-            image: dest.image?.find(img => isValidUrl(img)) || null
-          })).filter(dest => dest.image); 
-          
+          const processedDestinations = response.data.data
+            .map(dest => ({
+              id: dest._id,
+              name: dest.destination_name,
+              slug: dest.destination_name.toLowerCase().replace(/\s+/g, '-'),
+              image: dest.image?.find(img => isValidUrl(img)) || null,
+              description: dest.short_description || `Explore beautiful ${dest.destination_name}`
+            }))
+            .filter(dest => dest.image)
+            .slice(0, 6); // Limit to 6 destinations for better UI
+            
           setDestinations(processedDestinations);
         } else {
           setError("Unexpected response structure from server");
@@ -82,12 +83,12 @@ const DomesticPackage = () => {
     }
   };
 
-  const handleClick = () => {
+  const handleExploreMore = () => {
     navigate("/domestic");
   };
 
   return (
-    <section className="relative py-20 bg-gradient-to-b from-white to-yellow-600 mt-16">
+    <section className="relative py-20 bg-gradient-to-b from-white to-yellow-50 mt-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
@@ -99,7 +100,7 @@ const DomesticPackage = () => {
             Explore Domestic Destinations
           </h1>
           <p className="text-lg text-red-600 max-w-2xl mx-auto">
-            Budget packages in India
+            Discover amazing budget packages across India
           </p>
         </motion.div>
 
@@ -110,12 +111,14 @@ const DomesticPackage = () => {
         )}
 
         {destinationsLoading ? (
-          <div className="text-center py-12">
-            <p>Loading destinations...</p>
-          </div>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+    {[...Array(6)].map((_, index) => (
+      <div key={index} className="h-80 bg-gray-200 rounded-lg animate-pulse"></div>
+    ))}
+  </div>
         ) : destinations.length === 0 ? (
           <div className="text-center py-12">
-            <p>No destinations available at the moment.</p>
+            <p className="text-gray-600">No destinations available at the moment.</p>
           </div>
         ) : (
           <motion.div
@@ -134,34 +137,34 @@ const DomesticPackage = () => {
                 <Link 
                   to={`/destinations/${destination.slug}`} 
                   className="block h-full"
+                  aria-label={`Explore ${destination.name}`}
                 >
-                  <div className="overflow-hidden rounded-lg shadow-lg bg-white h-full flex flex-col cursor-pointer">
+                  <div className="overflow-hidden rounded-lg shadow-lg bg-white h-full flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl">
                     <div className="relative h-64 overflow-hidden">
-                      {destination.image ? (
-                        <motion.img
-                          alt={destination.name}
-                          src={destination.image}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                          initial={{ opacity: 0.8 }}
-                          whileHover={{ opacity: 1, scale: 1.1 }}
-                          transition={{ duration: 0.5 }}
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                          <span>Image not available</span>
+                      <motion.img
+                        alt={destination.name}
+                        src={destination.image}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        initial={{ opacity: 0.8 }}
+                        whileHover={{ opacity: 1, scale: 1.1 }}
+                        transition={{ duration: 0.5 }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/30 flex items-end p-4 transition-all duration-300 group-hover:from-black/70 group-hover:to-black/40">
+                        <div>
+                          <h3 className="text-white text-xl font-bold tracking-wide mb-1">
+                            {destination.name}
+                          </h3>
+                          <p className="text-gray-200 text-sm line-clamp-2">
+                            {destination.description}
+                          </p>
                         </div>
-                      )}
-                      <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all duration-300 group-hover:bg-opacity-50">
-                        <h3 className="text-white text-xl font-bold tracking-wide transition-transform duration-300 group-hover:scale-110">
-                          {destination.name}
-                        </h3>
                       </div>
                     </div>
                     <div className="p-4 text-center mt-auto">
-                      <p className="text-gray-600">
-                        Click to explore {destination.name}
-                      </p>
+                      <button className="px-4 py-2 bg-[#E69233] hover:bg-[#d5822b] text-white font-medium rounded-full transition-all duration-300 text-sm">
+                        View Packages
+                      </button>
                     </div>
                   </div>
                 </Link>
@@ -170,19 +173,22 @@ const DomesticPackage = () => {
           </motion.div>
         )}
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-center mt-12"
-        >
-          <button
-            onClick={handleClick}
-            className="px-8 py-3 bg-[#E69233] hover:bg-[#d5822b] text-white font-bold rounded-full transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg"
+        {destinations.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="text-center mt-12"
           >
-            Explore More
-          </button>
-        </motion.div>
+            <button
+              onClick={handleExploreMore}
+              className="px-8 py-3 bg-[#E69233] hover:bg-[#d5822b] text-white font-bold rounded-full transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#E69233] focus:ring-opacity-50"
+              aria-label="Explore more destinations"
+            >
+              Explore All Destinations
+            </button>
+          </motion.div>
+        )}
       </div>
 
       {/* Decorative animated elements */}
